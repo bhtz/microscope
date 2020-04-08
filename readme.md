@@ -1,23 +1,28 @@
 IRON HASURA
 ===========
 
-A Full Backend As A Service in one docker compose file
+A Full Backend As A Service in one docker compose file - play with hasura GraphQL engine
 
-STACK
-=====
+ROADMAP
+=======
 
-* Hasura graphQL engine
-* Iron Hasura
-* azure function serverless
+[roadmap](https://github.com/bhtz/IronHasura/blob/master/roadmap.md)
+
 
 GETTING STARTED
 ---------------
 
-* docker engine
+    docker-compose up
 
 
 REQUIREMENTS
 ============
+
+Run : 
+
+* docker engine
+
+Development :
 
 * .NET Core SDK 3.1
 
