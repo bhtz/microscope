@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace hasura_webhook_dotnet.Controllers_mvc
 {
+    [Authorize]
     public class AppConfigController : Controller
     {
         private readonly IronHasuraDbContext _context;

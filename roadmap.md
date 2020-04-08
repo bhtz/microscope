@@ -10,15 +10,14 @@ IRON HASURA ROADMAP
     - [ ] aws S3
 - [x] REMOTE CONFIGURATION
 - [x] BASIC ANALYTICS
-- [ ] PUSH NOTIFICATIONS
+- [ ] LOGS VIEWER
+- [ ] MAILS
 - [ ] INTEGRATION EVENTS
     - [ ] RabbitMQ
     - [ ] azure service bus
-- [ ] MAILS
 - [ ] CSV EXPORTS
 - [ ] CSV IMPORT
-- [ ] LOGS
-  - [ ] CONSOLE
+- [ ] PUSH NOTIFICATIONS
   - [ ] FILE
   - [ ] BLOBSTORAGE
   - [ ] APP INSIGHT
