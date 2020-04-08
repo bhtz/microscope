@@ -38,13 +38,20 @@ IRON HASURA
     - [ ] azure service bus
 - [ ] MAILS
 - [ ] CSV EXPORTS
+- [ ] CSV IMPORT
+- [ ] LOGS
+  - [ ] CONSOLE
+  - [ ] FILE
+  - [ ] BLOBSTORAGE
+  - [ ] APP INSIGHT
 - [ ] COGNITIVE
 
-SERVERLESS
-----------
+SERVERLESS & LOGIC APP
+----------------------
 
 - [x] BUSINESS LOGIC
 - [x] SCHEDULED TASKS
+- [x] WORKFLOW
 
 SETTINGS
 --------
@@ -56,7 +63,7 @@ SETTINGS
   },  
   "IRONHASURA_FILE_ADAPTER": "filesystem",
   "IRONHASURA_BLOB_CS": "",
-  "IRONHASURA_STORAGE_CONTAINER": "Uploads",
+  "IRONHASURA_STORAGE_CONTAINER": "uploads",
   "IRONHASURA_AUTHORITY_ENDPOINT": "http://localhost:8081/auth/realms/master",
   "IRONHASURA_AUDIENCE": "ironhasura"
 }
