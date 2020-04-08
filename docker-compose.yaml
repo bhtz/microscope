@@ -1,0 +1,34 @@
+version: '3.6'
+services:
+  graphql-engine:
+    image: hasura/graphql-engine:v1.2.0-beta.3
+    ports:
+    - "8080:8000"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: "User ID =username;Password=mypassword;Server=host;Port=5432;Database=mydatabase;Integrated Security=true;Pooling=true;"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: graphadmin
+      HASURA_GRAPHQL_SERVER_PORT: 8000
+      HASURA_GRAPHQL_AUTH_HOOK: http://host.docker.internal:8081/api/auth
+  ironhasura:
+    build: .
+    ports:
+    - "8081:80"
+    links:
+    - graphql-engine
+    environment:
+      IRONHASURA_CONSOLE_URL: "http://localhost:8080",
+      IRONHASURA_FILE_ADAPTER: "filesystem",
+      IRONHASURA_BLOB_CS: "",
+      IRONHASURA_STORAGE_CONTAINER: "uploads",
+      IRONHASURA_AUTHORITY_ENDPOINT: "http://localhost:8081/auth/realms/master",
+      IRONHASURA_AUDIENCE: "ironhasura"
+  codeserver:
+    image: codercom/code-server
+    ports:
+    - "8083:8080"
+    volumes:
+      - ./serverless:/home/coder/project
+    environment:
+      PASSWORD: ironhasura

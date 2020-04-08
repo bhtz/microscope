@@ -1,57 +1,26 @@
 IRON HASURA
 ===========
 
-BACKEND AS A SERVICE EXTENSION FOR HASURA GRAPHQL ENGINE
+A Full Backend As A Service in one docker compose file
+
+STACK
+=====
+
+* Hasura graphQL engine
+* Iron Hasura
+* azure function serverless
 
 GETTING STARTED
-===============
+---------------
+
+* docker engine
 
 
-STACK FEATURES
-==============
+REQUIREMENTS
+============
 
-HASURA
-------
+* .NET Core SDK 3.1
 
-- [x] GRAPHQL API
-- [x] LIVE QUERIES
-- [x] BAAS ADMIN
-- [x] DOMAIN EVENTS
-- [x] REMOTE SCHEMAS
-- [x] ACTIONS
-
-IRON HASURA
------------
-
-- [ ] AUTHENTICATION
-  - [x] WEBHOOK
-  - [ ] IDENTITY SERVER ?
-- [ ] FILES
-    - [x] blobstorage
-    - [x] file system
-    - [ ] aws S3
-- [x] REMOTE CONFIGURATION
-- [x] BASIC ANALYTICS
-- [ ] PUSH NOTIFICATIONS
-- [ ] INTEGRATION EVENTS
-    - [ ] RabbitMQ
-    - [ ] azure service bus
-- [ ] MAILS
-- [ ] CSV EXPORTS
-- [ ] CSV IMPORT
-- [ ] LOGS
-  - [ ] CONSOLE
-  - [ ] FILE
-  - [ ] BLOBSTORAGE
-  - [ ] APP INSIGHT
-- [ ] COGNITIVE
-
-SERVERLESS & LOGIC APP
-----------------------
-
-- [x] BUSINESS LOGIC
-- [x] SCHEDULED TASKS
-- [x] WORKFLOW
 
 SETTINGS
 --------
@@ -59,11 +28,15 @@ SETTINGS
 ```json
 {
   "ConnectionStrings": {
-    "IRONHASURA_SQL_CONNECTION_STRING": ""
-  },  
+    "IRONHASURA_DATA_CONNECTION_STRING": "User ID =username;Password=password;Server=host;Port=5432;Database=hasura;Integrated Security=true;Pooling=true;",
+    "IRONHASURA_IDENTITY_CONNECTION_STRING": "User ID =username;Password=password;Server=host;Port=5432;Database=hasura;Integrated Security=true;Pooling=true;"
+  },
+  "IRONHASURA_CONSOLE_URL": "http://localhost:8080",
+  
   "IRONHASURA_FILE_ADAPTER": "filesystem",
-  "IRONHASURA_BLOB_CS": "",
+  "IRONHASURA_BLOB_CS": "DefaultEndpointsProtocol=https;AccountName=account;AccountKey=mykey;EndpointSuffix=core.windows.net",
   "IRONHASURA_STORAGE_CONTAINER": "uploads",
+  
   "IRONHASURA_AUTHORITY_ENDPOINT": "http://localhost:8081/auth/realms/master",
   "IRONHASURA_AUDIENCE": "ironhasura"
 }
