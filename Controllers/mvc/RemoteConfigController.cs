@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace hasura_webhook_dotnet.Controllers_mvc
+namespace IronHasura.Controllers_mvc
 {
     [Authorize]
-    public class AppConfigController : Controller
+    public class RemoteConfigController : Controller
     {
         private readonly IronHasuraDbContext _context;
 
-        public AppConfigController(IronHasuraDbContext context)
+        public RemoteConfigController(IronHasuraDbContext context)
         {
             _context = context;
         }
@@ -23,7 +21,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
         // GET: AppConfig
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AppConfig.ToListAsync());
+            return View(await _context.RemoteConfig.ToListAsync());
         }
 
         // GET: AppConfig/Details/5
@@ -34,8 +32,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
                 return NotFound();
             }
 
-            var appConfig = await _context.AppConfig
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var appConfig = await _context.RemoteConfig.FirstOrDefaultAsync(m => m.Id == id);
             if (appConfig == null)
             {
                 return NotFound();
@@ -55,7 +52,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Value")] AppConfig appConfig)
+        public async Task<IActionResult> Create([Bind("Id,Key,Value")] RemoteConfig appConfig)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +72,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
                 return NotFound();
             }
 
-            var appConfig = await _context.AppConfig.FindAsync(id);
+            var appConfig = await _context.RemoteConfig.FindAsync(id);
             if (appConfig == null)
             {
                 return NotFound();
@@ -88,7 +85,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Value")] AppConfig appConfig)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Key,Value")] RemoteConfig appConfig)
         {
             if (id != appConfig.Id)
             {
@@ -126,7 +123,7 @@ namespace hasura_webhook_dotnet.Controllers_mvc
                 return NotFound();
             }
 
-            var appConfig = await _context.AppConfig
+            var appConfig = await _context.RemoteConfig
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (appConfig == null)
             {
@@ -141,15 +138,15 @@ namespace hasura_webhook_dotnet.Controllers_mvc
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var appConfig = await _context.AppConfig.FindAsync(id);
-            _context.AppConfig.Remove(appConfig);
+            var appConfig = await _context.RemoteConfig.FindAsync(id);
+            _context.RemoteConfig.Remove(appConfig);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
         private bool AppConfigExists(Guid id)
         {
-            return _context.AppConfig.Any(e => e.Id == id);
+            return _context.RemoteConfig.Any(e => e.Id == id);
         }
     }
 }

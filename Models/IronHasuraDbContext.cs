@@ -16,7 +16,7 @@ namespace IronHasura.Models
 
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Analytic> Analytic { get; set; }
-        public virtual DbSet<AppConfig> AppConfig { get; set; }
+        public virtual DbSet<RemoteConfig> RemoteConfig { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace IronHasura.Models
                     .HasColumnType("jsonb");
             });
 
-            modelBuilder.Entity<AppConfig>(entity =>
+            modelBuilder.Entity<RemoteConfig>(entity =>
             {
                 entity.HasKey(e => e.Id);
 

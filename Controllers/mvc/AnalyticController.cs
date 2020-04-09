@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace hasura_webhook_dotnet.Controllers_mvc
+namespace IronHasura.Controllers_mvc
 {
     [Authorize]
     public class AnalyticController : Controller

@@ -24,5 +24,11 @@ namespace IronHasura.Controllers
 
             return Redirect(this.hasuraUrl);
         }
+
+        public IActionResult Docs()
+        {
+
+            return View();
+        }
     }
 }

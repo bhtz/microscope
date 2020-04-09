@@ -1,4 +1,4 @@
-@model IEnumerable<IronHasura.Models.AppConfig>
+@model IEnumerable<IronHasura.Models.RemoteConfig>
 
 <!DOCTYPE html>
 
@@ -15,7 +15,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Key)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Value)
@@ -27,7 +27,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Key)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Value)

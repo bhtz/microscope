@@ -1,4 +1,4 @@
-@model IronHasura.Models.AppConfig
+@model IronHasura.Models.RemoteConfig
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/8.6.4/jsoneditor.min.css">
-    <title>Create</title>
+    <title>Edit</title>
 </head>
 <body>
 
@@ -14,12 +14,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Key" class="control-label"></label>
+                <input asp-for="Key" class="form-control" />
+                <span asp-validation-for="Key" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Value" class="control-label"></label>
@@ -28,7 +29,7 @@
                 <div id="jsoneditor" style="width: 600px; height: 400px;"></div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -43,6 +44,7 @@
     $(document).ready(function(){
         var container = document.getElementById("jsoneditor");
         var $input = $("#appconfigvalue");
+        var data = JSON.parse($input.val());
 
         var options = {
             mode: 'code',
@@ -52,7 +54,7 @@
             }
         };
 
-        var editor = new JSONEditor(container, options);
+        var editor = new JSONEditor(container, options, data);
 
         function getJson() {
             var json = editor.get();

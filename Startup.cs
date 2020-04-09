@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Westwind.AspNetCore.Markdown;
 
 namespace IronHasura
 {
@@ -41,6 +42,7 @@ namespace IronHasura
 
             services.AddSwaggerConfiguration();
             services.AddStorageConfiguration(this.Configuration);
+            services.AddMarkdownConfiguration();
         }
 
         /// <summary>
@@ -69,6 +71,7 @@ namespace IronHasura
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMarkdown();
 
             app.UseEndpoints(endpoints =>
             {

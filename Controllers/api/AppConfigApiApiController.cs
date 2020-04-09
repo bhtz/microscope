@@ -22,16 +22,16 @@ namespace IronHasura.Controllers_api
 
         // GET: api/AppConfigApiApi
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppConfig>>> GetAppConfig()
+        public async Task<ActionResult<IEnumerable<RemoteConfig>>> GetAppConfig()
         {
-            return await _context.AppConfig.ToListAsync();
+            return await _context.RemoteConfig.ToListAsync();
         }
 
         // GET: api/AppConfigApiApi/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppConfig>> GetAppConfig(Guid id)
+        public async Task<ActionResult<RemoteConfig>> GetAppConfig(Guid id)
         {
-            var appConfig = await _context.AppConfig.FindAsync(id);
+            var appConfig = await _context.RemoteConfig.FindAsync(id);
 
             if (appConfig == null)
             {
@@ -43,7 +43,7 @@ namespace IronHasura.Controllers_api
 
         // PUT: api/AppConfigApiApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppConfig(Guid id, AppConfig appConfig)
+        public async Task<IActionResult> PutAppConfig(Guid id, RemoteConfig appConfig)
         {
             if (id != appConfig.Id)
             {
@@ -73,9 +73,9 @@ namespace IronHasura.Controllers_api
 
         // POST: api/AppConfigApiApi
         [HttpPost]
-        public async Task<ActionResult<AppConfig>> PostAppConfig(AppConfig appConfig)
+        public async Task<ActionResult<RemoteConfig>> PostAppConfig(RemoteConfig appConfig)
         {
-            _context.AppConfig.Add(appConfig);
+            _context.RemoteConfig.Add(appConfig);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAppConfig", new { id = appConfig.Id }, appConfig);
@@ -83,15 +83,15 @@ namespace IronHasura.Controllers_api
 
         // DELETE: api/AppConfigApiApi/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<AppConfig>> DeleteAppConfig(Guid id)
+        public async Task<ActionResult<RemoteConfig>> DeleteAppConfig(Guid id)
         {
-            var appConfig = await _context.AppConfig.FindAsync(id);
+            var appConfig = await _context.RemoteConfig.FindAsync(id);
             if (appConfig == null)
             {
                 return NotFound();
             }
 
-            _context.AppConfig.Remove(appConfig);
+            _context.RemoteConfig.Remove(appConfig);
             await _context.SaveChangesAsync();
 
             return appConfig;
@@ -99,7 +99,7 @@ namespace IronHasura.Controllers_api
 
         private bool AppConfigExists(Guid id)
         {
-            return _context.AppConfig.Any(e => e.Id == id);
+            return _context.RemoteConfig.Any(e => e.Id == id);
         }
     }
 }
