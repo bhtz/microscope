@@ -1,7 +1,7 @@
 IRON HASURA
 ===========
 
-A Full Backend As A Service in one docker compose file - play with hasura GraphQL engine
+A (work in progress) full Backend As A Service in one docker compose file - play with hasura GraphQL engine
 
 ROADMAP
 =======

@@ -1,9 +1,7 @@
-﻿using com.ironhasura.Areas.Identity.Data;
-using IronHasura.Configurations;
+﻿using IronHasura.Configurations;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,16 +27,15 @@ namespace IronHasura
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-
-            //services.AddAuthConfiguration(this.Configuration);
-
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<IdentityDataContext>();
+            services.AddIdentityConfiguration();
+            services.AddIdentityServerConfiguration();
+            //services.AddAuthConfiguration(this.Configuration);
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddSwaggerConfiguration();
             services.AddStorageConfiguration(this.Configuration);
@@ -69,8 +66,10 @@ namespace IronHasura
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
+            app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseMarkdown();
 
             app.UseEndpoints(endpoints =>

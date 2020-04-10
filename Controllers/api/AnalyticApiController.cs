@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IronHasura.Controllers_api
 {

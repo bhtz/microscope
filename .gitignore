@@ -5,6 +5,7 @@
 local.settings.json
 appsettings.json
 uploads
+tempkey.rsa
 
 # User-specific files
 *.suo
