@@ -30,9 +30,9 @@ namespace IronHasura
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
 
+            services.AddAuthConfiguration(this.Configuration);
             services.AddIdentityConfiguration();
             services.AddIdentityServerConfiguration();
-            //services.AddAuthConfiguration(this.Configuration);
 
             services.AddControllersWithViews();
             services.AddRazorPages();

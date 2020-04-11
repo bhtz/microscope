@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace IronHasura.Controllers_api
 {
     [Route("api/analytics")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AnalyticApiController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
@@ -25,6 +28,7 @@ namespace IronHasura.Controllers_api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Analytic>>> GetAnalytic()
         {
+            var user = User.Identity.Name;
             return await _context.Analytic.ToListAsync();
         }
 

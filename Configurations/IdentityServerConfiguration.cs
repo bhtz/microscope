@@ -12,10 +12,20 @@ namespace IronHasura.Configurations
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
                 .AddDeveloperSigningCredential()
+                .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
                 .AddInMemoryClients(IdentityServerConfiguration.GetClients());
 
             return services;
+        }
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
+            };
         }
 
         public static IEnumerable<ApiResource> GetResources()
