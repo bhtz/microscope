@@ -19,30 +19,19 @@ namespace IronHasura.Configurations
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services
-            .AddAuthentication()
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddJwtBearer(o =>
-            {
-                o.Authority = authorityEndpoint;
-                o.Audience = audience;
-                o.RequireHttpsMetadata = false;
-
-                o.TokenValidationParameters = new TokenValidationParameters()
+                .AddAuthentication()
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddJwtBearer(o =>
                 {
-                    ValidateAudience = false,
-                };
+                    o.Authority = authorityEndpoint;
+                    o.Audience = audience;
+                    o.RequireHttpsMetadata = false;
 
-                o.Events = new JwtBearerEvents()
-                {
-                    OnAuthenticationFailed = c =>
+                    o.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        c.NoResult();
-                        c.Response.StatusCode = 500;
-                        c.Response.ContentType = "text/plain";
-                        return c.Response.WriteAsync("An error occured processing your authentication.");
-                    }
-                };
-            });
+                        ValidateAudience = false,
+                    };
+                });
 
             return services;
         }
