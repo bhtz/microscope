@@ -2,8 +2,8 @@ ROADMAP
 =======
 
 - [ ] AUTHENTICATION
-  - [ ] HASURA WEBHOOK
-  - [ ] IDENTITY SERVER
+  - [x] HASURA WEBHOOK
+  - [x] IDENTITY SERVER
   - [ ] EXTERNAL PROVIDERS
 - [x] STORAGE ADAPTER
     - [x] blobstorage
@@ -27,8 +27,8 @@ ROADMAP
 NEXT STEPS
 ==========
 
-* test identity with angular client
-* storage admin ui ?
+* CORS bug with API
+* Users / role admin ui
 * logs viewer / hasura log agregation ?
 
 STARTER KIT
