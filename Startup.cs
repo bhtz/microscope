@@ -30,9 +30,10 @@ namespace IronHasura
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
 
-            services.AddAuthConfiguration(this.Configuration);
+            services.AddCors();
             services.AddIdentityConfiguration();
             services.AddIdentityServerConfiguration();
+            services.AddAuthConfiguration(this.Configuration);
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -59,8 +60,9 @@ namespace IronHasura
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors();
             app.UseStaticFiles();
 
             app.UseOpenApi();

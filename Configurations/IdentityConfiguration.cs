@@ -9,6 +9,7 @@ namespace IronHasura.Configurations
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
         {
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDataContext>()
                 .AddDefaultTokenProviders();
 

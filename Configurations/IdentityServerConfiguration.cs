@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Security.Claims;
+using IdentityModel;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,10 +23,14 @@ namespace IronHasura.Configurations
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
+            var roleRessource = new IdentityResource(name: "roles", displayName: "Roles", claimTypes: new[] { "role" });
+
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                roleRessource
             };
         }
 
@@ -42,19 +48,17 @@ namespace IronHasura.Configurations
             {
                 new Client
                 {
-                    ClientId = "client",
-
-                    // no interactive user, use the clientid/secret for authentication
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                    // secret for authentication
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-
-                    // scopes that client has access to
-                    AllowedScopes = { "ironhasura.api" }
+                    ClientId = "AngularClient",
+                    ClientName = "Angular Client",
+                    ClientUri = "http://localhost:4200",
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = { "http://localhost:4200" },
+                    PostLogoutRedirectUris = { "http://localhost:4200/" },
+                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    AccessTokenLifetime = 3600,
+                    AllowedScopes = { "openid", "profile", "email", "roles", "ironhasura.api" }
                 }
             };
         }

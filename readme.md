@@ -6,7 +6,7 @@ A (work in progress) full Backend As A Service in one docker compose file - play
 ROADMAP
 =======
 
-[roadmap](https://github.com/bhtz/IronHasura/blob/master/roadmap.md)
+[roadmap](https://github.com/bhtz/IronHasura/blob/master/wwwroot/docs/roadmap.md)
 
 
 GETTING STARTED

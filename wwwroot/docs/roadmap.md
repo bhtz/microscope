@@ -24,6 +24,13 @@ ROADMAP
 - [ ] PUSH NOTIFICATIONS
 - [ ] COGNITIVE ?
 
+NEXT STEPS
+==========
+
+* test identity with angular client
+* storage admin ui ?
+* logs viewer / hasura log agregation ?
+
 STARTER KIT
 -----------
 
