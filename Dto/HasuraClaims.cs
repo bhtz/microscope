@@ -1,15 +1,14 @@
 using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace IronHasura.Dto
 {
-    [JsonObject]
     public class HasuraClaims
     {
-        [JsonProperty("x-hasura-user-id")]
+        [JsonPropertyName("x-hasura-user-id")]
         public Guid UserId { get; set; }
         
-        [JsonProperty("x-hasura-role")]
+        [JsonPropertyName("x-hasura-role")]
         public string Role { get; set; }
     }
 }

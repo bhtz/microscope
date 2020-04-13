@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using IronHasura.Dto;
 using IronHasura.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IronHasura.Controllers
@@ -11,32 +13,31 @@ namespace IronHasura.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AuthController(IronHasuraDbContext context)
+        public AuthController(IronHasuraDbContext context, UserManager<IdentityUser> userManager)
         {
             this._context = context;
+            this._userManager = userManager;
         }
 
         /**
             GET HASURA CLAIMS from bearer token
          */
         [HttpGet]
-        public ActionResult<HasuraClaims> Get()
+        public async Task<IActionResult> Get()
         {
             var hasuraClaims = new HasuraClaims();
-            Console.WriteLine("HASURA CONNECTED");
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var userId = HttpContext.User.FindFirst("sub")?.Value;
                 var role = string.IsNullOrEmpty(HttpContext.User.FindFirst("role")?.Value)
-                    ? HttpContext.User.FindFirst("role")?.Value
-                    : "user";
+                    ? "user"
+                    : HttpContext.User.FindFirst("role")?.Value;
 
-                if (Boolean.Parse(Environment.GetEnvironmentVariable("REFERENCE_USER")))
-                {
-                    this.SaveUser();
-                }
+                // var user = await this._userManager.GetUserAsync(User);
+                // var roles = await this._userManager.GetRolesAsync(user);
 
                 hasuraClaims.UserId = Guid.Parse(userId);
                 hasuraClaims.Role = role;
@@ -46,29 +47,7 @@ namespace IronHasura.Controllers
                 hasuraClaims.Role = "anonymous";
             }
 
-            return hasuraClaims;
-        }
-
-        private void SaveUser()
-        {
-            string sub = HttpContext.User.FindFirst("sub")?.Value;
-            string firstname = HttpContext.User.FindFirst("given_name")?.Value;
-            string lastname = HttpContext.User.FindFirst("family_name")?.Value;
-            string email = HttpContext.User.FindFirst("email")?.Value;
-            string role = HttpContext.User.FindFirst("role")?.Value;
-
-            if (!this._context.User.Any(x => x.Id == Guid.Parse(sub)))
-            {
-                User user = new User();
-                user.Id = Guid.Parse(sub);
-                user.Firstname = firstname;
-                user.Lastname = lastname;
-                user.Email = email;
-                user.Role = role;
-                
-                this._context.User.Add(user);
-                this._context.SaveChanges();
-            }
+            return Ok(hasuraClaims);
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.Markdown;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace IronHasura
 {
