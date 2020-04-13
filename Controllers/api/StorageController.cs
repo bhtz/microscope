@@ -78,5 +78,16 @@ namespace IronHasura.Controllers
             byte[] data = await this._storageService.GetFileData(filename);
             return File(data, "application/force-download", filename);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            string[] data = await this._storageService.GetFiles();
+            return Ok(data);
+        }
     }
 }

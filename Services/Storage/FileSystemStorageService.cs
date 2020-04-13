@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using IronHasura.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -99,6 +100,18 @@ namespace IronHasura.Services
             }
 
             return filename;
+        }
+
+        public Task<string[]> GetFiles()
+        {
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder);
+            
+            var files = Directory
+                .GetFiles(uploadPath)
+                .Select(x => Path.GetFileName(x))
+                .ToArray();
+
+            return Task.FromResult(files);
         }
     }
 }

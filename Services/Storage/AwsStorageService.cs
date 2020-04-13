@@ -16,6 +16,11 @@ namespace IronHasura.Services
             throw new System.NotImplementedException();
         }
 
+        public Task<string[]> GetFiles()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<string> GetFileUri(string filename)
         {
             throw new System.NotImplementedException();

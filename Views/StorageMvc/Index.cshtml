@@ -1,0 +1,23 @@
+@model IEnumerable<string>
+
+<h1>Storage</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <div class="list-group-item clearfix">
+                    <span class="align-middle">@item</span>
+                    <span class="float-right">
+                        <a href="~/api/storage/@item/download" class="btn btn-xs btn-warning"><i class="fas fa-download"></i></a>                        
+                        <form asp-action="Delete" class="float-right" onsubmit="return confirm('Are you sure ?');">
+                            <input type="hidden" name="filename" value="@item" />
+                            <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

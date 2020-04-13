@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using IronHasura.Services.Interfaces;
@@ -95,6 +96,17 @@ namespace IronHasura.Services
             this.StorageAccount = CloudStorageAccount.Parse(azureWebJobsStorage);
             this.Client = this.StorageAccount.CreateCloudBlobClient();
             this.Container = this.Client.GetContainerReference(containerName);
+        }
+
+        /// <summary>
+        /// NOT IMPLEMENTED YET
+        /// </summary>
+        /// <returns></returns>
+        public Task<string[]> GetFiles()
+        {
+            var data = new List<string>().ToArray();
+
+            return Task.FromResult(data);
         }
     }
 }

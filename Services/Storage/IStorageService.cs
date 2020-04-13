@@ -33,5 +33,11 @@ namespace IronHasura.Services.Interfaces
         /// <param name="filename"></param>
         /// <returns></returns>
         Task<byte[]> GetFileData(string filename);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<string[]> GetFiles();
     }
 }
