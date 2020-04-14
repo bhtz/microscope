@@ -32,9 +32,24 @@ namespace IronHasura
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
 
             services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                    );
+            });
+
             services.AddIdentityConfiguration();
             services.AddIdentityServerConfiguration();
             services.AddAuthConfiguration(this.Configuration);
+            // services.AddAuthorization(o => {
+            //     o.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
+            // });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -58,17 +73,17 @@ namespace IronHasura
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors();
             app.UseStaticFiles();
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
+            app.UseCors("AllowSpecificOrigin");
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();

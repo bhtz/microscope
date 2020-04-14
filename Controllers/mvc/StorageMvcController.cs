@@ -1,12 +1,12 @@
-using System;
 using System.Threading.Tasks;
 using IronHasura.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace IronHasura.Controllers
 {
-    [Route("Storage")]
+    [Authorize(Roles = "Admin")]
+    [Route("/Storage")]
     public class StorageMvcController : Controller
     {
         private IStorageService _storageService;

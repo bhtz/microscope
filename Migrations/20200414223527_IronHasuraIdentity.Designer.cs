@@ -10,14 +10,14 @@ using com.ironhasura.Areas.Identity.Data;
 namespace com.ironhasura.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20200411210541_CreateIdentitySchemaFull")]
-    partial class CreateIdentitySchemaFull
+    [Migration("20200414223527_IronHasuraIdentity")]
+    partial class IronHasuraIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -44,7 +44,7 @@ namespace com.ironhasura.Migrations
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("IronHasuraRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -52,7 +52,7 @@ namespace com.ironhasura.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -68,7 +68,7 @@ namespace com.ironhasura.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("IronHasuraRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -132,7 +132,7 @@ namespace com.ironhasura.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("IronHasuraUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -140,7 +140,7 @@ namespace com.ironhasura.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -156,7 +156,7 @@ namespace com.ironhasura.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("IronHasuraUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -180,7 +180,7 @@ namespace com.ironhasura.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("IronHasuraUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -195,7 +195,7 @@ namespace com.ironhasura.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("IronHasuraUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -216,7 +216,7 @@ namespace com.ironhasura.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("IronHasuraUserTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

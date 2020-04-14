@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IronHasura.Controllers_mvc
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AnalyticController : Controller
     {
         private readonly IronHasuraDbContext _context;

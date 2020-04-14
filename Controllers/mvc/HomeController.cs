@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -18,6 +19,7 @@ namespace IronHasura.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("/home/data")]
         public IActionResult Hasura()
         {
@@ -25,9 +27,10 @@ namespace IronHasura.Controllers
             return Redirect(this.hasuraUrl);
         }
 
-        public IActionResult Docs()
+        [Route("/home/docs/{doc}")]
+        public IActionResult Docs(string doc)
         {
-
+            ViewBag.Filename = doc + ".md";
             return View();
         }
     }

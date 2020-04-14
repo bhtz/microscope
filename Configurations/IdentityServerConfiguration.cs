@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,12 +14,14 @@ namespace IronHasura.Configurations
     {
         public static IServiceCollection AddIdentityServerConfiguration(this IServiceCollection services)
         {
+            services.AddSingleton<ICorsPolicyService, CorsPolicyService>();
             services.AddIdentityServer()
                 .AddAspNetIdentity<IdentityUser>()
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
-                .AddInMemoryClients(IdentityServerConfiguration.GetClients());
+                .AddInMemoryClients(IdentityServerConfiguration.GetClients())
+                .AddCorsPolicyService<CorsPolicyService>();
 
             return services;
         }
@@ -61,6 +66,15 @@ namespace IronHasura.Configurations
                     AllowedScopes = { "openid", "profile", "email", "roles", "ironhasura.api" }
                 }
             };
+        }
+    }
+
+    public class CorsPolicyService : ICorsPolicyService
+    {
+        public Task<bool> IsOriginAllowedAsync(string origin)
+        {
+            Console.WriteLine("TESTTEST: " + origin);
+            return Task.FromResult(true);
         }
     }
 }

@@ -2,21 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
+using System.Security.Claims;
 
 namespace IronHasura.Controllers_api
 {
     [Route("api/analytics")]
     [ApiController]
-    // [Authorize("ironhasura.api")]
-    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [EnableCors("AllowSpecificOrigin")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AnalyticApiController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
@@ -28,7 +27,6 @@ namespace IronHasura.Controllers_api
 
         // GET: api/AnalyticApi
         [HttpGet]
-        [EnableCors]
         public async Task<ActionResult<IEnumerable<Analytic>>> GetAnalytic()
         {
             return await _context.Analytic.ToListAsync();

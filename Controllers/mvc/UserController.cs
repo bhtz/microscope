@@ -7,23 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace IronHasura.Controllers_mvc
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly IronHasuraDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UserController(IronHasuraDbContext context)
+        public UserController(IronHasuraDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: User
         public async Task<IActionResult> Index()
         {
+            ViewBag.NbrIdentityUsers = this._userManager.Users.Count();
             return View(await _context.User.ToListAsync());
+        }
+
+
+        public async Task<IActionResult> Identity()
+        {
+            return View(await this._userManager.Users.ToListAsync());
         }
 
         // GET: User/Details/5

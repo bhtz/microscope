@@ -1,5 +1,5 @@
-ROADMAP
-=======
+MVP ROADMAP
+===========
 
 - [ ] AUTHENTICATION
   - [x] HASURA WEBHOOK
@@ -24,30 +24,9 @@ ROADMAP
 - [ ] PUSH NOTIFICATIONS
 - [ ] COGNITIVE ?
 
-NEXT STEPS
-==========
+CURRENT WORK
+============
 
-* CORS bug with API
-* Users / role admin ui
-* logs viewer / hasura log agregation ?
+* USER / ROLE SIMPLE ADMIN UI (MVC)
+* Logs
 
-STARTER KIT
------------
-
-* HASURA
-  * DATA
-  * GRAPHQL
-  * ACTIONS
-  * DOMAIN EVENTS
-* IRON HASURA
-  * IDENTITY
-  * STORAGE
-  * MAILER
-  * INTEGRATION EVENT
-  * REMOTE CONFIGURATIONS
-  * PUSH
-* SERVERLESS
-  * BUSINESS LOGIC
-  * SCHEDULED TASKS
-* LOGIC APP
-  * WORKFLOW

@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,9 @@ namespace IronHasura.Configurations
 
             services
                 .AddAuthentication()
-                .AddCookie()
+                .AddCookie(o => {
+                    o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                })
                 .AddJwtBearer(o =>
                 {
                     o.Authority = authorityEndpoint;
@@ -27,6 +30,7 @@ namespace IronHasura.Configurations
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateAudience = false,
+                        ValidateIssuer = false
                     };
                 });
 
