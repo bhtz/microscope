@@ -13,18 +13,18 @@ namespace IronHasura.Configurations
     public static class IdentityServerConfiguration
     {
         public static IServiceCollection AddIdentityServerConfiguration(this IServiceCollection services)
-        {
-            services.AddSingleton<ICorsPolicyService, CorsPolicyService>();
-            services.AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
-                .AddDeveloperSigningCredential()
-                .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
-                .AddInMemoryClients(IdentityServerConfiguration.GetClients())
-                .AddCorsPolicyService<CorsPolicyService>();
+            {
+                services.AddSingleton<ICorsPolicyService, CorsPolicyService>();
+                services.AddIdentityServer()
+                    .AddAspNetIdentity<IdentityUser>()
+                    .AddDeveloperSigningCredential()
+                    .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
+                    .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
+                    .AddInMemoryClients(IdentityServerConfiguration.GetClients())
+                    .AddCorsPolicyService<CorsPolicyService>();
 
-            return services;
-        }
+                return services;
+            }
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {

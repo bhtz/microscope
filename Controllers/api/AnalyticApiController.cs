@@ -29,6 +29,7 @@ namespace IronHasura.Controllers_api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Analytic>>> GetAnalytic()
         {
+            var isAdmin = User.IsInRole("Admin");
             return await _context.Analytic.ToListAsync();
         }
 

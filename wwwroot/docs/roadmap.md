@@ -23,6 +23,7 @@ MVP ROADMAP
 - [ ] CSV IMPORT
 - [ ] PUSH NOTIFICATIONS
 - [ ] COGNITIVE ?
+- [ ] MS GRAPH / O365 ?
 
 CURRENT WORK
 ============

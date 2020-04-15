@@ -25,7 +25,7 @@ namespace IronHasura.Controllers
             GET HASURA CLAIMS from bearer token
          */
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public ActionResult<HasuraClaims> Get()
         {
             var hasuraClaims = new HasuraClaims();
 
@@ -47,7 +47,7 @@ namespace IronHasura.Controllers
                 hasuraClaims.Role = "anonymous";
             }
 
-            return Ok(hasuraClaims);
+            return hasuraClaims;
         }
     }
 }

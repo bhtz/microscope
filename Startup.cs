@@ -1,4 +1,4 @@
-﻿using IronHasura.Configurations;
+using IronHasura.Configurations;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,8 +30,6 @@ namespace IronHasura
         {
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
-
-            services.AddCors();
 
             services.AddCors(options =>
             {

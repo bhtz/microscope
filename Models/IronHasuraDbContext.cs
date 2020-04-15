@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using IronHasura.Models;
 
 namespace IronHasura.Models
 {
