@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,16 @@ namespace IronHasura.Controllers
         {
             ViewBag.Filename = doc + ".md";
             return View();
+        }
+
+        public IActionResult Error(string errorId) 
+        {
+            var err = new ErrorViewModel 
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier    
+            };
+
+            return View(err);
         }
     }
 }

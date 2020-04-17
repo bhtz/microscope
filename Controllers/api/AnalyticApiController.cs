@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using IronHasura.Models;
+using IronHasura.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
@@ -15,7 +15,7 @@ namespace IronHasura.Controllers_api
     [Route("api/analytics")]
     [ApiController]
     [EnableCors("AllowSpecificOrigin")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy= "Administrator")]
     public class AnalyticApiController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
@@ -30,6 +30,8 @@ namespace IronHasura.Controllers_api
         public async Task<ActionResult<IEnumerable<Analytic>>> GetAnalytic()
         {
             var isAdmin = User.IsInRole("Admin");
+            var boolea = User.HasClaim("role", "Admin");
+            var headers = this.Request.Headers;
             return await _context.Analytic.ToListAsync();
         }
 

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace IronHasura.Models
+namespace IronHasura.Data
 {
     public partial class User
     {

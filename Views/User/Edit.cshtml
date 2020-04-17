@@ -1,32 +1,54 @@
 @using Microsoft.AspNetCore.Identity
-@model IdentityUser;
+@using IronHasura.Models
+@model List<UserRoleViewModel>;
+
+@{
+    IList<IdentityRole> roles = ViewBag.Roles;
+    IList<string> userRoles = ViewBag.UserRoles;
+    
+}
 
 <div>
     <h4>User</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+            Username
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+            @ViewBag.User.UserName
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @ViewBag.User.Email
         </dd>
     </dl>
 
     <h4>Roles</h4>
     <hr />
-    <ul class="list-group">
-        @foreach(var item in ViewBag.Roles)
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @for(int i = 0; i < Model.Count; i++)
         {
-            <li class="list-group-item">@item</li>
+            <div class="form-check">
+                <input type="hidden" asp-for="@Model[i].RoleId">
+                <input type="hidden" asp-for="@Model[i].RoleName">
+                <input asp-for="@Model[i].IsSelected">
+                <label asp-for="@Model[i].IsSelected">
+                    @Model[i].RoleName
+                </label>
+            </div>
         }
-    </ul>
+
+        <br>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
 <br>

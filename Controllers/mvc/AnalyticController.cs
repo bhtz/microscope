@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using IronHasura.Models;
+using IronHasura.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace IronHasura.Controllers_mvc

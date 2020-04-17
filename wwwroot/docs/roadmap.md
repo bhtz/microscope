@@ -1,4 +1,4 @@
-MVP ROADMAP
+POC ROADMAP
 ===========
 
 - [ ] AUTHENTICATION
@@ -11,7 +11,8 @@ MVP ROADMAP
     - [ ] aws S3
 - [x] REMOTE CONFIGURATIONS
 - [x] ANALYTICS ADAPTER
-- [ ] LOGGING
+- [ ] GRAPHQL API
+- [ ] LOGS
   - [ ] FILE
   - [ ] BLOBSTORAGE
   - [ ] APP INSIGHT
@@ -30,4 +31,13 @@ CURRENT WORK
 
 * USER / ROLE SIMPLE ADMIN UI (MVC)
 * Logs
+
+V1 ROADMAP
+==========
+
+- [ ] IronHasura.Admin -- MVC
+- [ ] IronHasura.API -- API
+- [ ] IronHasura.Identity -- IdentityServer
+- [ ] IronHasura.IdentityAdmin -- Skoruba.IDADMIN
+
 

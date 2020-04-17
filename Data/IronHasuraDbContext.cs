@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using IronHasura.Models;
 
-namespace IronHasura.Models
+namespace IronHasura.Data
 {
     public class IronHasuraDbContext : DbContext
     {

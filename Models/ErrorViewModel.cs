@@ -1,4 +1,4 @@
-namespace IronHasura.Dto
+namespace IronHasura.Models
 {
     public class ErrorViewModel
     {

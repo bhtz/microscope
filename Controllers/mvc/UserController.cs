@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using IronHasura.Models;
+using IronHasura.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using IronHasura.Models;
 
 namespace IronHasura.Controllers_mvc
 {
@@ -28,7 +30,11 @@ namespace IronHasura.Controllers_mvc
             return View(await this._userManager.Users.ToListAsync());
         }
 
-        // GET: User/Details/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -64,10 +70,32 @@ namespace IronHasura.Controllers_mvc
                 return NotFound();
             }
 
-            ViewBag.User = user;
-            ViewBag.Roles = await this._roleManager.Roles.ToListAsync();
+            var model = new List<UserRoleViewModel>();
+            var userRoles = await this._userManager.GetRolesAsync(user);
+            var roles = await this._roleManager.Roles.ToListAsync();
 
-            return View(user);
+            foreach (var role in roles)
+            {
+                var item = new UserRoleViewModel() 
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if(userRoles.Contains(role.Name)) 
+                {
+                    item.IsSelected = true;
+                }
+                else 
+                {
+                    item.IsSelected = false;
+                }
+
+                model.Add(item);
+            }
+
+            ViewBag.User = user;
+            return View(model);
         }
 
         /// <summary>
@@ -77,34 +105,33 @@ namespace IronHasura.Controllers_mvc
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Email,Firstname,Lastname,Role")] User user)
+        public async Task<IActionResult> Edit(IEnumerable<UserRoleViewModel> models, string id)
         {
-            if (id != user.Id)
+            var user = await this._userManager.FindByIdAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var roles = await this._userManager.GetRolesAsync(user);
+            var result = await this._userManager.RemoveFromRolesAsync(user, roles);
+
+            if(!result.Succeeded)
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists("test"))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError("", "cannot drop roles");
+                return View(models);
             }
-            return View(user);
+            
+            var selectedRoles = models.Where(x => x.IsSelected).Select(x => x.RoleName);
+            result = await this._userManager.AddToRolesAsync(user, selectedRoles);
+
+            if(!result.Succeeded)
+            {
+                ModelState.AddModelError("", "cannot add selected roles");
+                return View(models);
+            }
+            
+            return RedirectToAction("Details", new { id = id });
         }
 
         /// <summary>
@@ -128,7 +155,11 @@ namespace IronHasura.Controllers_mvc
             return View(user);
         }
 
-        // POST: User/Delete/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
@@ -139,6 +170,11 @@ namespace IronHasura.Controllers_mvc
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool UserExists(string id)
         {
             return this._userManager.Users.Any(e => e.Id == id);

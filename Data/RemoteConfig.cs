@@ -1,13 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace IronHasura.Models
+namespace IronHasura.Data
 {
-    public partial class Analytic
+    public partial class RemoteConfig
     {
         [Key]
         public Guid Id { get; set; }
         public string Key { get; set; }
-        public string Dimension { get; set; }
+        public string Value { get; set; }
     }
 }

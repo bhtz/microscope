@@ -1,5 +1,5 @@
 using IronHasura.Configurations;
-using IronHasura.Models;
+using IronHasura.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,19 +35,16 @@ namespace IronHasura
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowCredentials()
                     );
             });
 
             services.AddIdentityConfiguration();
-            services.AddIdentityServerConfiguration();
+            services.AddIdentityServerConfiguration(this.Configuration);
             services.AddAuthConfiguration(this.Configuration);
-            // services.AddAuthorization(o => {
-            //     o.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
-            // });
+            services.AddAuthorizationConfiguration(this.Configuration);
 
             services.AddControllersWithViews();
             services.AddRazorPages();

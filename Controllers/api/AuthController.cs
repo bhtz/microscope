@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IronHasura.Dto;
-using IronHasura.Models;
+using IronHasura.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
