@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 using IronHasura.Dto;
 using IronHasura.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IronHasura.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AuthController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
@@ -21,9 +22,10 @@ namespace IronHasura.Controllers
             this._userManager = userManager;
         }
 
-        /**
-            GET HASURA CLAIMS from bearer token
-         */
+        /// <summary>
+        /// GET claims from bearer token
+        /// </summary>
+        /// <returns>HASURA CLAIMS</returns>
         [HttpGet]
         public ActionResult<HasuraClaims> Get()
         {
@@ -32,15 +34,13 @@ namespace IronHasura.Controllers
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var userId = HttpContext.User.FindFirst("sub")?.Value;
-                var role = string.IsNullOrEmpty(HttpContext.User.FindFirst("role")?.Value)
+                var role = 
+                    string.IsNullOrEmpty(HttpContext.User.FindFirst("role")?.Value)
                     ? "user"
                     : HttpContext.User.FindFirst("role")?.Value;
 
-                // var user = await this._userManager.GetUserAsync(User);
-                // var roles = await this._userManager.GetRolesAsync(user);
-
                 hasuraClaims.UserId = Guid.Parse(userId);
-                hasuraClaims.Role = role;
+                hasuraClaims.Role = role.ToLower();
             }
             else
             {

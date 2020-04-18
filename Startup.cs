@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.Markdown;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using IronHasura.GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 
 namespace IronHasura
 {
@@ -49,6 +52,11 @@ namespace IronHasura
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddScoped<IronHasuraSchema>();
+            services
+                .AddGraphQL(o => { o.ExposeExceptions = false; })
+                .AddGraphTypes(ServiceLifetime.Scoped);
+
             services.AddSwaggerConfiguration();
             services.AddStorageConfiguration(this.Configuration);
             services.AddMarkdownConfiguration();
@@ -84,6 +92,9 @@ namespace IronHasura
             app.UseAuthorization();
 
             app.UseMarkdown();
+
+            app.UseGraphQL<IronHasuraSchema>();
+            app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
 
             app.UseEndpoints(endpoints =>
             {
