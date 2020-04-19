@@ -1,4 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
+using IdentityModel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +31,10 @@ namespace IronHasura.Configurations
 
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
-                        ValidateAudience = false,
-                        ValidateIssuer = false
+                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        NameClaimType = JwtClaimTypes.Name,
+                        RoleClaimType = JwtClaimTypes.Role
                     };
                 });
 

@@ -1,8 +1,9 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using IronHasura.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
@@ -11,6 +12,7 @@ namespace IronHasura.Controllers
 {
     [Route("api/storage")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StorageController : ControllerBase
     {
         private IStorageService _storageService { get; set; }

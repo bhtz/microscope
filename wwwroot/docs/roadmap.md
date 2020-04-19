@@ -47,6 +47,6 @@ POC ROADMAP
 CURRENT WORK
 ============
 
+* HASURA JWT CLAIMS
 * ROLE ADMIN
 * IS Clients as json
-* HASURA JWT CLAIMS
