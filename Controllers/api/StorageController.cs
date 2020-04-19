@@ -86,6 +86,7 @@ namespace IronHasura.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             string[] data = await this._storageService.GetFiles();

@@ -14,8 +14,8 @@ namespace IronHasura.Controllers_api
 {
     [Route("api/analytics")]
     [ApiController]
-    [EnableCors("AllowSpecificOrigin")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy= "Administrator")]
+    [Authorize(Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AnalyticApiController : ControllerBase
     {
         private readonly IronHasuraDbContext _context;
