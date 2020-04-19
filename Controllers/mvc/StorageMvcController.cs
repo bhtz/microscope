@@ -22,12 +22,30 @@ namespace IronHasura.Controllers
             return View(data);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string filename)
         {
             await this._storageService.DeleteFile(filename);
             return RedirectToAction(nameof(Index));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/storage/{filename}/download")]
+        public async Task<IActionResult> Download(string filename)
+        {
+            byte[] data = await this._storageService.GetFileData(filename);
+            return File(data, "application/force-download", filename);
         }
 
     }

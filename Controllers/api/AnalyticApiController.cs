@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using IronHasura.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Cors;
-using System.Security.Claims;
 
 namespace IronHasura.Controllers_api
 {

@@ -15,6 +15,10 @@ namespace IronHasura.Controllers
             this.hasuraUrl = configuration.GetValue<string>("IRONHASURA_CONSOLE_URL");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [Route("/")]
         public IActionResult Index()
         {

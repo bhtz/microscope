@@ -18,13 +18,20 @@ namespace IronHasura.Controllers_mvc
             _context = context;
         }
 
-        // GET: AppConfig
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             return View(await _context.RemoteConfig.ToListAsync());
         }
 
-        // GET: AppConfig/Details/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -41,15 +48,19 @@ namespace IronHasura.Controllers_mvc
             return View(appConfig);
         }
 
-        // GET: AppConfig/Create
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: AppConfig/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Key,Value")] RemoteConfig appConfig)
@@ -64,7 +75,11 @@ namespace IronHasura.Controllers_mvc
             return View(appConfig);
         }
 
-        // GET: AppConfig/Edit/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -80,9 +95,11 @@ namespace IronHasura.Controllers_mvc
             return View(appConfig);
         }
 
-        // POST: AppConfig/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Key,Value")] RemoteConfig appConfig)
@@ -115,7 +132,11 @@ namespace IronHasura.Controllers_mvc
             return View(appConfig);
         }
 
-        // GET: AppConfig/Delete/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -133,7 +154,11 @@ namespace IronHasura.Controllers_mvc
             return View(appConfig);
         }
 
-        // POST: AppConfig/Delete/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -144,6 +169,11 @@ namespace IronHasura.Controllers_mvc
             return RedirectToAction(nameof(Index));
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool AppConfigExists(Guid id)
         {
             return _context.RemoteConfig.Any(e => e.Id == id);

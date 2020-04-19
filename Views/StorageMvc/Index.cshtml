@@ -10,7 +10,7 @@
                 <div class="list-group-item clearfix">
                     <span class="align-middle">@item</span>
                     <span class="float-right">
-                        <a href="~/api/storage/@item/download" class="btn btn-xs btn-warning"><i class="fas fa-download"></i></a>                        
+                        <a href="~/storage/@item/download" class="btn btn-xs btn-warning"><i class="fas fa-download"></i></a>                        
                         <form asp-action="Delete" class="float-right" onsubmit="return confirm('Are you sure ?');">
                             <input type="hidden" name="filename" value="@item" />
                             <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
