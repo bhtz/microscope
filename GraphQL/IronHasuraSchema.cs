@@ -7,7 +7,7 @@ namespace IronHasura.GraphQL
     {
         public IronHasuraSchema(IDependencyResolver resolver) : base(resolver)
         {
-            //Query = resolver.Resolve<MyHotelQuery>();
+            Query = resolver.Resolve<RootQuery>();
         }
     }
 }

@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using IronHasura.GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using GraphQL;
 
 namespace IronHasura
 {
@@ -31,6 +33,11 @@ namespace IronHasura
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
 
@@ -52,10 +59,7 @@ namespace IronHasura
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddScoped<IronHasuraSchema>();
-            services
-                .AddGraphQL(o => { o.ExposeExceptions = false; })
-                .AddGraphTypes(ServiceLifetime.Scoped);
+            services.AddGraphQLConfiguration();
 
             services.AddSwaggerConfiguration();
             services.AddStorageConfiguration(this.Configuration);
