@@ -5,10 +5,10 @@ POC ROADMAP
   - [x] IDENTITY SERVER
   - [x] IDENTITY
   - [x] HASURA WEBHOOK
-  - [ ] EXTERNAL PROVIDERS
   - [ ] HASURA JWT CLAIMS
-  - [ ] SIMPLE ADMIN
-    - [ ] ROLES
+  - [ ] EXTERNAL PROVIDERS
+  - [x] SIMPLE ADMIN
+    - [x] ROLES
     - [x] USERS
 - [x] STORAGE ADAPTER
     - [x] blobstorage
@@ -47,6 +47,5 @@ POC ROADMAP
 CURRENT WORK
 ============
 
-* HASURA JWT CLAIMS - TESTING
-* ROLES ADMIN MVC
 * IS Clients as json
+* HASURA JWT CLAIMS - TESTING
