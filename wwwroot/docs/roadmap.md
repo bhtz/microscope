@@ -1,5 +1,5 @@
-POC ROADMAP
-===========
+ROADMAP
+=======
 
 - [ ] AUTHENTICATION
   - [x] IDENTITY SERVER
@@ -18,12 +18,20 @@ POC ROADMAP
     - [ ] Database persistence ?
 - [x] REMOTE CONFIGURATIONS
 - [x] ANALYTICS ADAPTER
-- [ ] GRAPHQL API
-  - [ ] USERS
-  - [ ] ROLES
-  - [ ] REMOTE CONFIGS
-  - [ ] ANALYTICS
-  - [x] PLAYGROUND
+- [ ] API
+  - [ ] GRAPHQL API
+    - [ ] USERS
+    - [ ] ROLES
+    - [ ] REMOTE CONFIGS
+    - [ ] ANALYTICS
+    - [x] PLAYGROUND
+  - [ ] REST API
+    - [ ] USERS
+    - [ ] ROLES
+    - [x] STORAGE
+    - [x] REMOTE CONFIGS
+    - [x] ANALYTICS
+    - [x] SWAGGER
 - [ ] LOGS
   - [ ] FILE
   - [ ] BLOBSTORAGE
@@ -47,5 +55,10 @@ POC ROADMAP
 CURRENT WORK
 ============
 
-* IS Clients as json
+* REST API
+  * ROLES
+  * USERS
 * HASURA JWT CLAIMS - TESTING
+* IS Clients as json
+* Storage ADMIN UI
+  * Upload
