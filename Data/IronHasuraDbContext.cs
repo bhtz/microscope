@@ -14,7 +14,6 @@ namespace IronHasura.Data
             
         }
 
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Analytic> Analytic { get; set; }
         public virtual DbSet<RemoteConfig> RemoteConfig { get; set; }
 
