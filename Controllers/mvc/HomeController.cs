@@ -3,9 +3,11 @@ using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using NSwag.Annotations;
 
 namespace IronHasura.Controllers
 {
+    [OpenApiIgnore]
     public class HomeController : Controller
     {
         private readonly string hasuraUrl;
@@ -20,6 +22,7 @@ namespace IronHasura.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("/")]
+        [OpenApiIgnore]
         public IActionResult Index()
         {
             return View();
@@ -27,6 +30,7 @@ namespace IronHasura.Controllers
 
         [Authorize(Roles = "Admin")]
         [Route("/home/data")]
+        [OpenApiIgnore]
         public IActionResult Hasura()
         {
 
@@ -34,6 +38,7 @@ namespace IronHasura.Controllers
         }
 
         [Route("/home/docs/{doc}")]
+        [OpenApiIgnore]
         public IActionResult Docs(string doc)
         {
             ViewBag.Filename = doc + ".md";

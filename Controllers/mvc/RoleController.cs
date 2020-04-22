@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NSwag.Annotations;
 
 namespace IronHasura.Controllers
 {
+    [OpenApiIgnore]
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using IronHasura.Models;
+using NSwag.Annotations;
 
 namespace IronHasura.Controllers_mvc
 {
+    [OpenApiIgnore]
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {

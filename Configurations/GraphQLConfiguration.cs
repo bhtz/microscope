@@ -11,7 +11,7 @@ namespace IronHasura.Configurations
         {
             services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
             services.AddScoped<IronHasuraSchema>();
-            services.AddSingleton<RootQuery>();
+            services.AddScoped<RootQuery>();
             services
                 .AddGraphQL(o => { o.ExposeExceptions = false; })
                 .AddGraphTypes(ServiceLifetime.Scoped);

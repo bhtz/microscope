@@ -2,9 +2,11 @@ using System.Threading.Tasks;
 using IronHasura.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace IronHasura.Controllers
 {
+    [OpenApiIgnore]
     [Authorize(Roles = "Admin")]
     [Route("/Storage")]
     public class StorageMvcController : Controller

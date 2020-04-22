@@ -50,14 +50,16 @@ ROADMAP
 - [ ] FUNCTIONS
   - [ ] CODE SERVER IDE
   - [ ] DOCKER
-- [ ] DOCKER  
+- [ ] DOCKER
+- [ ] STARTER KIT
+  - [ ] HASURA
+  - [ ] IRON HASURA
+  - [ ] AZURE FUNCTIONS
+  - [ ] AZURE LOGIC APP
 
 CURRENT WORK
 ============
 
-* REST API
-  * ROLES
-  * USERS
 * HASURA JWT CLAIMS - TESTING
 * IS Clients as json
 * Storage ADMIN UI

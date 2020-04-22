@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IronHasura.Data;
 using Microsoft.AspNetCore.Authorization;
+using NSwag.Annotations;
 
 namespace IronHasura.Controllers_mvc
 {
+    [OpenApiIgnore]
     [Authorize(Roles = "Admin")]
     public class RemoteConfigController : Controller
     {
