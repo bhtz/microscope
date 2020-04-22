@@ -1,16 +1,14 @@
-using System.Collections.Generic;
 using GraphQL.Types;
+using IronHasura.Data;
 using IronHasura.GraphQL.Types;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 public class RootQuery : ObjectGraphType<object>
 {
-    public RootQuery(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    public RootQuery(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IronHasuraDbContext dbContext)
     {
         Name = "Query";
-        
-        Field<StringGraphType>("hello", resolve: (context) => "hello world !");
         
         FieldAsync<ListGraphType<UserType>>("IronHasuraUsers", resolve: async context => 
         {
@@ -20,6 +18,16 @@ public class RootQuery : ObjectGraphType<object>
         FieldAsync<ListGraphType<RoleType>>("IronHasuraRoles", resolve: async context => 
         {
             return await roleManager.Roles.ToListAsync();
+        });
+
+        FieldAsync<ListGraphType<RemoteConfigType>>("RemoteConfigs", resolve: async context => 
+        {
+            return await dbContext.RemoteConfig.ToListAsync();
+        });
+
+        FieldAsync<ListGraphType<AnalyticType>>("Analytics", resolve: async context => 
+        {
+            return await dbContext.Analytic.ToListAsync();
         });
     }
 }
