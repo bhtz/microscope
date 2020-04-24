@@ -32,6 +32,7 @@ ROADMAP
     - [x] REMOTE CONFIGS
     - [x] ANALYTICS
     - [x] SWAGGER
+- [x] DOCKER
 - [ ] LOGS
   - [ ] FILE
   - [ ] BLOBSTORAGE
@@ -50,7 +51,6 @@ ROADMAP
 - [ ] FUNCTIONS
   - [ ] CODE SERVER IDE
   - [ ] DOCKER
-- [ ] DOCKER
 - [ ] STARTER KIT
   - [ ] HASURA
   - [ ] IRON HASURA

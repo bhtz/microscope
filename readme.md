@@ -29,11 +29,18 @@ Development :
 GETTING STARTED
 ---------------
 
+With dotnet : 
+
     git clone https://github.com/bhtz/microscope.git
     dotnet restore
     dotnet build
     update appsettings.json 
     dotnet run
+
+with docker : 
+
+    docker build . -t microscope
+    docker run -p 3000:80 microscope
 
 SETTINGS
 --------

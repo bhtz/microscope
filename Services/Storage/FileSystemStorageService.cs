@@ -17,6 +17,7 @@ namespace IronHasura.Services
         {
             this.Configuration = configuration;
             this.UploadsFolder = configuration.GetValue<string>("IRONHASURA_STORAGE_CONTAINER");
+            this.CreateUploadDirectoryIfNotExist();
         }
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace IronHasura.Services
         /// <returns></returns>
         public Task<bool> DeleteFile(string filename)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder, filename);
+            var path = Path.Combine(this.GetUploadDirectoryPath(), filename);
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -35,7 +36,6 @@ namespace IronHasura.Services
             else
             {
                 throw new Exception("File not found");
-                // return Task.FromResult(false);
             }
         }
 
@@ -46,7 +46,7 @@ namespace IronHasura.Services
         /// <returns></returns>
         public Task<byte[]> GetFileData(string filename)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder, filename);
+            var path = Path.Combine(this.GetUploadDirectoryPath(), filename);
             if (File.Exists(path))
             {
                 var fileBytes = File.ReadAllBytes(path);
@@ -65,7 +65,7 @@ namespace IronHasura.Services
         /// <returns></returns>
         public Task<string> GetFileUri(string filename)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder, filename);
+            var path = Path.Combine(this.GetUploadDirectoryPath(), filename);
 
             if (File.Exists(path))
             {
@@ -85,15 +85,8 @@ namespace IronHasura.Services
         /// <returns></returns>
         public async Task<string> SaveFile(string filename, IFormFile file)
         {
-            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder);
+            var path = Path.Combine(this.GetUploadDirectoryPath(), filename);
 
-            bool uploadDirExist = Directory.Exists(uploadPath);
-            if (!uploadDirExist)
-            {
-                Directory.CreateDirectory(uploadPath);
-            }
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder, filename);
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
@@ -103,15 +96,28 @@ namespace IronHasura.Services
         }
 
         public Task<string[]> GetFiles()
-        {
-            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder);
-            
+        {            
+            var path = this.GetUploadDirectoryPath();
             var files = Directory
-                .GetFiles(uploadPath)
+                .GetFiles(path)
                 .Select(x => Path.GetFileName(x))
                 .ToArray();
 
             return Task.FromResult(files);
+        }
+
+        private void CreateUploadDirectoryIfNotExist() 
+        {
+            var path = this.GetUploadDirectoryPath();
+            if(!Directory.Exists(path)) 
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        private string GetUploadDirectoryPath() 
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), this.UploadsFolder);
         }
     }
 }
