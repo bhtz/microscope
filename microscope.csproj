@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>com.ironhasura</RootNamespace>
+    <RootNamespace>microscope</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

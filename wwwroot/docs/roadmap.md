@@ -14,7 +14,7 @@ ROADMAP
     - [x] blobstorage
     - [x] file system
     - [ ] aws S3
-    - [ ] Admin UI (folder ? treeview ?)
+    - [ ] Admin UI (container, upload)
     - [ ] Database persistence ?
 - [x] REMOTE CONFIGURATIONS
 - [x] ANALYTICS ADAPTER
