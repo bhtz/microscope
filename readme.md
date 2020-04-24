@@ -1,38 +1,38 @@
-IRON HASURA
-===========
+MICROSCOPE
+==========
 
-A (work in progress) full Backend As A Service in one docker compose file - play with hasura GraphQL engine
+Backend as a service for ambitious digital factory (work in progress)
 
+* postgres
+* hasura
 * Identity & SSO
 * Storage
 * Remote configs
 * REST & GraphQL API
+* ...
 
 
 ROADMAP
 =======
 
-[roadmap](https://github.com/bhtz/IronHasura/blob/master/wwwroot/docs/roadmap.md)
+[roadmap](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/roadmap.md)
 
 
 REQUIREMENTS
 ============
 
-Run : 
-
-* docker engine
-
 Development :
 
-* .NET Core SDK 3.1
+* dotnet core SDK 3.1
+* docker engine
 
 GETTING STARTED
 ---------------
 
-    git clone https://github.com/bhtz/IronHasura.git
+    git clone https://github.com/bhtz/microscope.git
     dotnet restore
     dotnet build
-    update appsettings.json (aka)
+    update appsettings.json 
     dotnet run
 
 SETTINGS

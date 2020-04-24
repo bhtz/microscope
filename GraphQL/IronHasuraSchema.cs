@@ -8,6 +8,7 @@ namespace IronHasura.GraphQL
         public IronHasuraSchema(IDependencyResolver resolver) : base(resolver)
         {
             Query = resolver.Resolve<RootQuery>();
+            Mutation = resolver.Resolve<RootMutation>();
         }
     }
 }

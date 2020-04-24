@@ -10,20 +10,9 @@ public class RootQuery : ObjectGraphType<object>
     {
         Name = "Query";
         
-        FieldAsync<ListGraphType<UserType>>("IronHasuraUsers", resolve: async context => 
-        {
-            return await userManager.Users.ToListAsync();
-        });
-
-        FieldAsync<ListGraphType<RoleType>>("IronHasuraRoles", resolve: async context => 
-        {
-            return await roleManager.Roles.ToListAsync();
-        });
-
-        FieldAsync<ListGraphType<RemoteConfigType>>("RemoteConfigs", resolve: async context => 
-        {
-            return await dbContext.RemoteConfig.ToListAsync();
-        });
+        Field<IdentityQuery>("Identity", resolve: context => new {});
+        
+        Field<RemoteConfigsQuery>("RemoteConfigs", resolve: context => new {});
 
         FieldAsync<ListGraphType<AnalyticType>>("Analytics", resolve: async context => 
         {

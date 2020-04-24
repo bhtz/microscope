@@ -20,7 +20,7 @@ namespace IronHasura.Configurations
             services
                 .AddAuthentication()
                 .AddCookie(o => {
-                    o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                    o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 })
                 .AddJwtBearer(o =>
                 {

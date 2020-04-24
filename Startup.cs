@@ -7,12 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.Markdown;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using IronHasura.GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using GraphQL;
 
 namespace IronHasura
 {
