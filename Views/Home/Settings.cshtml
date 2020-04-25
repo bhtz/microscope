@@ -1,0 +1,45 @@
+@model IronHasura.Models.SettingsViewModel
+
+<h1>Settings</h1>
+<br>
+
+<div class="row">
+    <div class="col">
+        <div class="card" style="height:200px">
+            <div class="card-header">
+            <i class="fa fa-database"></i> PostgreSQL
+            </div>
+            <div class="card-body">
+                <p><strong>Host : </strong> <br> @Model.DatabaseHost</p>
+                <p><strong>Database : </strong> <br> @Model.DatabaseName</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card" style="height:200px">
+            <div class="card-header">
+            <i class="fa fa-code"></i> GraphQL engine
+            </div>
+            <div class="card-body">
+                <p><strong>Hasura console : </strong> <br> <a href="@Model.HasuraConsoleUrl" target="_blank">@Model.HasuraConsoleUrl</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card" style="height:200px">
+            <div class="card-header">
+            <i class="fa fa-hdd"></i> Storage
+            </div>
+            <div class="card-body">
+                <p><strong>Storage Adapter : </strong> <br> @Model.FileAdapter</p>
+                <p><strong>Container : </strong> <br> @Model.Container</p>
+            </div>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>

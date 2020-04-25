@@ -1,8 +1,10 @@
+using System.Data.Common;
 using System.Diagnostics;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using NSwag.Annotations;
 
 namespace IronHasura.Controllers
@@ -11,9 +13,13 @@ namespace IronHasura.Controllers
     public class HomeController : Controller
     {
         private readonly string hasuraUrl;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, ILogger<HomeController> logger)
         {
+            this._configuration = configuration;
+            this._logger = logger;
             this.hasuraUrl = configuration.GetValue<string>("IRONHASURA_CONSOLE_URL");
         }
 
@@ -25,6 +31,7 @@ namespace IronHasura.Controllers
         [OpenApiIgnore]
         public IActionResult Index()
         {
+            this._logger.LogWarning("test serilog");
             return View();
         }
 
@@ -43,6 +50,27 @@ namespace IronHasura.Controllers
         {
             ViewBag.Filename = doc + ".md";
             return View();
+        }
+
+        [Route("/settings")]
+        [OpenApiIgnore]
+        public IActionResult Settings()
+        {
+            var cs = this._configuration.GetConnectionString("IRONHASURA_DATA_CONNECTION_STRING");
+
+            DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
+            builder.ConnectionString = cs;
+
+            var model  = new SettingsViewModel 
+            {
+                HasuraConsoleUrl = this._configuration.GetValue<string>("IRONHASURA_CONSOLE_URL"),
+                FileAdapter = this._configuration.GetValue<string>("IRONHASURA_FILE_ADAPTER"),
+                Container = this._configuration.GetValue<string>("IRONHASURA_STORAGE_CONTAINER"),
+                DatabaseName = builder["Database"] as string,
+                DatabaseHost = builder["Server"] as string,
+            };
+
+            return View(model);
         }
 
         public IActionResult Error(string errorId) 

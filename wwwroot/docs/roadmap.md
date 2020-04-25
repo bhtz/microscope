@@ -33,6 +33,7 @@ ROADMAP
     - [x] ANALYTICS
     - [x] SWAGGER
 - [x] DOCKER
+- [x] INSTANCE SETTINGS PAGE
 - [ ] LOGS
   - [ ] FILE
   - [ ] BLOBSTORAGE
@@ -64,3 +65,5 @@ CURRENT WORK
 * IS Clients as json
 * Storage ADMIN UI
   * Upload
+* API
+* SETTINGS PAGE
