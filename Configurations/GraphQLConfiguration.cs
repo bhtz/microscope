@@ -14,6 +14,7 @@ namespace IronHasura.Configurations
 
             services.AddScoped<IGraphQueryMarker, IdentityQuery>();
             services.AddScoped<IGraphQueryMarker, RemoteConfigsQuery>();
+            services.AddScoped<IGraphQueryMarker, AnalyticsQuery>();
             
             services.AddScoped<IGraphMutationMarker, IdentityMutation>();
 
