@@ -20,14 +20,14 @@ ROADMAP
 - [x] ANALYTICS ADAPTER
 - [ ] API
   - [ ] GRAPHQL API
-    - [ ] USERS
-    - [ ] ROLES
+    - [x] USERS
+    - [x] ROLES
     - [ ] REMOTE CONFIGS
     - [ ] ANALYTICS
     - [x] PLAYGROUND
   - [ ] REST API
-    - [ ] USERS
-    - [ ] ROLES
+    - [x] USERS
+    - [x] ROLES
     - [x] STORAGE
     - [x] REMOTE CONFIGS
     - [x] ANALYTICS
@@ -35,7 +35,8 @@ ROADMAP
 - [x] DOCKER
 - [x] INSTANCE SETTINGS PAGE
 - [ ] LOGS
-  - [ ] FILE
+  - [x] CONSOLE
+  - [x] FILE
   - [ ] BLOBSTORAGE
   - [ ] APP INSIGHT
   - [ ] VIEWER

@@ -78,5 +78,21 @@ namespace IronHasura.Controllers_api
             var dto = await this._roleManager.CreateAsync(role);
             return role;
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<IdentityRole>> Update(string id, [FromBody] string name)
+        {
+            var role = await this._roleManager.FindByIdAsync(id);
+
+            if(role == null)
+            {
+                return NotFound();
+            }
+
+            role.Name = name;
+            await this._roleManager.UpdateAsync(role);
+
+            return role;
+        }
     }
 }
