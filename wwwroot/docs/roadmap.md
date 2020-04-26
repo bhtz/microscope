@@ -25,6 +25,7 @@ ROADMAP
     - [ ] REMOTE CONFIGS
     - [ ] ANALYTICS
     - [x] PLAYGROUND
+    - [ ] AUTH
   - [ ] REST API
     - [x] USERS
     - [x] ROLES
@@ -32,6 +33,7 @@ ROADMAP
     - [x] REMOTE CONFIGS
     - [x] ANALYTICS
     - [x] SWAGGER
+    - [x] AUTH
 - [x] DOCKER
 - [x] INSTANCE SETTINGS PAGE
 - [ ] LOGS
