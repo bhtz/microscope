@@ -18,12 +18,12 @@ namespace IronHasura
 
             try
             {
-                Log.Information("Starting up");
+                Log.Information("Microscope starting up");
                 CreateWebHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Application start-up failed");
+                Log.Fatal(ex, "Microscope start-up failed");
             }
             finally
             {

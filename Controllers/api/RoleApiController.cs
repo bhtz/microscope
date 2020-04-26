@@ -68,5 +68,15 @@ namespace IronHasura.Controllers_api
 
             return role;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<IdentityRole>> Create([FromBody] string name)
+        {
+            var role = new IdentityRole();
+            role.Name = name;
+            
+            var dto = await this._roleManager.CreateAsync(role);
+            return role;
+        }
     }
 }
