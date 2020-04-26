@@ -1,13 +1,18 @@
+using System.Collections.Generic;
 using GraphQL.Types;
-using IronHasura.Data;
-using IronHasura.GraphQL.Types;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using IronHasura.GraphQL;
 
 public class RootMutation : ObjectGraphType<object>
 {
-    public RootMutation()
+    public RootMutation(IEnumerable<IGraphMutationMarker> markers)
     {
-        Field<IdentityMutation>("identity", resolve: context => new {});
+        foreach(var marker in markers)
+        {
+            var q = marker as ObjectGraphType<object>;
+            foreach(var f in q.Fields)
+            {
+                AddField(f);
+            }
+        }
     }
 }

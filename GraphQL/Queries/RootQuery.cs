@@ -1,22 +1,18 @@
+using System.Collections.Generic;
 using GraphQL.Types;
-using IronHasura.Data;
-using IronHasura.GraphQL.Types;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using IronHasura.GraphQL;
 
 public class RootQuery : ObjectGraphType<object>
 {
-    public RootQuery(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IronHasuraDbContext dbContext)
-    {
-        Name = "Query";
-        
-        Field<IdentityQuery>("Identity", resolve: context => new {});
-        
-        Field<RemoteConfigsQuery>("RemoteConfigs", resolve: context => new {});
-
-        FieldAsync<ListGraphType<AnalyticType>>("Analytics", resolve: async context => 
+    public RootQuery(IEnumerable<IGraphQueryMarker> markers)
+    {        
+        foreach(var marker in markers)
         {
-            return await dbContext.Analytic.ToListAsync();
-        });
+            var q = marker as ObjectGraphType<object>;
+            foreach(var f in q.Fields)
+            {
+                AddField(f);
+            }
+        }
     }
 }

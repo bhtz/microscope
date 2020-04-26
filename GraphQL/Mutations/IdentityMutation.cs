@@ -1,10 +1,9 @@
 using GraphQL.Types;
-using IronHasura.Data;
+using IronHasura.GraphQL;
 using IronHasura.GraphQL.Types;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
-public class IdentityMutation : ObjectGraphType<object>
+public class IdentityMutation : ObjectGraphType<object>, IGraphMutationMarker
 {
     public IdentityMutation(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {   

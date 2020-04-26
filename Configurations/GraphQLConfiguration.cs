@@ -11,6 +11,12 @@ namespace IronHasura.Configurations
         {
             services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
             services.AddScoped<IronHasuraSchema>();
+
+            services.AddScoped<IGraphQueryMarker, IdentityQuery>();
+            services.AddScoped<IGraphQueryMarker, RemoteConfigsQuery>();
+            
+            services.AddScoped<IGraphMutationMarker, IdentityMutation>();
+
             services.AddScoped<RootQuery>();
             services
                 .AddGraphQL(o => { o.ExposeExceptions = false; })

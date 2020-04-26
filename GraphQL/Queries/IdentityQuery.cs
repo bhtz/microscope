@@ -1,9 +1,10 @@
 using GraphQL.Types;
+using IronHasura.GraphQL;
 using IronHasura.GraphQL.Types;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-public class IdentityQuery : ObjectGraphType<object>
+public class IdentityQuery : ObjectGraphType<object>, IGraphQueryMarker
 {
     public IdentityQuery(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {        
