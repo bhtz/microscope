@@ -7,9 +7,9 @@ namespace IronHasura.GraphQL.Types
     {
         public RemoteConfigType()
         {
-            Field(x => x.Id, type:typeof(StringGraphType));
-            Field(x => x.Key);
-            Field(x => x.Value);
+            Field(x => x.Id, type:typeof(StringGraphType)).Name("Id");;
+            Field(x => x.Key).Name("Key");
+            Field(x => x.Value).Name("Value");
         }
     }
 }

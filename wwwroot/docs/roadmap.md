@@ -22,8 +22,8 @@ ROADMAP
   - [ ] GRAPHQL API
     - [x] USERS
     - [x] ROLES
-    - [ ] REMOTE CONFIGS
-    - [ ] ANALYTICS
+    - [x] REMOTE CONFIGS
+    - [x] ANALYTICS
     - [x] PLAYGROUND
     - [ ] AUTH
   - [ ] REST API
