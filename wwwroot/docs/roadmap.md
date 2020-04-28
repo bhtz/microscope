@@ -41,7 +41,7 @@ ROADMAP
   - [x] FILE
   - [ ] BLOBSTORAGE
   - [ ] APP INSIGHT
-  - [ ] VIEWER
+  - [x] VIEWER
 - [ ] MAILER
 - [ ] INTEGRATION EVENTS
     - [ ] RabbitMQ

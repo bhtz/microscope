@@ -14,7 +14,6 @@ namespace IronHasura.Controllers
     public class RoleController : Controller
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public RoleController(IConfiguration configuration, RoleManager<IdentityRole> roleManager)

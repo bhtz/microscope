@@ -1,5 +1,7 @@
 using System.Data.Common;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +42,6 @@ namespace IronHasura.Controllers
         [OpenApiIgnore]
         public IActionResult Hasura()
         {
-
             return Redirect(this.hasuraUrl);
         }
 
@@ -81,6 +82,29 @@ namespace IronHasura.Controllers
             };
 
             return View(err);
+        }
+
+        [Route("/logs")]
+        [OpenApiIgnore]
+        public IActionResult Logs() 
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "./Logs");
+
+            var logFilePath = Directory
+                .GetFiles(path)
+                .FirstOrDefault();
+
+            if(!string.IsNullOrEmpty(logFilePath))
+            {
+                var data = System.IO.File.ReadAllBytes(logFilePath);
+
+                return new FileContentResult(data, "text/plain");
+            }
+            else 
+            {
+                return Content("Microscope logs file not exist");
+            }
+
         }
     }
 }
