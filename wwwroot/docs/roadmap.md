@@ -65,8 +65,8 @@ CURRENT WORK
 ============
 
 * HASURA JWT CLAIMS - TESTING
-* IS Clients as json
-* Storage ADMIN UI
-  * Upload
-* API
-* SETTINGS PAGE
+* STORAGE
+  * MCV - Upload
+  * MCV - Folder
+  * API - Folder
+  * GraphQL - Folder
