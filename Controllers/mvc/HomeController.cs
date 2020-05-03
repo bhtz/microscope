@@ -100,7 +100,7 @@ namespace IronHasura.Controllers
 
                 return new FileContentResult(data, "text/plain");
             }
-            else 
+            else
             {
                 return Content("Microscope logs file not exist");
             }

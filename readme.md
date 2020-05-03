@@ -58,5 +58,27 @@ SETTINGS
   "IRONHASURA_STORAGE_CONTAINER": "uploads",
   "IRONHASURA_AUTHORITY_ENDPOINT": "http://localhost:5000",
   "IRONHASURA_AUDIENCE": "ironhasura.api",
+
+  "Clients": [
+    {
+      "ClientId": "pwaclient",
+      "ClientName": "PWA Client",
+      "ClientUri": "http://localhost:4200",
+      "AllowedGrantTypes": ["authorization_code"],
+      "RedirectUris": ["http://localhost:4200"],
+      "PostLogoutRedirectUris": ["http://localhost:4200/"],
+      "AllowedCorsOrigins": ["http://localhost:4200"],
+      "AccessTokenLifetime": 3600,
+      "ClientSecrets": [ { "Value": "" } ],
+      "RequireConsent": false,
+      "RequireClientSecret": false,
+      "AllowedScopes": [
+        "openid",
+        "profile",
+        "email",
+        "role",
+        "ironhasura.api"
+      ]
+    }
 }
 ```

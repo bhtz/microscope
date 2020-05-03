@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IronHasura.Services;
@@ -20,8 +21,7 @@ namespace IronHasura.Configurations
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
-                .AddInMemoryClients(IdentityServerConfiguration.GetClients())
-                //.AddInMemoryClients(configuration.GetSection("clients"))
+                .AddInMemoryClients(configuration.GetSection("Clients"))
                 .AddProfileService<ProfileService>()
                 .AddCorsPolicyService<CorsPolicyService>();
 
@@ -68,8 +68,6 @@ namespace IronHasura.Configurations
                     ClientId = "AngularClient",
                     ClientName = "Angular Client",
                     ClientUri = "http://localhost:4200",
-                    RequireClientSecret = false,
-                    RequireConsent = false,
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "http://localhost:4200" },
                     PostLogoutRedirectUris = { "http://localhost:4200/" },

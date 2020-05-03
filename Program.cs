@@ -11,7 +11,7 @@ namespace IronHasura
         {
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .MinimumLevel.Information()
+                .MinimumLevel.Error()
                 .WriteTo.Console()
                 .WriteTo.File("./Logs/microscope.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
