@@ -9,9 +9,6 @@ namespace IronHasura.Configurations
     {
         public static IServiceCollection AddGraphQLConfiguration(this IServiceCollection services)
         {
-            services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
-            services.AddScoped<IronHasuraSchema>();
-
             services.AddScoped<IGraphQueryMarker, IdentityQuery>();
             services.AddScoped<IGraphQueryMarker, RemoteConfigsQuery>();
             services.AddScoped<IGraphQueryMarker, AnalyticsQuery>();
@@ -21,8 +18,13 @@ namespace IronHasura.Configurations
             services.AddScoped<IGraphMutationMarker, AnalyticMutation>();
 
             services.AddScoped<RootQuery>();
+            services.AddScoped<RootMutation>();
+
+            services.AddScoped<IronHasuraSchema>();
+            services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
+            
             services
-                .AddGraphQL(o => { o.ExposeExceptions = false; })
+                .AddGraphQL(o => { o.ExposeExceptions = true; })
                 .AddGraphTypes(ServiceLifetime.Scoped);
 
             return services;

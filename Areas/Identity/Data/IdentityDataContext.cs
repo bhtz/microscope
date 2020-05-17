@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +14,7 @@ namespace com.ironhasura.Areas.Identity.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            this.RenameIdentityTables(builder, "IronHasura");
+            this.RenameIdentityTables(builder, "mcsp_");
         }
 
         private void RenameIdentityTables(ModelBuilder builder, string prefix)

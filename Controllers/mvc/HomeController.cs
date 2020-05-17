@@ -92,7 +92,7 @@ namespace IronHasura.Controllers
 
             var logFilePath = Directory
                 .GetFiles(path)
-                .FirstOrDefault();
+                .LastOrDefault();
 
             if(!string.IsNullOrEmpty(logFilePath))
             {

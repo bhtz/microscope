@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace com.ironhasura.Migrations
+namespace microscope.Migrations
 {
-    public partial class IronHasuraIdentity : Migration
+    public partial class InitialCreateIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "IronHasuraRoles",
+                name: "mcsp_Roles",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -19,11 +19,11 @@ namespace com.ironhasura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraRoles", x => x.Id);
+                    table.PrimaryKey("PK_mcsp_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraUsers",
+                name: "mcsp_Users",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -44,53 +44,53 @@ namespace com.ironhasura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraUsers", x => x.Id);
+                    table.PrimaryKey("PK_mcsp_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraRoleClaims",
+                name: "mcsp_RoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_mcsp_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IronHasuraRoleClaims_IronHasuraRoles_RoleId",
+                        name: "FK_mcsp_RoleClaims_mcsp_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "IronHasuraRoles",
+                        principalTable: "mcsp_Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraUserClaims",
+                name: "mcsp_UserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_mcsp_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IronHasuraUserClaims_IronHasuraUsers_UserId",
+                        name: "FK_mcsp_UserClaims_mcsp_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "IronHasuraUsers",
+                        principalTable: "mcsp_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraUserLogins",
+                name: "mcsp_UserLogins",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
@@ -100,17 +100,17 @@ namespace com.ironhasura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_mcsp_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_IronHasuraUserLogins_IronHasuraUsers_UserId",
+                        name: "FK_mcsp_UserLogins_mcsp_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "IronHasuraUsers",
+                        principalTable: "mcsp_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraUserRoles",
+                name: "mcsp_UserRoles",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -118,23 +118,23 @@ namespace com.ironhasura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_mcsp_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_IronHasuraUserRoles_IronHasuraRoles_RoleId",
+                        name: "FK_mcsp_UserRoles_mcsp_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "IronHasuraRoles",
+                        principalTable: "mcsp_Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_IronHasuraUserRoles_IronHasuraUsers_UserId",
+                        name: "FK_mcsp_UserRoles_mcsp_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "IronHasuraUsers",
+                        principalTable: "mcsp_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IronHasuraUserTokens",
+                name: "mcsp_UserTokens",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -144,49 +144,49 @@ namespace com.ironhasura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IronHasuraUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_mcsp_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_IronHasuraUserTokens_IronHasuraUsers_UserId",
+                        name: "FK_mcsp_UserTokens_mcsp_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "IronHasuraUsers",
+                        principalTable: "mcsp_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_IronHasuraRoleClaims_RoleId",
-                table: "IronHasuraRoleClaims",
+                name: "IX_mcsp_RoleClaims_RoleId",
+                table: "mcsp_RoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                table: "IronHasuraRoles",
+                table: "mcsp_Roles",
                 column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_IronHasuraUserClaims_UserId",
-                table: "IronHasuraUserClaims",
+                name: "IX_mcsp_UserClaims_UserId",
+                table: "mcsp_UserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IronHasuraUserLogins_UserId",
-                table: "IronHasuraUserLogins",
+                name: "IX_mcsp_UserLogins_UserId",
+                table: "mcsp_UserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IronHasuraUserRoles_RoleId",
-                table: "IronHasuraUserRoles",
+                name: "IX_mcsp_UserRoles_RoleId",
+                table: "mcsp_UserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "IronHasuraUsers",
+                table: "mcsp_Users",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "IronHasuraUsers",
+                table: "mcsp_Users",
                 column: "NormalizedUserName",
                 unique: true);
         }
@@ -194,25 +194,25 @@ namespace com.ironhasura.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "IronHasuraRoleClaims");
+                name: "mcsp_RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraUserClaims");
+                name: "mcsp_UserClaims");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraUserLogins");
+                name: "mcsp_UserLogins");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraUserRoles");
+                name: "mcsp_UserRoles");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraUserTokens");
+                name: "mcsp_UserTokens");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraRoles");
+                name: "mcsp_Roles");
 
             migrationBuilder.DropTable(
-                name: "IronHasuraUsers");
+                name: "mcsp_Users");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace IronHasura
             });
             
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString));
+                .AddDbContext<IronHasuraDbContext>(opt => opt.UseNpgsql(this.ConnexionString, o => o.SetPostgresVersion(9, 6)));
 
             services.AddCors(options =>
             {

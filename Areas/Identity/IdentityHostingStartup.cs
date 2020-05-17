@@ -17,7 +17,7 @@ namespace com.ironhasura.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<IdentityDataContext>(options =>
                     options.UseNpgsql(
-                        context.Configuration.GetConnectionString("IRONHASURA_IDENTITY_CONNECTION_STRING")));
+                        context.Configuration.GetConnectionString("IRONHASURA_IDENTITY_CONNECTION_STRING"), o => o.SetPostgresVersion(9, 6)));
             });
         }
     }

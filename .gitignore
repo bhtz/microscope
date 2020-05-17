@@ -5,6 +5,9 @@
 local.settings.json
 Logs/
 appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
 uploads
 tempkey.rsa
 
