@@ -16,7 +16,7 @@ namespace IronHasura.Services
         public FileSystemStorageService(IConfiguration configuration)
         {
             this.Configuration = configuration;
-            this.UploadsFolder = configuration.GetValue<string>("IRONHASURA_STORAGE_CONTAINER");
+            this.UploadsFolder = configuration.GetValue<string>("MCSP_STORAGE_CONTAINER");
             this.CreateUploadDirectoryIfNotExist();
         }
 

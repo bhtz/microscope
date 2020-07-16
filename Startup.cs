@@ -11,7 +11,6 @@ using IronHasura.GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.IdentityModel.Logging;
 using com.ironhasura.Areas.Identity.Data;
 
 namespace IronHasura
@@ -24,7 +23,7 @@ namespace IronHasura
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            this.ConnexionString = Configuration.GetConnectionString("IRONHASURA_DATA_CONNECTION_STRING");
+            this.ConnexionString = Configuration.GetConnectionString("MCSP_DATA_CS");
         }
 
         /// <summary>

@@ -13,8 +13,7 @@ namespace IronHasura.Configurations
         public static IServiceCollection AddAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
 
-            var authorityEndpoint = configuration.GetValue<string>("IRONHASURA_AUTHORITY_ENDPOINT");
-            var audience = configuration.GetValue<string>("IRONHASURA_AUDIENCE");
+            var authorityEndpoint = configuration.GetValue<string>("MCSP_HOST");
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -35,7 +34,7 @@ namespace IronHasura.Configurations
                 .AddJwtBearer(o =>
                 {
                     o.Authority = authorityEndpoint;
-                    o.Audience = audience;
+                    o.Audience = "mcsp.api";
                     o.RequireHttpsMetadata = false;
 
                     o.TokenValidationParameters = new TokenValidationParameters()

@@ -22,7 +22,7 @@ namespace IronHasura.Controllers
         {
             this._configuration = configuration;
             this._logger = logger;
-            this.hasuraUrl = configuration.GetValue<string>("IRONHASURA_CONSOLE_URL");
+            this.hasuraUrl = configuration.GetValue<string>("MCSP_HASURA_CONSOLE_URL");
         }
 
         /// <summary>
@@ -57,16 +57,16 @@ namespace IronHasura.Controllers
         [OpenApiIgnore]
         public IActionResult Settings()
         {
-            var cs = this._configuration.GetConnectionString("IRONHASURA_DATA_CONNECTION_STRING");
+            var cs = this._configuration.GetConnectionString("MCSP_DATA_CS");
 
             DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
             builder.ConnectionString = cs;
 
             var model  = new SettingsViewModel 
             {
-                HasuraConsoleUrl = this._configuration.GetValue<string>("IRONHASURA_CONSOLE_URL"),
-                FileAdapter = this._configuration.GetValue<string>("IRONHASURA_FILE_ADAPTER"),
-                Container = this._configuration.GetValue<string>("IRONHASURA_STORAGE_CONTAINER"),
+                HasuraConsoleUrl = this._configuration.GetValue<string>("MCSP_HASURA_CONSOLE_URL"),
+                FileAdapter = this._configuration.GetValue<string>("MCSP_FILE_ADAPTER"),
+                Container = this._configuration.GetValue<string>("MCSP_STORAGE_CONTAINER"),
                 DatabaseName = builder["Database"] as string,
                 DatabaseHost = builder["Server"] as string,
             };

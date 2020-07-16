@@ -9,7 +9,7 @@ namespace IronHasura.Configurations
     {
         public static IServiceCollection AddStorageConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            var adapter = configuration.GetValue<string>("IRONHASURA_FILE_ADAPTER");
+            var adapter = configuration.GetValue<string>("MCSP_FILE_ADAPTER");
 
             switch (adapter)
             {

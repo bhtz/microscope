@@ -28,5 +28,10 @@ namespace com.ironhasura.Areas.Identity.Data
                 }
             };
         }
+
+        private void Seed()
+        {
+            
+        }
     }
 }

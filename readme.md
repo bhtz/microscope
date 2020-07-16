@@ -21,57 +21,85 @@ ROADMAP
 REQUIREMENTS
 ============
 
-Development :
-
 * dotnet core SDK 3.1
 * docker engine
 
 GETTING STARTED
----------------
+===============
 
-With dotnet : 
+Run the following command :
 
-    git clone https://github.com/bhtz/microscope.git
-    dotnet restore
-    dotnet build
-    update appsettings.json 
-    dotnet run
+    docker-compose up
 
-with docker : 
-
-    docker build . -t microscope
-    docker run -p 3000:80 microscope
 
 SETTINGS
 --------
 
+You can update microscope configuration using : appsettings.{environment}.yaml according to [asp net core configurations](https://docs.microsoft.com/fr-fr/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1).
+
+
+MCSP_DATA_CS (connection string)
+
+    connection string for microscope BAAS data (remote configurations, analytics)
+
+MCSP_IDENTITY_CS (connection string)
+
+    connection string for microscope Identity Server data (users, roles, claims, ...)
+
+MCSP_HASURA_CONSOLE_URL
+
+    (string) URL for Hasura graphql engine
+
+MCSP_FILE_ADAPTER
+
+    (string) Key defining the file storage adapter, poossibilities are : filesystem, blobstorage
+
+MCSP_STORAGE_CONTAINER
+
+    (string) The folder name (blob container, fs directory) used as root for storage
+
+MCSP_HOST
+
+    (string) Host of microscope instance (used as authority endpoint for API JWT token validation scheme)
+
+ExternalProviders
+
+    (object) OIDC external auth providers with configurations (clientId, secret, authority)
+
 ```json
-{
-  "ConnectionStrings": {
-    "IRONHASURA_DATA_CONNECTION_STRING": "User ID =;Password=;Server=;Port=5432;Database=hasura;Integrated Security=true;Pooling=true;",
-    "IRONHASURA_IDENTITY_CONNECTION_STRING": "User ID =;Password=;Server=;Port=5432;Database=hasura;Integrated Security=true;Pooling=true;"
+      "ExternalProviders": {
+    "AAD" : {
+      "Authority": "https://login.microsoftonline.com/<tenantid>/v2.0",
+      "ClientId": "<clientid>",
+      "ClientSecret": "<secret>"
+    },
+    "Google" : {
+      "Authority": "",
+      "ClientId": "",
+      "ClientSecret": ""
+    }
   },
+```
 
-  "IRONHASURA_CONSOLE_URL": "http://localhost:8080/console/data/schema/public",
-  "IRONHASURA_FILE_ADAPTER": "filesystem",
-  "IRONHASURA_BLOB_CS": "DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=core.windows.net",
-  "IRONHASURA_STORAGE_CONTAINER": "uploads",
-  "IRONHASURA_AUTHORITY_ENDPOINT": "http://localhost:5000",
-  "IRONHASURA_AUDIENCE": "ironhasura.api",
+Clients
 
+    (array) Collection of application client for microscope stack, check [identity server docs](http://docs.identityserver.io/en/stable/reference/client.html) for more details
+
+```json
   "Clients": [
     {
-      "ClientId": "pwaclient",
-      "ClientName": "PWA Client",
-      "ClientUri": "http://localhost:4200",
+      "ClientId": "PWA",
+      "ClientName": "Progressive Web App Client",
+      "ClientUri": "https://mydomain.com",
       "AllowedGrantTypes": ["authorization_code"],
-      "RedirectUris": ["http://localhost:4200"],
-      "PostLogoutRedirectUris": ["http://localhost:4200/"],
-      "AllowedCorsOrigins": ["http://localhost:4200"],
+      "RedirectUris": ["https://mydomain.com/oidc-callback"],
+      "PostLogoutRedirectUris": ["https://mydomain.com/logout"],
+      "AllowedCorsOrigins": ["https://mydomain.com"],
       "AccessTokenLifetime": 3600,
       "ClientSecrets": [ { "Value": "" } ],
       "RequireConsent": false,
       "RequireClientSecret": false,
+      "EnableLocalLogin": true,
       "AllowedScopes": [
         "openid",
         "profile",
@@ -80,5 +108,5 @@ SETTINGS
         "ironhasura.api"
       ]
     }
-}
+  ]
 ```
