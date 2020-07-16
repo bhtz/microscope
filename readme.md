@@ -3,14 +3,13 @@ MICROSCOPE
 
 Backend as a service for ambitious digital factory (work in progress)
 
-* postgres
-* hasura
-* Identity & SSO
-* Storage
-* Remote configs
-* REST & GraphQL API
-* ...
-
+* Postgres
+* GraphQL Engine (hasura)
+* Identity federation gateway
+* Cloud & local Storage
+* Remote configurations
+* Analytics
+* Swagger & GraphQL playground
 
 ROADMAP
 =======
@@ -27,10 +26,19 @@ REQUIREMENTS
 GETTING STARTED
 ===============
 
+Get the source code: 
+
+    git clone https://github.com/bhtz/microscope.git
+
 Run the following command :
 
     docker-compose up
 
+Create the following Backend As A Service stack :
+
+* Postgres 12 (Database)
+* Hasura (Events & GraphQL Engine)
+* Microscope (Identity, Storage, remote configs, analytics)
 
 SETTINGS
 --------
