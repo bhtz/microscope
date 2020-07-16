@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
+using IdentityServer4;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,15 @@ namespace IronHasura.Configurations
                 .AddAuthentication()
                 .AddCookie(o => {
                     o.Cookie.SameSite = SameSiteMode.None;
+                })
+                .AddOpenIdConnect("aad", "Azure AD", options =>
+                {
+                    options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
+                    options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+                    options.RequireHttpsMetadata = true;
+                    options.ResponseType = "code";
+                    options.SaveTokens = true;
                 })
                 .AddJwtBearer(o =>
                 {

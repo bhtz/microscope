@@ -11,6 +11,8 @@ using IronHasura.GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.IdentityModel.Logging;
+using com.ironhasura.Areas.Identity.Data;
 
 namespace IronHasura
 {
@@ -31,6 +33,7 @@ namespace IronHasura
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            // IdentityModelEventSource.ShowPII = true;
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
@@ -81,6 +84,8 @@ namespace IronHasura
                 //app.UseHsts();
             }
 
+            this.InitializeDatabase(app);
+
             //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
@@ -103,6 +108,15 @@ namespace IronHasura
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app) 
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<IdentityDataContext>().Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>().Database.Migrate();
+            }
         }
     }
 }

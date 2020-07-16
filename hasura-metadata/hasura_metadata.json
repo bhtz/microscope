@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "tables": [
+    {
+      "table": {
+        "schema": "public",
+        "name": "Analytic"
+      }
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "RemoteConfig"
+      }
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "mcsp_Roles"
+      },
+      "array_relationships": [
+        {
+          "name": "mcsp_UserRoles",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "RoleId",
+              "table": {
+                "schema": "public",
+                "name": "mcsp_UserRoles"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "mcsp_UserRoles"
+      },
+      "object_relationships": [
+        {
+          "name": "mcsp_Role",
+          "using": {
+            "foreign_key_constraint_on": "RoleId"
+          }
+        },
+        {
+          "name": "mcsp_User",
+          "using": {
+            "foreign_key_constraint_on": "UserId"
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "mcsp_Users"
+      },
+      "array_relationships": [
+        {
+          "name": "mcsp_UserRoles",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "UserId",
+              "table": {
+                "schema": "public",
+                "name": "mcsp_UserRoles"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
