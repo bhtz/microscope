@@ -10,6 +10,7 @@ Backend as a service for ambitious digital factory (work in progress)
 * Remote configurations
 * Analytics
 * Swagger & GraphQL playground
+* Cloud functions
 
 ROADMAP
 =======

@@ -34,7 +34,7 @@ ROADMAP
     - [x] ANALYTICS
     - [x] SWAGGER
     - [x] AUTH
-- [x] DOCKER
+- [x] DOCKER & COMPOSE
 - [x] INSTANCE SETTINGS PAGE
 - [ ] LOGS
   - [x] CONSOLE
