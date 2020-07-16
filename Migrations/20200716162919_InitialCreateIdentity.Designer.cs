@@ -10,7 +10,7 @@ using com.ironhasura.Areas.Identity.Data;
 namespace microscope.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20200517152519_InitialCreateIdentity")]
+    [Migration("20200716162919_InitialCreateIdentity")]
     partial class InitialCreateIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,15 @@ namespace microscope.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("mcsp_Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cc0ecdfb-91fb-42dd-9252-72a1d31b1782",
+                            ConcurrencyStamp = "3849a58d-825e-4df4-8e23-696d321ae26e",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -133,6 +142,24 @@ namespace microscope.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("mcsp_Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "55971229-8e76-4707-b473-7661a71e631b",
+                            Email = "admin@microscope.net",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MICROSCOPE.NET",
+                            NormalizedUserName = "ADMIN@MICROSCOPE.NET",
+                            PasswordHash = "AQAAAAEAACcQAAAAELoBwp/Lt984yI7p2jwUpqvrUEIkEERKbBI8Lo4C+s6Ybu4il5ci4MPYW9f9m7Ti9g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@microscope.net"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -196,6 +223,13 @@ namespace microscope.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("mcsp_UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5",
+                            RoleId = "cc0ecdfb-91fb-42dd-9252-72a1d31b1782"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

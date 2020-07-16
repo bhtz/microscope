@@ -153,6 +153,21 @@ namespace microscope.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "mcsp_Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "cc0ecdfb-91fb-42dd-9252-72a1d31b1782", "3849a58d-825e-4df4-8e23-696d321ae26e", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "mcsp_Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5", 0, "55971229-8e76-4707-b473-7661a71e631b", "admin@microscope.net", true, false, null, "ADMIN@MICROSCOPE.NET", "ADMIN@MICROSCOPE.NET", "AQAAAAEAACcQAAAAELoBwp/Lt984yI7p2jwUpqvrUEIkEERKbBI8Lo4C+s6Ybu4il5ci4MPYW9f9m7Ti9g==", null, false, "", false, "admin@microscope.net" });
+
+            migrationBuilder.InsertData(
+                table: "mcsp_UserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5", "cc0ecdfb-91fb-42dd-9252-72a1d31b1782" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_mcsp_RoleClaims_RoleId",
                 table: "mcsp_RoleClaims",
