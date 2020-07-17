@@ -43,6 +43,8 @@ Create the following Backend As A Service stack :
 
 Navigate to [http://localhost:5000/](http://localhost:5000/) and enjoy your backend as a service experience !
 
+![MICROSCOPE](https://github.com/bhtz/microscope/blob/master/wwwroot/home.png)
+
 
 SETTINGS
 --------
