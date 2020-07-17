@@ -17,7 +17,13 @@ namespace com.ironhasura.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<IdentityDataContext>(options =>
                     options.UseNpgsql(
-                        context.Configuration.GetConnectionString("MCSP_IDENTITY_CS"), o => o.SetPostgresVersion(9, 6)));
+                        context.Configuration.GetConnectionString("MCSP_IDENTITY_CS"), o => 
+                        {
+                            o.SetPostgresVersion(9, 6);
+                            o.MigrationsHistoryTable("__MCSPMigrationsHistory", "mcsp");
+                        }
+                    )
+                );
             });
         }
     }

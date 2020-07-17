@@ -1,14 +1,18 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace microscope.Migrations.IronHasuraDb
+namespace microscope.Migrations
 {
     public partial class InitialCreateBaas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "mcsp");
+
             migrationBuilder.CreateTable(
                 name: "Analytic",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -22,6 +26,7 @@ namespace microscope.Migrations.IronHasuraDb
 
             migrationBuilder.CreateTable(
                 name: "RemoteConfig",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -37,10 +42,12 @@ namespace microscope.Migrations.IronHasuraDb
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Analytic");
+                name: "Analytic",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "RemoteConfig");
+                name: "RemoteConfig",
+                schema: "mcsp");
         }
     }
 }

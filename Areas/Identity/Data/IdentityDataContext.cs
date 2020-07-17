@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace com.ironhasura.Areas.Identity.Data
 {
@@ -15,6 +16,7 @@ namespace com.ironhasura.Areas.Identity.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.HasDefaultSchema("mcsp");
             this.RenameIdentityTables(builder, "mcsp_");
             this.SeedData(builder);
         }
@@ -26,7 +28,8 @@ namespace com.ironhasura.Areas.Identity.Data
                 var table = entityType.GetTableName();
                 if (table.StartsWith("AspNet"))
                 {
-                    entityType.SetTableName(prefix + table.Substring(6));
+                    // entityType.SetTableName(prefix + table.Substring(6));
+                    entityType.SetTableName(table.Substring(6));
                 }
             };
         }

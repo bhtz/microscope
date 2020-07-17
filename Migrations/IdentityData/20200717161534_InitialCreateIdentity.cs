@@ -2,14 +2,18 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace microscope.Migrations
+namespace microscope.Migrations.IdentityData
 {
     public partial class InitialCreateIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "mcsp");
+
             migrationBuilder.CreateTable(
-                name: "mcsp_Roles",
+                name: "Roles",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -19,11 +23,12 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_Roles", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_Users",
+                name: "Users",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -44,11 +49,12 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_RoleClaims",
+                name: "RoleClaims",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -59,17 +65,19 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_RoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_mcsp_RoleClaims_mcsp_Roles_RoleId",
+                        name: "FK_RoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "mcsp_Roles",
+                        principalSchema: "mcsp",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_UserClaims",
+                name: "UserClaims",
+                schema: "mcsp",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -80,17 +88,19 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_UserClaims", x => x.Id);
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_mcsp_UserClaims_mcsp_Users_UserId",
+                        name: "FK_UserClaims_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "mcsp_Users",
+                        principalSchema: "mcsp",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_UserLogins",
+                name: "UserLogins",
+                schema: "mcsp",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
@@ -100,17 +110,19 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_mcsp_UserLogins_mcsp_Users_UserId",
+                        name: "FK_UserLogins_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "mcsp_Users",
+                        principalSchema: "mcsp",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_UserRoles",
+                name: "UserRoles",
+                schema: "mcsp",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -118,23 +130,26 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_mcsp_UserRoles_mcsp_Roles_RoleId",
+                        name: "FK_UserRoles_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "mcsp_Roles",
+                        principalSchema: "mcsp",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_mcsp_UserRoles_mcsp_Users_UserId",
+                        name: "FK_UserRoles_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "mcsp_Users",
+                        principalSchema: "mcsp",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "mcsp_UserTokens",
+                name: "UserTokens",
+                schema: "mcsp",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -144,64 +159,75 @@ namespace microscope.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mcsp_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_mcsp_UserTokens_mcsp_Users_UserId",
+                        name: "FK_UserTokens_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "mcsp_Users",
+                        principalSchema: "mcsp",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "mcsp_Roles",
+                schema: "mcsp",
+                table: "Roles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "cc0ecdfb-91fb-42dd-9252-72a1d31b1782", "3849a58d-825e-4df4-8e23-696d321ae26e", "Admin", "ADMIN" });
+                values: new object[] { "f3c21db4-5361-484b-b16d-b3683d166e51", "f18e7824-a5c6-4c78-abff-46702566fc81", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
-                table: "mcsp_Users",
+                schema: "mcsp",
+                table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5", 0, "55971229-8e76-4707-b473-7661a71e631b", "admin@microscope.net", true, false, null, "ADMIN@MICROSCOPE.NET", "ADMIN@MICROSCOPE.NET", "AQAAAAEAACcQAAAAELoBwp/Lt984yI7p2jwUpqvrUEIkEERKbBI8Lo4C+s6Ybu4il5ci4MPYW9f9m7Ti9g==", null, false, "", false, "admin@microscope.net" });
+                values: new object[] { "14efc4bb-b64d-4c03-9ab6-126904fb3337", 0, "6e304d85-50f1-415f-9d54-ed271cab0542", "admin@microscope.net", true, false, null, "ADMIN@MICROSCOPE.NET", "ADMIN@MICROSCOPE.NET", "AQAAAAEAACcQAAAAEDQj0PO94+7HYhIUZkiFYge+xrbbpXzjBye9Bx0XbKEiMaqDBdaPMZULtmlmGYINMg==", null, false, "", false, "admin@microscope.net" });
 
             migrationBuilder.InsertData(
-                table: "mcsp_UserRoles",
+                schema: "mcsp",
+                table: "UserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5", "cc0ecdfb-91fb-42dd-9252-72a1d31b1782" });
+                values: new object[] { "14efc4bb-b64d-4c03-9ab6-126904fb3337", "f3c21db4-5361-484b-b16d-b3683d166e51" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_mcsp_RoleClaims_RoleId",
-                table: "mcsp_RoleClaims",
+                name: "IX_RoleClaims_RoleId",
+                schema: "mcsp",
+                table: "RoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                table: "mcsp_Roles",
+                schema: "mcsp",
+                table: "Roles",
                 column: "NormalizedName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_mcsp_UserClaims_UserId",
-                table: "mcsp_UserClaims",
+                name: "IX_UserClaims_UserId",
+                schema: "mcsp",
+                table: "UserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_mcsp_UserLogins_UserId",
-                table: "mcsp_UserLogins",
+                name: "IX_UserLogins_UserId",
+                schema: "mcsp",
+                table: "UserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_mcsp_UserRoles_RoleId",
-                table: "mcsp_UserRoles",
+                name: "IX_UserRoles_RoleId",
+                schema: "mcsp",
+                table: "UserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "mcsp_Users",
+                schema: "mcsp",
+                table: "Users",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "mcsp_Users",
+                schema: "mcsp",
+                table: "Users",
                 column: "NormalizedUserName",
                 unique: true);
         }
@@ -209,25 +235,32 @@ namespace microscope.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "mcsp_RoleClaims");
+                name: "RoleClaims",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_UserClaims");
+                name: "UserClaims",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_UserLogins");
+                name: "UserLogins",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_UserRoles");
+                name: "UserRoles",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_UserTokens");
+                name: "UserTokens",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_Roles");
+                name: "Roles",
+                schema: "mcsp");
 
             migrationBuilder.DropTable(
-                name: "mcsp_Users");
+                name: "Users",
+                schema: "mcsp");
         }
     }
 }

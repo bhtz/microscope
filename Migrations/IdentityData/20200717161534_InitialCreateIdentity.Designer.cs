@@ -7,16 +7,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using com.ironhasura.Areas.Identity.Data;
 
-namespace microscope.Migrations
+namespace microscope.Migrations.IdentityData
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20200716162919_InitialCreateIdentity")]
+    [Migration("20200717161534_InitialCreateIdentity")]
     partial class InitialCreateIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("mcsp")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
@@ -44,13 +45,13 @@ namespace microscope.Migrations
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.ToTable("mcsp_Roles");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
-                            Id = "cc0ecdfb-91fb-42dd-9252-72a1d31b1782",
-                            ConcurrencyStamp = "3849a58d-825e-4df4-8e23-696d321ae26e",
+                            Id = "f3c21db4-5361-484b-b16d-b3683d166e51",
+                            ConcurrencyStamp = "f18e7824-a5c6-4c78-abff-46702566fc81",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -77,7 +78,7 @@ namespace microscope.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("mcsp_RoleClaims");
+                    b.ToTable("RoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -141,20 +142,20 @@ namespace microscope.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("mcsp_Users");
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5",
+                            Id = "14efc4bb-b64d-4c03-9ab6-126904fb3337",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "55971229-8e76-4707-b473-7661a71e631b",
+                            ConcurrencyStamp = "6e304d85-50f1-415f-9d54-ed271cab0542",
                             Email = "admin@microscope.net",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MICROSCOPE.NET",
                             NormalizedUserName = "ADMIN@MICROSCOPE.NET",
-                            PasswordHash = "AQAAAAEAACcQAAAAELoBwp/Lt984yI7p2jwUpqvrUEIkEERKbBI8Lo4C+s6Ybu4il5ci4MPYW9f9m7Ti9g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDQj0PO94+7HYhIUZkiFYge+xrbbpXzjBye9Bx0XbKEiMaqDBdaPMZULtmlmGYINMg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -183,7 +184,7 @@ namespace microscope.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("mcsp_UserClaims");
+                    b.ToTable("UserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -207,7 +208,7 @@ namespace microscope.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("mcsp_UserLogins");
+                    b.ToTable("UserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -222,13 +223,13 @@ namespace microscope.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("mcsp_UserRoles");
+                    b.ToTable("UserRoles");
 
                     b.HasData(
                         new
                         {
-                            UserId = "9a434ef4-0abe-45e6-a37a-9ecf1ac05dd5",
-                            RoleId = "cc0ecdfb-91fb-42dd-9252-72a1d31b1782"
+                            UserId = "14efc4bb-b64d-4c03-9ab6-126904fb3337",
+                            RoleId = "f3c21db4-5361-484b-b16d-b3683d166e51"
                         });
                 });
 
@@ -250,7 +251,7 @@ namespace microscope.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("mcsp_UserTokens");
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

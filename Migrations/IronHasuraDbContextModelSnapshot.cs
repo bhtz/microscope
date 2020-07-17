@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace microscope.Migrations.IronHasuraDb
+namespace microscope.Migrations
 {
     [DbContext(typeof(IronHasuraDbContext))]
     partial class IronHasuraDbContextModelSnapshot : ModelSnapshot
@@ -15,6 +15,7 @@ namespace microscope.Migrations.IronHasuraDb
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("mcsp")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
