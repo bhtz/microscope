@@ -50,7 +50,7 @@ namespace IronHasura.Configurations
 
                     Scopes = {
                         new Scope {
-                            Name = "ironhasura.api",
+                            Name = "mcsp.api",
                             DisplayName = "Iron hasura API",
                             UserClaims = new [] { "role", "https://hasura.io/jwt/claims" }
                         }
@@ -73,7 +73,7 @@ namespace IronHasura.Configurations
                     PostLogoutRedirectUris = { "http://localhost:4200/" },
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     AccessTokenLifetime = 3600,
-                    AllowedScopes = { "openid", "profile", "email", "role", "ironhasura.api" }
+                    AllowedScopes = { "openid", "profile", "email", "role", "mcsp.api" }
                 }
             };
         }
