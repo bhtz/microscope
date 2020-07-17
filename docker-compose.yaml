@@ -7,7 +7,7 @@ services:
     restart: always
     volumes:
     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    - ./db_data:/var/lib/postgresql/data
+    - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
@@ -41,3 +41,5 @@ services:
   #     - ./serverless:/home/coder/project
   #   environment:
   #     PASSWORD: microscope
+volumes:
+  db_data:
