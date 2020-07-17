@@ -36,10 +36,13 @@ Run the following command :
     docker-compose up
 
 Create the following Backend As A Service stack :
-
 * Postgres 12 (Database)
 * Hasura (Events & GraphQL Engine)
 * Microscope (Identity, Storage, remote configs, analytics)
+
+
+Navigate to [http://localhost:5000/](http://localhost:5000/) and enjoy your backend as a service experience !
+
 
 SETTINGS
 --------
