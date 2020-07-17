@@ -3,6 +3,7 @@
 
 # Azure Functions localsettings file
 local.settings.json
+db_data
 Logs/
 appsettings.json
 appsettings.Production.json
