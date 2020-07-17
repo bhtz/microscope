@@ -14,8 +14,8 @@ Backend as a service for ambitious digital factory (work in progress)
 * Swagger & GraphQL playground
 * Cloud functions
 
-ROADMAP
-=======
+BETA ROADMAP
+============
 
 [roadmap](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/roadmap.md)
 
