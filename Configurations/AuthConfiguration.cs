@@ -24,12 +24,11 @@ namespace IronHasura.Configurations
                 })
                 .AddOpenIdConnect("aad", "Azure AD", options =>
                 {
-                    options.SignInScheme = IdentityServer4.IdentityServerConstants.DefaultCookieAuthenticationScheme;
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
                     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
                     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                    options.RequireHttpsMetadata = true;
-                    options.ResponseType = "code";
+                    options.RequireHttpsMetadata = false;
                     options.SaveTokens = true;
                 })
                 .AddJwtBearer(o =>
