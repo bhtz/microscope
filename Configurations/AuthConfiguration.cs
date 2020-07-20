@@ -1,7 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
 using IdentityServer4;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,18 +23,27 @@ namespace IronHasura.Configurations
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services
-                .AddAuthentication()
-                .AddCookie(o => {
-                    o.Cookie.SameSite = SameSiteMode.None;
-                    o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-                })
-                .AddOpenIdConnect("aad", "Azure AD", options =>
+                .AddAuthentication(AzureADDefaults.AuthenticationScheme)
+                .AddCookie(o =>
                 {
-                    // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
+                    o.Cookie.SameSite = SameSiteMode.None;
+                    o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                })
+                // .AddOpenIdConnect("aad", "Azure AD", options =>
+                // {
+                //     // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                //     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
+                //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+                //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+                //     options.SaveTokens = true;
+                // })
+                .AddAzureAD(options =>
+                {
+                    options.Instance = configuration.GetValue<string>("ExternalProviders:AAD:Instance");
+                    options.TenantId = configuration.GetValue<string>("ExternalProviders:AAD:TenantId");
                     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+                    options.Domain = "soprasteria.onmicrosoft.com";
                     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                    options.SaveTokens = true;
                 })
                 .AddGoogle(options =>
                 {
@@ -58,6 +70,12 @@ namespace IronHasura.Configurations
                         RoleClaimType = JwtClaimTypes.Role
                     };
                 });
+
+            services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+            {
+                options.Authority = options.Authority + "/v2.0/";
+                options.TokenValidationParameters.ValidateIssuer = false;
+            });
 
             return services;
         }
