@@ -12,6 +12,7 @@ using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using com.ironhasura.Areas.Identity.Data;
+using Microsoft.IdentityModel.Logging;
 
 namespace IronHasura
 {
@@ -32,7 +33,7 @@ namespace IronHasura
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // IdentityModelEventSource.ShowPII = true;
+            IdentityModelEventSource.ShowPII = true;
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;

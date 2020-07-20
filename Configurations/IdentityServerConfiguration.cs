@@ -16,12 +16,18 @@ namespace IronHasura.Configurations
         public static IServiceCollection AddIdentityServerConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<ICorsPolicyService, CorsPolicyService>();
-            services.AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
+            services.AddIdentityServer(options =>
+            {
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+            })
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfiguration.GetResources())
                 .AddInMemoryClients(configuration.GetSection("Clients"))
+                .AddAspNetIdentity<IdentityUser>()
                 .AddProfileService<ProfileService>()
                 .AddCorsPolicyService<CorsPolicyService>();
 

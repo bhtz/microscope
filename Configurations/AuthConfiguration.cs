@@ -1,9 +1,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
 using IdentityServer4;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IronHasura.Configurations
@@ -21,16 +23,27 @@ namespace IronHasura.Configurations
                 .AddAuthentication()
                 .AddCookie(o => {
                     o.Cookie.SameSite = SameSiteMode.None;
+                    o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 })
                 .AddOpenIdConnect("aad", "Azure AD", options =>
                 {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
                     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
                     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                    options.RequireHttpsMetadata = false;
                     options.SaveTokens = true;
                 })
+                .AddGoogle(options =>
+                {
+                    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
+                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
+                    options.SaveTokens = true;
+                })
+                // .AddMicrosoftAccount(o => {
+                //     o.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+                //     o.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+                // })
                 .AddJwtBearer(o =>
                 {
                     o.Authority = authorityEndpoint;
