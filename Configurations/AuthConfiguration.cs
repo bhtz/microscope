@@ -22,60 +22,64 @@ namespace IronHasura.Configurations
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services
-                .AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddCookie(o =>
-                {
-                    o.Cookie.SameSite = SameSiteMode.None;
-                    o.Cookie.SecurePolicy = CookieSecurePolicy.None;
-                })
-                // .AddOpenIdConnect("aad", "Azure AD", options =>
-                // {
-                //     // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                //     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
-                //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-                //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                //     options.SaveTokens = true;
-                // })
-                .AddAzureAD(options =>
-                {
-                    options.Instance = configuration.GetValue<string>("ExternalProviders:AAD:Instance");
-                    options.TenantId = configuration.GetValue<string>("ExternalProviders:AAD:TenantId");
-                    options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-                    options.Domain = "soprasteria.onmicrosoft.com";
-                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                })
-                .AddGoogle(options =>
-                {
-                    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
-                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
-                    options.SaveTokens = true;
-                })
-                // .AddMicrosoftAccount(o => {
-                //     o.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-                //     o.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-                // })
-                .AddJwtBearer(o =>
-                {
-                    o.Authority = authorityEndpoint;
-                    o.Audience = "mcsp.api";
-                    o.RequireHttpsMetadata = false;
-
-                    o.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateAudience = true,
-                        ValidateIssuer = false,
-                        NameClaimType = JwtClaimTypes.Name,
-                        RoleClaimType = JwtClaimTypes.Role
-                    };
-                });
-
-            services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+            var builder = services.AddAuthentication();
+            
+            builder.AddCookie(o =>
             {
-                options.Authority = options.Authority + "/v2.0/";
-                options.TokenValidationParameters.ValidateIssuer = false;
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.None;
             });
+
+            builder.AddGoogle(options =>
+            {
+                options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
+                options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
+                options.SaveTokens = true;
+            });
+
+            // builder.AddOpenIdConnect("aad", "Azure AD", options =>
+            // {
+            //     // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+            //     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
+            //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+            //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+            //     options.SaveTokens = true;
+            // });
+
+            // builder.AddAzureAD(options =>
+            // {
+            //     options.Instance = configuration.GetValue<string>("ExternalProviders:AAD:Instance");
+            //     options.TenantId = configuration.GetValue<string>("ExternalProviders:AAD:TenantId");
+            //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+            //     options.Domain = "my.onmicrosoft.com";
+            //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+            // });
+
+            // builder.AddMicrosoftAccount(o => {
+            //     o.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
+            //     o.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
+            // });
+
+            builder.AddJwtBearer(o =>
+            {
+                o.Authority = authorityEndpoint;
+                o.Audience = "mcsp.api";
+                o.RequireHttpsMetadata = false;
+
+                o.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    NameClaimType = JwtClaimTypes.Name,
+                    RoleClaimType = JwtClaimTypes.Role
+                };
+            });
+
+            // services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+            // {
+            //     options.Authority = options.Authority + "/v2.0/";
+            //     options.TokenValidationParameters.ValidateIssuer = false;
+            // });
 
             return services;
         }

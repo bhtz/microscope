@@ -51,8 +51,8 @@ namespace IronHasura.Configurations
             {
                 new ApiResource 
                 {
-                    Name = "ironhasura.api",
-                    Description = "Iron hasura API",
+                    Name = "mcsp.api",
+                    Description = "microscope API",
 
                     Scopes = {
                         new Scope {
