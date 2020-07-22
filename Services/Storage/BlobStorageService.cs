@@ -91,7 +91,7 @@ namespace IronHasura.Services
         /// </summary>
         private void InitStorageClient()
         {
-            var azureWebJobsStorage = this.Configuration.GetValue<string>("MCSP_BLOB_CS");
+            var azureWebJobsStorage = this.Configuration.GetValue<string>("MCSP_STORAGE_CS");
             var containerName = this.Configuration.GetValue<string>("MCSP_STORAGE_CONTAINER");
 
             this.StorageAccount = CloudStorageAccount.Parse(azureWebJobsStorage);
