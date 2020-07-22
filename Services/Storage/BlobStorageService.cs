@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Linq;
 
 namespace IronHasura.Services
 {
@@ -90,7 +91,7 @@ namespace IronHasura.Services
         /// </summary>
         private void InitStorageClient()
         {
-            var azureWebJobsStorage = this.Configuration.GetValue<string>("IRONHASURA_BLOB_CS");
+            var azureWebJobsStorage = this.Configuration.GetValue<string>("MCSP_BLOB_CS");
             var containerName = this.Configuration.GetValue<string>("MCSP_STORAGE_CONTAINER");
 
             this.StorageAccount = CloudStorageAccount.Parse(azureWebJobsStorage);
@@ -99,14 +100,12 @@ namespace IronHasura.Services
         }
 
         /// <summary>
-        /// NOT IMPLEMENTED YET
         /// </summary>
         /// <returns></returns>
-        public Task<string[]> GetFiles()
+        public async Task<string[]> GetFiles()
         {
-            var data = new List<string>().ToArray();
-
-            return Task.FromResult(data);
+            var data = await this.Container.ListBlobsSegmentedAsync(null);
+            return data.Results.Select(x=>x.Uri.ToString().Split('/').Last()).ToArray();
         }
     }
 }
