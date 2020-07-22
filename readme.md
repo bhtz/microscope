@@ -3,7 +3,7 @@ MICROSCOPE
 
 ![MICROSCOPE](https://github.com/bhtz/microscope/blob/master/wwwroot/home.png)
 
-Backend as a service for ambitious digital factory (work in progress)
+Digital Platform Factory (alpha)
 
 * Postgres
 * GraphQL Engine (hasura)
@@ -20,8 +20,8 @@ BETA ROADMAP
 [roadmap](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/roadmap.md)
 
 
-REQUIREMENTS
-============
+DEV REQUIREMENTS
+================
 
 * dotnet core SDK 3.1
 * docker engine
@@ -37,10 +37,10 @@ Run the following command :
 
     docker-compose up
 
-Create the following Backend As A Service stack :
+Launch the following Backend As A Service stack :
 * Postgres 12 (Database)
-* Hasura (Events & GraphQL Engine)
-* Microscope (Identity, Storage, remote configs, analytics)
+* Hasura (Domain Events & GraphQL Engine)
+* Microscope (Identity, Storage, remote configs, analytics, ...)
 
 
 Navigate to [http://localhost:5000/](http://localhost:5000/) and enjoy your backend as a service experience !
@@ -67,9 +67,13 @@ MCSP_FILE_ADAPTER
 
     (string) Key defining the file storage adapter, poossibilities are : filesystem, blobstorage
 
+MCSP_STORAGE_CS
+
+    (string) cloud storage connection string
+
 MCSP_STORAGE_CONTAINER
 
-    (string) The folder name (blob container, fs directory) used as root for storage
+    (string) The folder name (azure blob container, file system directory) used as root for storage
 
 MCSP_HOST
 
@@ -82,14 +86,15 @@ ExternalProviders
 ```json
       "ExternalProviders": {
     "AAD" : {
-      "Authority": "https://login.microsoftonline.com/<tenantid>/v2.0",
-      "ClientId": "<clientid>",
+      "Instance": "https://login.microsoftonline.com/",
+      "TenantId": "<tenant>",
+      "ClientId": "<client>",
       "ClientSecret": "<secret>"
     },
     "Google" : {
-      "Authority": "",
-      "ClientId": "",
-      "ClientSecret": ""
+      "Authority": "https://accounts.google.com/o/oauth2/v2/auth",
+      "ClientId": "<client>",
+      "ClientSecret": "<secret>"
     }
   },
 ```

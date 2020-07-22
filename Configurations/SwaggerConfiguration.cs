@@ -11,8 +11,8 @@ namespace IronHasura.Configurations
                 opt.PostProcess = doc =>
                 {
                     doc.Info.Version = "v1";
-                    doc.Info.Title = "IRON HASURA";
-                    doc.Info.Description = "IRON HASURA project";
+                    doc.Info.Title = "MICROSCOPE";
+                    doc.Info.Description = "Digital Platform Factory";
                     doc.Info.TermsOfService = "None";
                 };
             });
