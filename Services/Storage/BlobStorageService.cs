@@ -100,12 +100,13 @@ namespace IronHasura.Services
         }
 
         /// <summary>
+        /// 
         /// </summary>
         /// <returns></returns>
         public async Task<string[]> GetFiles()
         {
             var data = await this.Container.ListBlobsSegmentedAsync(null);
-            return data.Results.Select(x=>x.Uri.ToString().Split('/').Last()).ToArray();
+            return data.Results.Select(x => x.Uri.ToString().Split('/').Last()).ToArray();
         }
     }
 }
