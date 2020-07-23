@@ -2,6 +2,18 @@
 
 <h1>Storage</h1>
 
+<form asp-action="Upload" enctype="multipart/form-data">
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" name="file" class="custom-file-input" id="inputGroup" aria-describedby="inputGroup">
+            <label class="custom-file-label" for="inputGroup">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Upload</button>
+        </div>
+    </div> 
+</form>
+<br>
 <div class="row">
     <div class="col-md-12">
         <div class="list-group">
@@ -21,3 +33,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

@@ -26,7 +26,7 @@ BETA ROADMAP
   - [x] List
   - [x] Download
   - [x] Delete
-  - [ ] Upload
+  - [x] Upload
   - [ ] Container
 - [x] REMOTE CONFIGURATIONS
 - [x] ANALYTICS ADAPTER
