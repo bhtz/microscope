@@ -60,12 +60,6 @@ namespace IronHasura.Configurations
                 };
             });
 
-            // services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
-            // {
-            //     options.Authority = options.Authority + "/v2.0/";
-            //     options.TokenValidationParameters.ValidateIssuer = false;
-            // });
-
             return services;
         }
     }
