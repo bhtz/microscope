@@ -1,14 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using IdentityModel;
-using IdentityServer4;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IronHasura.Configurations
@@ -30,19 +24,19 @@ namespace IronHasura.Configurations
                 o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
 
-            if (configuration.GetSection("ExternalProviders:Google").Exists())
-            {
-                builder.AddGoogle(options => configuration.Bind("ExternalProviders:Google", options));
-            }
-
             if (configuration.GetSection("ExternalProviders:OIDC").Exists())
             {
                 builder.AddOpenIdConnect(options => configuration.Bind("ExternalProviders:OIDC", options));
             }
 
-            if (configuration.GetSection("ExternalProviders:AAD").Exists())
+            if (configuration.GetSection("ExternalProviders:Google").Exists())
             {
-                builder.AddAzureAD(options => configuration.Bind("ExternalProviders:AAD", options));
+                builder.AddGoogle(options => configuration.Bind("ExternalProviders:Google", options));
+            }
+
+            if (configuration.GetSection("ExternalProviders:Microsoft").Exists())
+            {
+                builder.AddMicrosoftAccount(options => configuration.Bind("ExternalProviders:Microsoft", options));
             }
 
             if (configuration.GetSection("ExternalProviders:Github").Exists())
