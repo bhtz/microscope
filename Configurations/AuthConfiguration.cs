@@ -27,15 +27,18 @@ namespace IronHasura.Configurations
             builder.AddCookie(o =>
             {
                 o.Cookie.SameSite = SameSiteMode.None;
-                o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
-
-            builder.AddGoogle(options =>
+            
+            if (configuration.GetSection("ExternalProviders:Google").Exists())
             {
-                options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
-                options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
-                options.SaveTokens = true;
-            });
+                builder.AddGoogle(options =>
+                {
+                    options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
+                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
+                    options.SaveTokens = true;
+                });
+            }
 
             // builder.AddOpenIdConnect("aad", "Azure AD", options =>
             // {

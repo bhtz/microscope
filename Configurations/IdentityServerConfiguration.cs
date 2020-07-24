@@ -57,7 +57,7 @@ namespace IronHasura.Configurations
                     Scopes = {
                         new Scope {
                             Name = "mcsp.api",
-                            DisplayName = "Iron hasura API",
+                            DisplayName = "microscope API",
                             UserClaims = new [] { "role", "https://hasura.io/jwt/claims" }
                         }
                     }

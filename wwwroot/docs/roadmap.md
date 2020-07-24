@@ -2,10 +2,11 @@ BETA ROADMAP
 ============
 
 - [ ] AUTHENTICATION
-  - [x] IDENTITY SERVER
-  - [x] IDENTITY
-  - [x] HASURA WEBHOOK
-  - [ ] HASURA JWT CLAIMS
+  - [x] IDENTITY FEDERATION GATEWAY & SSO
+  - [x] IDENTITY MGT
+  - [x] HASURA CLAIMS 
+    - [x] WEBHOOK
+    - [ ] JWT
   - [x] SIMPLE ADMIN
     - [x] ROLES
     - [x] USERS
@@ -18,10 +19,10 @@ BETA ROADMAP
   - [ ] Facebook
   - [ ] Twitter
 - [x] STORAGE ADAPTER
-    - [x] blobstorage
-    - [x] file system
-    - [ ] aws S3
-    - [ ] Database ?
+    - [x] Azure blob storage
+    - [x] File system
+    - [ ] AWS S3
+    - [ ] Database binary ?
 - [ ] STORAGE ADMIN
   - [x] List
   - [x] Download
@@ -56,21 +57,19 @@ BETA ROADMAP
 - [ ] MAILER
 - [ ] INTEGRATION EVENTS ADAPTER
     - [ ] RabbitMQ
-    - [ ] azure service bus
+    - [ ] Kafka
+    - [ ] Azure Service Bus
+    - [ ] Google Pub/Sub
 - [ ] PUSH NOTIFICATIONS
 - [ ] STARTER KIT
-  - [ ] HASURA
-  - [ ] MICROSCOPE
-  - [ ] AZURE FUNCTIONS
-  - [ ] AZURE LOGIC APP
 
 SANDBOX
 -------
 
-- [ ] WORKFLOW (elsa ?)
-- [ ] CSV EXPORT ?
-- [ ] CSV IMPORT ?
-- [ ] COGNITIVE ?
+- [ ] MULTI DOMAINS (hasura)
+- [ ] WORKFLOW (elsa) ?
+- [ ] CSV EXPORT / IMPORT ?
+- [ ] ML/AI - COGNITIVE Service ?
 - [ ] MS GRAPH / O365 ?
 - [ ] CODE SERVER IDE ?
 
