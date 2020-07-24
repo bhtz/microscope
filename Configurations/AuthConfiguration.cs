@@ -23,13 +23,13 @@ namespace IronHasura.Configurations
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             var builder = services.AddAuthentication();
-            
+
             builder.AddCookie(o =>
             {
                 o.Cookie.SameSite = SameSiteMode.None;
                 o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
-            
+
             if (configuration.GetSection("ExternalProviders:Google").Exists())
             {
                 builder.AddGoogle(options => configuration.Bind("ExternalProviders:Google", options));
@@ -43,6 +43,11 @@ namespace IronHasura.Configurations
             if (configuration.GetSection("ExternalProviders:AAD").Exists())
             {
                 builder.AddAzureAD(options => configuration.Bind("ExternalProviders:AAD", options));
+            }
+
+            if (configuration.GetSection("ExternalProviders:Github").Exists())
+            {
+                builder.AddGitHub(options => configuration.Bind("ExternalProviders:Github", options));
             }
 
             builder.AddJwtBearer(o =>
