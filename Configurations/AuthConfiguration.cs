@@ -44,6 +44,11 @@ namespace IronHasura.Configurations
                 builder.AddGitHub(options => configuration.Bind("ExternalProviders:Github", options));
             }
 
+            if (configuration.GetSection("ExternalProviders:Twitter").Exists())
+            {
+                builder.AddTwitter(options => configuration.Bind("ExternalProviders:Twitter", options));
+            }
+
             builder.AddJwtBearer(o =>
             {
                 o.Authority = authorityEndpoint;

@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
