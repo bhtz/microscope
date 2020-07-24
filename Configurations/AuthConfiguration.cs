@@ -32,36 +32,18 @@ namespace IronHasura.Configurations
             
             if (configuration.GetSection("ExternalProviders:Google").Exists())
             {
-                builder.AddGoogle(options =>
-                {
-                    options.ClientId = configuration.GetValue<string>("ExternalProviders:Google:ClientId");
-                    options.ClientSecret = configuration.GetValue<string>("ExternalProviders:Google:ClientSecret");
-                    options.SaveTokens = true;
-                });
+                builder.AddGoogle(options => configuration.Bind("ExternalProviders:Google", options));
             }
 
-            // builder.AddOpenIdConnect("aad", "Azure AD", options =>
-            // {
-            //     // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-            //     options.Authority = configuration.GetValue<string>("ExternalProviders:AAD:Authority");
-            //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-            //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-            //     options.SaveTokens = true;
-            // });
+            if (configuration.GetSection("ExternalProviders:OIDC").Exists())
+            {
+                builder.AddOpenIdConnect(options => configuration.Bind("ExternalProviders:OIDC", options));
+            }
 
-            // builder.AddAzureAD(options =>
-            // {
-            //     options.Instance = configuration.GetValue<string>("ExternalProviders:AAD:Instance");
-            //     options.TenantId = configuration.GetValue<string>("ExternalProviders:AAD:TenantId");
-            //     options.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-            //     options.Domain = "my.onmicrosoft.com";
-            //     options.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-            // });
-
-            // builder.AddMicrosoftAccount(o => {
-            //     o.ClientId = configuration.GetValue<string>("ExternalProviders:AAD:ClientId");
-            //     o.ClientSecret = configuration.GetValue<string>("ExternalProviders:AAD:ClientSecret");
-            // });
+            if (configuration.GetSection("ExternalProviders:AAD").Exists())
+            {
+                builder.AddAzureAD(options => configuration.Bind("ExternalProviders:AAD", options));
+            }
 
             builder.AddJwtBearer(o =>
             {
