@@ -49,6 +49,16 @@ namespace IronHasura.Configurations
                 builder.AddTwitter(options => configuration.Bind("ExternalProviders:Twitter", options));
             }
 
+            if (configuration.GetSection("ExternalProviders:LinkedIn").Exists())
+            {
+                builder.AddLinkedIn(options => configuration.Bind("ExternalProviders:LinkedIn", options));
+            }
+
+            if (configuration.GetSection("ExternalProviders:Dropbox").Exists())
+            {
+                builder.AddDropbox(options => configuration.Bind("ExternalProviders:Dropbox", options));
+            }
+
             builder.AddJwtBearer(o =>
             {
                 o.Authority = authorityEndpoint;
