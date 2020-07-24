@@ -76,9 +76,6 @@ SANDBOX
 CURRENT WORK
 ============
 
-* HASURA JWT CLAIMS - TESTING
-* STORAGE
-  * MCV - Upload
-  * MCV - Folder
-  * API - Folder
-  * GraphQL - Folder
+* HASURA JWT CLAIMS - E2E TEST
+* EXTERNAL PROVIDER - Azure AD
+* INTEGRATION EVENTS - DESIGN
