@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col">
-        <div class="card" style="height:200px">
+        <div class="card" style="height:300px">
             <div class="card-header">
             <i class="fa fa-database"></i> PostgreSQL
             </div>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="col">
-        <div class="card" style="height:200px">
+        <div class="card" style="height:300px">
             <div class="card-header">
             <i class="fa fa-code"></i> GraphQL engine
             </div>
@@ -31,7 +31,7 @@
 <br>
 <div class="row">
     <div class="col">
-        <div class="card" style="height:200px">
+        <div class="card" style="height:300px">
             <div class="card-header">
             <i class="fa fa-hdd"></i> Storage
             </div>
@@ -41,5 +41,41 @@
             </div>
         </div>
     </div>
-    <div class="col"></div>
+    <div class="col">
+        <div class="card" style="height:300px">
+            <div class="card-header">
+            <i class="fa fa-users"></i> External providers
+            </div>
+            <div class="card-body">
+                @if (Model.IsOIDCEnable) 
+                {
+                    <p><strong>OIDC</strong></p>
+                }
+                @if (Model.IsMicrosoftEnable) 
+                {
+                    <p><strong>Microsoft</strong></p>
+                }
+                @if (Model.IsGoogleEnable) 
+                {
+                    <p><strong>Google</strong></p>
+                }
+                @if (Model.IsTwitterEnable) 
+                {
+                    <p><strong>Twitter</strong></p>
+                }
+                @if (Model.IsLinkedInEnable) 
+                {
+                    <p><strong>LinkedIn</strong></p>
+                }
+                @if (Model.IsGithubEnable) 
+                {
+                    <p><strong>Github</strong></p>
+                }
+                @if (Model.IsDropboxEnable) 
+                {
+                    <p><strong>Dropbox</strong></p>
+                }
+            </div>
+        </div>
+    </div>
 </div>

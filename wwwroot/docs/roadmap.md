@@ -11,13 +11,14 @@ BETA ROADMAP
     - [x] ROLES
     - [x] USERS
 - [ ] EXTERNAL PROVIDERS
-  - [ ] OIDC
+  - [x] OIDC
   - [x] Google
-  - [ ] Azure AD
-  - [ ] LinkedIn
-  - [ ] Github
+  - [x] Azure AD
+  - [x] LinkedIn
+  - [x] Github
   - [ ] Facebook
-  - [ ] Twitter
+  - [x] Twitter
+  - [x] Dropbox
 - [x] STORAGE ADAPTER
     - [x] Azure blob storage
     - [x] File system
@@ -51,7 +52,7 @@ BETA ROADMAP
 - [ ] LOGS ADAPTERS
   - [x] CONSOLE
   - [x] FILE
-  - [ ] BLOBSTORAGE
+  - [ ] BLOB STORAGE
   - [ ] APP INSIGHT
   - [x] VIEWER
 - [ ] MAILER

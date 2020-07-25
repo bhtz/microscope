@@ -7,5 +7,12 @@ namespace IronHasura.Models
         public string Container { get; set; }
         public string DatabaseName { get; set; }
         public string DatabaseHost { get; set; }
+        public bool IsTwitterEnable { get; set; }
+        public bool IsMicrosoftEnable { get; set; }
+        public bool IsGoogleEnable { get; set; }
+        public bool IsLinkedInEnable { get; set; }
+        public bool IsDropboxEnable { get; set; }
+        public bool IsGithubEnable { get; set; }
+        public bool IsOIDCEnable { get; set; }
     }
 }

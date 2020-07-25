@@ -67,6 +67,13 @@ namespace IronHasura.Controllers
                 HasuraConsoleUrl = this._configuration.GetValue<string>("MCSP_HASURA_CONSOLE_URL"),
                 FileAdapter = this._configuration.GetValue<string>("MCSP_FILE_ADAPTER"),
                 Container = this._configuration.GetValue<string>("MCSP_STORAGE_CONTAINER"),
+                IsMicrosoftEnable = this._configuration.GetSection("ExternalProviders:Microsoft").Exists(),
+                IsTwitterEnable = this._configuration.GetSection("ExternalProviders:Twitter").Exists(),
+                IsLinkedInEnable = this._configuration.GetSection("ExternalProviders:LinkedIn").Exists(),
+                IsGoogleEnable = this._configuration.GetSection("ExternalProviders:Google").Exists(),
+                IsDropboxEnable = this._configuration.GetSection("ExternalProviders:Dropbox").Exists(),
+                IsGithubEnable = this._configuration.GetSection("ExternalProviders:Github").Exists(),
+                IsOIDCEnable = this._configuration.GetSection("ExternalProviders:OIDC").Exists(),
                 DatabaseName = builder["Database"] as string,
                 DatabaseHost = builder["Server"] as string,
             };
