@@ -132,3 +132,19 @@ Dropbox
         }
     }
 ```
+
+Facebook
+--------
+
+1. Navigate to : [Facebook apps](https://developers.facebook.com/apps/)
+2. Add `http://localhost:5000/signin-facebook` as an authorized redirect URI.
+3. Configure microscope :
+
+```json
+    "ExternalProviders": {
+        "Facebook" : {
+            "AppId": "",
+            "AppSecret": ""
+        }
+    }
+```

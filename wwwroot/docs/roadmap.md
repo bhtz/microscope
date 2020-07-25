@@ -10,13 +10,13 @@ Beta roadmap
   - [x] SIMPLE ADMIN
     - [x] ROLES
     - [x] USERS
-- [ ] EXTERNAL PROVIDERS
+- [x] EXTERNAL PROVIDERS
   - [x] OIDC
   - [x] Google
   - [x] Azure AD
   - [x] LinkedIn
   - [x] Github
-  - [ ] Facebook
+  - [x] Facebook
   - [x] Twitter
   - [x] Dropbox
 - [x] STORAGE ADAPTER
