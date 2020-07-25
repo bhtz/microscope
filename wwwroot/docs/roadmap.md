@@ -78,5 +78,5 @@ Current work
 ------------
 
 * HASURA JWT CLAIMS - E2E TEST
-* EXTERNAL PROVIDER - Azure AD
+* GraphQL API - JWT auth
 * INTEGRATION EVENTS - DESIGN
