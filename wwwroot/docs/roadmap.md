@@ -1,4 +1,4 @@
-BETA ROADMAP
+Beta roadmap
 ============
 
 - [ ] AUTHENTICATION
@@ -64,7 +64,7 @@ BETA ROADMAP
 - [ ] PUSH NOTIFICATIONS
 - [ ] STARTER KIT
 
-SANDBOX
+Sandbox
 -------
 
 - [ ] MULTI DOMAINS (hasura)
@@ -74,8 +74,8 @@ SANDBOX
 - [ ] MS GRAPH / O365 ?
 - [ ] CODE SERVER IDE ?
 
-CURRENT WORK
-============
+Current work
+------------
 
 * HASURA JWT CLAIMS - E2E TEST
 * EXTERNAL PROVIDER - Azure AD
