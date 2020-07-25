@@ -28,19 +28,26 @@ OIDC
     }
 ```
 
-Microsoft (multi-tenant)
+Azure AD
 ------------------------
 
 1. Navigate to : [azure portal - App registrations](https://go.microsoft.com/fwlink/?linkid=2083908)
 2. Select New registration
-3. Add `http://localhost:5000/signin-microsoft` as an authorized redirect URI.
+3. Add `http://localhost:5000/signin-azuread` as an authorized redirect URI.
 4. Configure microscope : 
 
 ```json
     "ExternalProviders": {
-        "Microsoft" : {
-            "ClientId": "",
-            "ClientSecret": ""
+        "AzureAd": {
+            "Authority":"https://login.microsoftonline.com/<tenantid>/v2.0/",
+            "ClientId": "<clientid>",
+            "ClientSecret": "<secret>",
+            "CallbackPath": "/signin-azuread"  ,
+            "ResponseType":"code id_token",
+            "RequireHttpsMetadata":false,
+            "SaveTokens":true,
+            "GetClaimsFromUserInfoEndpoint":true,
+            "Scope":["email"]
         }
     }
 ```
@@ -88,7 +95,8 @@ Twitter
     "ExternalProviders": {
         "Twitter" : {
             "ClientId": "",
-            "ClientSecret": ""
+            "ClientSecret": "",
+            "RetrieveUserDetails": true
         }
     }
 ```

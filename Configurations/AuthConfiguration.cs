@@ -21,10 +21,10 @@ namespace IronHasura.Configurations
             var builder = services.AddAuthentication();
 
             builder.AddCookie(o =>
-           {
-               o.Cookie.SameSite = SameSiteMode.None;
-               o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-           });
+            {
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+            });
 
             if (configuration.GetSection("ExternalProviders:OIDC").Exists())
             {
