@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using IdentityModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -15,14 +16,15 @@ namespace IronHasura.Configurations
             var authorityEndpoint = configuration.GetValue<string>("MCSP_HOST");
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Add("sub", ClaimTypes.NameIdentifier);
 
             var builder = services.AddAuthentication();
 
             builder.AddCookie(o =>
-            {
-                o.Cookie.SameSite = SameSiteMode.None;
-                o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-            });
+           {
+               o.Cookie.SameSite = SameSiteMode.None;
+               o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+           });
 
             if (configuration.GetSection("ExternalProviders:OIDC").Exists())
             {
@@ -34,9 +36,9 @@ namespace IronHasura.Configurations
                 builder.AddGoogle(options => configuration.Bind("ExternalProviders:Google", options));
             }
 
-            if (configuration.GetSection("ExternalProviders:Microsoft").Exists())
+            if (configuration.GetSection("ExternalProviders:AzureAd").Exists())
             {
-                builder.AddMicrosoftAccount(options => configuration.Bind("ExternalProviders:Microsoft", options));
+                builder.AddOpenIdConnect("AzureAd", "Azure Active Directory", options => configuration.Bind("ExternalProviders:AzureAd", options));
             }
 
             if (configuration.GetSection("ExternalProviders:Github").Exists())
