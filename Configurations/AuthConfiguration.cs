@@ -61,6 +61,11 @@ namespace IronHasura.Configurations
                 builder.AddDropbox(options => configuration.Bind("ExternalProviders:Dropbox", options));
             }
 
+            if (configuration.GetSection("ExternalProviders:Facebook").Exists())
+            {
+                builder.AddFacebook(options => configuration.Bind("ExternalProviders:Facebook", options));
+            }
+
             builder.AddJwtBearer(o =>
             {
                 o.Authority = authorityEndpoint;
