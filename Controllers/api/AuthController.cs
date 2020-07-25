@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace IronHasura.Controllers
 {
@@ -33,7 +34,9 @@ namespace IronHasura.Controllers
 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                var userId = HttpContext.User.FindFirst("sub")?.Value;
+                
+                var userId = HttpContext.User.FindFirstValue("sub") ?? 
+                            HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var role = 
                     string.IsNullOrEmpty(HttpContext.User.FindFirst("role")?.Value)
                     ? "user"
