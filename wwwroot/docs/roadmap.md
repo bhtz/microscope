@@ -30,7 +30,7 @@ Beta roadmap
   - [x] Delete
   - [x] Upload
   - [ ] Container
-- [ ] IDENTITY SERVER ADMIN
+- [ ] CLIENTS ADMIN
   - [ ] List
   - [ ] Delete
   - [ ] Create
