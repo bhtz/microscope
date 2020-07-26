@@ -24,7 +24,9 @@ namespace IronHasura
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            this.ConnexionString = Configuration.GetConnectionString("MCSP_DATA_CS");
+            this.ConnexionString = 
+                Configuration.GetConnectionString("MCSP_DATA_CS") ?? 
+                Configuration.GetValue<string>("MCSP_DATA_CS");
         }
 
         /// <summary>

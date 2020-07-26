@@ -5,7 +5,6 @@
 local.settings.json
 db_data
 Logs/
-appsettings.json
 appsettings.Production.json
 appsettings.Staging.json
 docker-compose.Production.yaml

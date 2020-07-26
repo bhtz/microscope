@@ -7,7 +7,7 @@ Beta roadmap
   - [x] HASURA CLAIMS 
     - [x] WEBHOOK
     - [ ] JWT
-  - [x] SIMPLE ADMIN
+  - [x] IDENTITY ADMIN
     - [x] ROLES
     - [x] USERS
 - [x] EXTERNAL PROVIDERS
@@ -30,6 +30,11 @@ Beta roadmap
   - [x] Delete
   - [x] Upload
   - [ ] Container
+- [ ] IDENTITY SERVER ADMIN
+  - [ ] List
+  - [ ] Delete
+  - [ ] Create
+  - [ ] Edit
 - [x] REMOTE CONFIGURATIONS
 - [x] ANALYTICS ADAPTER
 - [ ] GRAPHQL API
@@ -55,6 +60,7 @@ Beta roadmap
   - [ ] BLOB STORAGE
   - [ ] APP INSIGHT
   - [x] VIEWER
+- [ ] STARTER KIT
 - [ ] MAILER
 - [ ] INTEGRATION EVENTS ADAPTER
     - [ ] RabbitMQ
@@ -62,7 +68,6 @@ Beta roadmap
     - [ ] Azure Service Bus
     - [ ] Google Pub/Sub
 - [ ] PUSH NOTIFICATIONS
-- [ ] STARTER KIT
 
 Sandbox
 -------
