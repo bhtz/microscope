@@ -32,14 +32,6 @@ services:
       - "postgres"
     restart: always
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
-  # codeserver:
-  #   image: codercom/code-server
-  #   ports:
-  #   - "8082:8080"
-  #   volumes:
-  #     - ./serverless:/home/coder/project
-  #   environment:
-  #     PASSWORD: microscope
+      # ASPNETCORE_ENVIRONMENT: Development
 volumes:
   db_data:

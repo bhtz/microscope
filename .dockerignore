@@ -1,0 +1,15 @@
+.git
+.ipynb_checkpoints/*
+/notebooks/*
+/unused/*
+Dockerfile
+.DS_Store
+.gitignore
+README.md
+env.*
+/devops/*
+
+# dev configuration 
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
