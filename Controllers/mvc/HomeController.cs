@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using IdentityServer4.Models;
 using IronHasura.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +76,7 @@ namespace IronHasura.Controllers
                 IsDropboxEnable = this._configuration.GetSection("ExternalProviders:Dropbox").Exists(),
                 IsGithubEnable = this._configuration.GetSection("ExternalProviders:Github").Exists(),
                 IsOIDCEnable = this._configuration.GetSection("ExternalProviders:OIDC").Exists(),
+                Clients = this._configuration.GetSection("Clients").Get<List<Client>>(),
                 DatabaseName = builder["Database"] as string,
                 DatabaseHost = builder["Server"] as string,
             };

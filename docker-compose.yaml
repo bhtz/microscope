@@ -32,6 +32,6 @@ services:
       - "postgres"
     restart: always
     environment:
-      # ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Development
 volumes:
   db_data:

@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using IdentityServer4.Models;
+
 namespace IronHasura.Models 
 {
     public class SettingsViewModel 
@@ -14,5 +17,6 @@ namespace IronHasura.Models
         public bool IsDropboxEnable { get; set; }
         public bool IsGithubEnable { get; set; }
         public bool IsOIDCEnable { get; set; }
+        public IEnumerable<Client> Clients { get; set; }
     }
 }
