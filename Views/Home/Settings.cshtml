@@ -89,8 +89,9 @@
             </div>
             <div class="card-body">
                 @foreach(var item in Model.Clients) {
-                    <a href="@item.ClientUri">@item.ClientName</a>  
+                    <strong><a href="@item.ClientUri" target="_blank">@item.ClientName</a></strong>
                     <p>@item.Description</p>
+                    <br>
                 }
             </div>
         </div>
