@@ -9,7 +9,7 @@ appsettings.Production.json
 appsettings.Staging.json
 docker-compose.Production.yaml
 docker-compose.Staging.yaml
-
+NuGet.config
 .vscode
 
 uploads
