@@ -75,7 +75,7 @@ namespace IronHasura.Configurations
                     ClientName = "Angular Client",
                     ClientUri = "http://localhost:4200",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "http://localhost:4200" },
+                    RedirectUris = { "http://localhost:4200/callback" },
                     PostLogoutRedirectUris = { "http://localhost:4200/" },
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     AccessTokenLifetime = 3600,

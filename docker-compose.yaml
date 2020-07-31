@@ -33,5 +33,9 @@ services:
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+    volumes:
+      - type: bind
+        source: ./appsettings.Development.json
+        target: /app/appsettings.Development.json
 volumes:
   db_data:
