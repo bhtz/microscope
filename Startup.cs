@@ -1,5 +1,5 @@
-using IronHasura.Configurations;
-using IronHasura.Data;
+using Microscope.Configurations;
+using Microscope.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.Markdown;
-using IronHasura.GraphQL;
+using Microscope.GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using com.ironhasura.Areas.Identity.Data;
+using Microscope.Areas.Identity.Data;
 using Microsoft.IdentityModel.Logging;
 
-namespace IronHasura
+namespace Microscope
 {
     public class Startup
     {

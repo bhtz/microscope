@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GraphQL.Types;
-using IronHasura.GraphQL;
+using Microscope.GraphQL;
 
 public class RootQuery : ObjectGraphType<object>
 {

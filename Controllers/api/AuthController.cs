@@ -1,13 +1,13 @@
 ﻿using System;
-using IronHasura.Dto;
-using IronHasura.Data;
+using Microscope.Dto;
+using Microscope.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

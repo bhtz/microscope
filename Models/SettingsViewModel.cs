@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IdentityServer4.Models;
 
-namespace IronHasura.Models 
+namespace Microscope.Models 
 {
     public class SettingsViewModel 
     {

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using IronHasura.Services.Interfaces;
+using Microscope.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 
-namespace IronHasura.Services
+namespace Microscope.Services
 {
     public class AwsStorageService : IStorageService
     {

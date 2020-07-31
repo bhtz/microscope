@@ -1,8 +1,8 @@
-using com.ironhasura.Areas.Identity.Data;
+using Microscope.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class IdentityConfiguration
     {

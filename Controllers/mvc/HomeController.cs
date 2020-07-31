@@ -4,14 +4,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using IdentityServer4.Models;
-using IronHasura.Models;
+using Microscope.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NSwag.Annotations;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [OpenApiIgnore]
     public class HomeController : Controller

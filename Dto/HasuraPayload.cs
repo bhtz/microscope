@@ -1,6 +1,6 @@
 using System;
 
-namespace IronHasura.dto
+namespace Microscope.dto
 {
     public class HasuraPayload {
         public Payload payload { get; set; }

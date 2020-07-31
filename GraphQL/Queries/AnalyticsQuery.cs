@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using IronHasura.Data;
-using IronHasura.GraphQL;
-using IronHasura.GraphQL.Types;
+using Microscope.Data;
+using Microscope.GraphQL;
+using Microscope.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 
 public class AnalyticsQuery : ObjectGraphType<object>, IGraphQueryMarker

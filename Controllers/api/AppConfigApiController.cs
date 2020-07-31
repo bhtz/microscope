@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using IronHasura.Data;
+using Microscope.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace IronHasura.Controllers_api
+namespace Microscope.Controllers_api
 {
     [Route("api/remoteconfigs")]
     [ApiController]

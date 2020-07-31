@@ -1,14 +1,14 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using IronHasura.Services.Interfaces;
+using Microscope.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [Route("api/storage")]
     [ApiController]

@@ -1,6 +1,6 @@
 using GraphQL.Types;
-using IronHasura.GraphQL;
-using IronHasura.GraphQL.Types;
+using Microscope.GraphQL;
+using Microscope.GraphQL.Types;
 using Microsoft.AspNetCore.Identity;
 
 public class IdentityMutation : ObjectGraphType<object>, IGraphMutationMarker

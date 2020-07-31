@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using IronHasura.Services.Interfaces;
+using Microscope.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Linq;
 
-namespace IronHasura.Services
+namespace Microscope.Services
 {
     public class BlobStorageService : IStorageService
     {

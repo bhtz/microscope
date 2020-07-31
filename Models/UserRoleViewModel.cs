@@ -1,4 +1,4 @@
-namespace IronHasura.Models {
+namespace Microscope.Models {
     public class UserRoleViewModel 
     {
         public string RoleId { get; set; }

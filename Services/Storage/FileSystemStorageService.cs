@@ -2,11 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using IronHasura.Services.Interfaces;
+using Microscope.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace IronHasura.Services
+namespace Microscope.Services
 {
     public class FileSystemStorageService : IStorageService
     {

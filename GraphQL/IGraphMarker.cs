@@ -1,5 +1,5 @@
 
-namespace IronHasura.GraphQL 
+namespace Microscope.GraphQL 
 {
     public interface IGraphQueryMarker
     {

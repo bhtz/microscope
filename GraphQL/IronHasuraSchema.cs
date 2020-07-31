@@ -1,7 +1,7 @@
 using GraphQL;
 using GraphQL.Types;
 
-namespace IronHasura.GraphQL
+namespace Microscope.GraphQL
 {
     public class IronHasuraSchema : Schema
     {

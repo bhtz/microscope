@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class SwaggerConfiguration
     {

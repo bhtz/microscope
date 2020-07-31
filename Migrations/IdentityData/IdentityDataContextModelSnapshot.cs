@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using com.ironhasura.Areas.Identity.Data;
+using Microscope.Areas.Identity.Data;
 
 namespace microscope.Migrations.IdentityData
 {

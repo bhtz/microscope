@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using IronHasura.Services;
+using Microscope.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class IdentityServerConfiguration
     {

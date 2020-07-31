@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace IronHasura.Models
+namespace Microscope.Models
 {
     public class ApplicationUser : IdentityUser
     {

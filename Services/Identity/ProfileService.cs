@@ -9,7 +9,7 @@ using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
-namespace IronHasura.Services
+namespace Microscope.Services
 {
     public class ProfileService : IProfileService
     {

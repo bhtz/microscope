@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace IronHasura.Data
+namespace Microscope.Data
 {
     public partial class RemoteConfig
     {

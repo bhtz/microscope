@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Westwind.AspNetCore.Markdown;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class MarkdownConfiguration
     {

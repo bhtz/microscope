@@ -7,7 +7,7 @@ using System.Text;
 using System;
 using System.Net;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

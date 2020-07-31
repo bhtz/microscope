@@ -1,15 +1,19 @@
+using GraphQL.Authorization;
 using GraphQL.Types;
-using IronHasura.Data;
-using IronHasura.GraphQL;
-using IronHasura.GraphQL.Types;
+using Microscope.Data;
+using Microscope.GraphQL;
+using Microscope.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 
 public class RemoteConfigsQuery : ObjectGraphType<object>, IGraphQueryMarker
 {
     public RemoteConfigsQuery(IronHasuraDbContext dbContext)
-    {        
+    {    
+        this.AuthorizeWith("AdminPolicy");
+
         FieldAsync<ListGraphType<RemoteConfigType>>("RemoteConfigs", resolve: async context => 
         {
+             var userContext = context.UserContext as GraphQLUserContext;
             return await dbContext.RemoteConfig.ToListAsync();
         });
 

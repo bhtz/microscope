@@ -1,9 +1,9 @@
-using IronHasura.Services;
-using IronHasura.Services.Interfaces;
+using Microscope.Services;
+using Microscope.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class StorageConfiguration
     {

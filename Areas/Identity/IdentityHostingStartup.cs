@@ -1,5 +1,5 @@
 using System;
-using com.ironhasura.Areas.Identity.Data;
+using Microscope.Areas.Identity.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(com.ironhasura.Areas.Identity.IdentityHostingStartup))]
-namespace com.ironhasura.Areas.Identity
+[assembly: HostingStartup(typeof(Microscope.Areas.Identity.IdentityHostingStartup))]
+namespace Microscope.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

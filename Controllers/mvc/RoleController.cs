@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NSwag.Annotations;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [OpenApiIgnore]
     [Authorize(Roles = "Admin")]

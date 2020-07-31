@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace IronHasura.Dto
+namespace Microscope.Dto
 {
     public class HasuraClaims
     {

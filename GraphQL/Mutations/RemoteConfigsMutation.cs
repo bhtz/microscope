@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using IronHasura.Data;
-using IronHasura.GraphQL;
-using IronHasura.GraphQL.Types;
+using Microscope.Data;
+using Microscope.GraphQL;
+using Microscope.GraphQL.Types;
 
 public class RemoteConfigsMutation : ObjectGraphType<object>, IGraphMutationMarker
 {

@@ -1,7 +1,7 @@
 using GraphQL.Types;
 using Microsoft.AspNetCore.Identity;
 
-namespace IronHasura.GraphQL.Types 
+namespace Microscope.GraphQL.Types 
 {
     public class RoleType : ObjectGraphType<IdentityRole>
     {

@@ -1,9 +1,10 @@
 using GraphQL;
 using GraphQL.Server;
-using IronHasura.GraphQL;
+using Microscope.GraphQL;
+using Microscope.Authorization.Graphql;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IronHasura.Configurations
+namespace Microscope.Configurations
 {
     public static class GraphQLConfiguration
     {
@@ -12,7 +13,7 @@ namespace IronHasura.Configurations
             services.AddScoped<IGraphQueryMarker, IdentityQuery>();
             services.AddScoped<IGraphQueryMarker, RemoteConfigsQuery>();
             services.AddScoped<IGraphQueryMarker, AnalyticsQuery>();
-            
+
             services.AddScoped<IGraphMutationMarker, IdentityMutation>();
             services.AddScoped<IGraphMutationMarker, RemoteConfigsMutation>();
             services.AddScoped<IGraphMutationMarker, AnalyticMutation>();
@@ -22,7 +23,14 @@ namespace IronHasura.Configurations
 
             services.AddScoped<IronHasuraSchema>();
             services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
-            
+
+            services.AddGraphQLAuth(options =>
+            {
+                options.AddPolicy("AuthenticatedPolicy", p => p.AddRequirement(new AuthenticatedAuthorizationRequirement()));
+                options.AddPolicy("AdminPolicy", p => p.RequireClaim("role", "Admin"));
+
+            });
+
             services
                 .AddGraphQL(o => { o.ExposeExceptions = true; })
                 .AddGraphTypes(ServiceLifetime.Scoped);

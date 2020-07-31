@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace IronHasura.Services.Interfaces
+namespace Microscope.Services.Interfaces
 {
     public interface IStorageService
     {   

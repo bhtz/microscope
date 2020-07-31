@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace com.ironhasura.Areas.Identity.Data
+namespace Microscope.Areas.Identity.Data
 {
     public class IdentityDataContext : IdentityDbContext<IdentityUser>
     {

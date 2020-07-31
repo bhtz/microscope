@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 
-namespace IronHasura.Controllers_api
+namespace Microscope.Controllers_api
 {
     [Route("api/Roles")]
     [ApiController]

@@ -1,7 +1,7 @@
 using GraphQL.Types;
-using IronHasura.Data;
+using Microscope.Data;
 
-namespace IronHasura.GraphQL.Types
+namespace Microscope.GraphQL.Types
 {
     public class AnalyticType : ObjectGraphType<Analytic>
     {

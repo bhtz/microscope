@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace IronHasura.Data
+namespace Microscope.Data
 {
     public class IronHasuraDbContext : DbContext
     {

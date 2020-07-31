@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using IronHasura.Services.Interfaces;
+using Microscope.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
-namespace IronHasura.Controllers
+namespace Microscope.Controllers
 {
     [OpenApiIgnore]
     [Authorize(Roles = "Admin")]
