@@ -3,9 +3,9 @@ using GraphQL.Types;
 
 namespace Microscope.GraphQL
 {
-    public class IronHasuraSchema : Schema
+    public class MicroscopeSchema : Schema
     {
-        public IronHasuraSchema(IDependencyResolver resolver) : base(resolver)
+        public MicroscopeSchema(IDependencyResolver resolver) : base(resolver)
         {
             Query = resolver.Resolve<RootQuery>();
             Mutation = resolver.Resolve<RootMutation>();

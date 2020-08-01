@@ -13,19 +13,26 @@ using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microscope.Areas.Identity.Data;
 using Microsoft.IdentityModel.Logging;
+using GraphQL.Validation;
+using GraphQL.Server.Ui.GraphiQL;
 
 namespace Microscope
 {
     public class Startup
     {
         private string ConnexionString { get; set; }
-        public IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public IWebHostEnvironment HostingEnvironment { get; }
+
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-            this.ConnexionString = 
-                Configuration.GetConnectionString("MCSP_DATA_CS") ?? 
+            HostingEnvironment = env;
+
+            this.ConnexionString =
+                Configuration.GetConnectionString("MCSP_DATA_CS") ??
                 Configuration.GetValue<string>("MCSP_DATA_CS");
         }
 
@@ -40,10 +47,10 @@ namespace Microscope
             {
                 options.AllowSynchronousIO = true;
             });
-            
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IronHasuraDbContext>(
-                    opt => opt.UseNpgsql(this.ConnexionString, o => 
+                    opt => opt.UseNpgsql(this.ConnexionString, o =>
                     {
                         o.SetPostgresVersion(9, 6);
                         o.MigrationsHistoryTable("__MCSPMigrationsHistory", "mcsp");
@@ -67,22 +74,27 @@ namespace Microscope
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            services.AddGraphQLConfiguration(HostingEnvironment);
 
-            services.AddGraphQLConfiguration();
 
             services.AddSwaggerConfiguration();
             services.AddStorageConfiguration(this.Configuration);
             services.AddMarkdownConfiguration();
+
+            
         }
+
+        public const string GraphQlPath = "/graphql";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (HostingEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -108,8 +120,23 @@ namespace Microscope
 
             app.UseMarkdown();
 
-            app.UseGraphQL<IronHasuraSchema>();
-            app.UseGraphQLPlayground(options: new GraphQLPlaygroundOptions());
+            var validationRules = app.ApplicationServices.GetServices<IValidationRule>();
+
+
+            app.UseGraphQL<MicroscopeSchema>(GraphQlPath);
+
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                Path = "/ui/playground",
+                GraphQLEndPoint = GraphQlPath
+
+            });
+
+            app.UseGraphiQLServer(new GraphiQLOptions
+            {
+                GraphiQLPath = "/ui/graphiql",
+                GraphQLEndPoint = GraphQlPath,
+            });
 
             app.UseEndpoints(endpoints =>
             {
@@ -118,7 +145,7 @@ namespace Microscope
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app) 
+        private void InitializeDatabase(IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {

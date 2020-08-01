@@ -3,26 +3,31 @@ using GraphQL.Server;
 using Microscope.GraphQL;
 using Microscope.Authorization.Graphql;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
 
 namespace Microscope.Configurations
 {
     public static class GraphQLConfiguration
     {
-        public static IServiceCollection AddGraphQLConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddGraphQLConfiguration(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
         {
-            services.AddScoped<IGraphQueryMarker, IdentityQuery>();
-            services.AddScoped<IGraphQueryMarker, RemoteConfigsQuery>();
-            services.AddScoped<IGraphQueryMarker, AnalyticsQuery>();
+            services.AddTransient<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
-            services.AddScoped<IGraphMutationMarker, IdentityMutation>();
-            services.AddScoped<IGraphMutationMarker, RemoteConfigsMutation>();
-            services.AddScoped<IGraphMutationMarker, AnalyticMutation>();
+            services.AddSingleton<MicroscopeSchema>();
+            services.AddSingleton<RootQuery>();
+            services.AddSingleton<RootMutation>();
 
-            services.AddScoped<RootQuery>();
-            services.AddScoped<RootMutation>();
 
-            services.AddScoped<IronHasuraSchema>();
-            services.AddScoped<IDependencyResolver>(x => new FuncDependencyResolver(x.GetRequiredService));
+            services.AddSingleton<IGraphQueryMarker, IdentityQuery>();
+            services.AddSingleton<IGraphQueryMarker, RemoteConfigsQuery>();
+            services.AddSingleton<IGraphQueryMarker, AnalyticsQuery>();
+
+            services.AddSingleton<IGraphMutationMarker, IdentityMutation>();
+            services.AddSingleton<IGraphMutationMarker, RemoteConfigsMutation>();
+            services.AddSingleton<IGraphMutationMarker, AnalyticMutation>();
+
 
             services.AddGraphQLAuth(options =>
             {
@@ -32,8 +37,14 @@ namespace Microscope.Configurations
             });
 
             services
-                .AddGraphQL(o => { o.ExposeExceptions = true; })
-                .AddGraphTypes(ServiceLifetime.Scoped);
+                .AddGraphQL(o =>
+                 {
+                     o.EnableMetrics = true;
+                     o.ExposeExceptions = hostingEnvironment.IsDevelopment();
+
+                 })
+                .AddGraphTypes()
+                .AddUserContextBuilder(context => new GraphQLUserContext { User = context.User });
 
             return services;
         }

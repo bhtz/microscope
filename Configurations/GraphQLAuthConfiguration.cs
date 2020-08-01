@@ -19,7 +19,6 @@ public static class GraphQLAuthConfiguration
                 configure(authSettings);
                 return authSettings;
             });
- 
 
         }
 

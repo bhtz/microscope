@@ -34,6 +34,9 @@ namespace Microscope.Authorization.Graphql
                 _.Match<Field>(fieldAst =>
                 {
                     var fieldDef = context.TypeInfo.GetFieldDef();
+
+                    if (fieldDef == null) return;
+
                     if (fieldDef.RequiresPermissions() &&
                         (!authenticated || !fieldDef.CanAccess(userContext.User.Claims.Select(x => x.Value))))
                     {

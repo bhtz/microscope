@@ -9,13 +9,13 @@ public class RemoteConfigsQuery : ObjectGraphType<object>, IGraphQueryMarker
 {
     public RemoteConfigsQuery(IronHasuraDbContext dbContext)
     {    
-        this.AuthorizeWith("AdminPolicy");
+        //this.AuthorizeWith("AdminPolicy");
 
         FieldAsync<ListGraphType<RemoteConfigType>>("RemoteConfigs", resolve: async context => 
         {
              var userContext = context.UserContext as GraphQLUserContext;
             return await dbContext.RemoteConfig.ToListAsync();
-        });
+        }).AuthorizeWith("AdminPolicy");
 
         FieldAsync<UserType>("RemoteConfigById", 
             arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }), 
