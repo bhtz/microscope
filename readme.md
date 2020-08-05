@@ -1,48 +1,39 @@
-V1 architecture
+MICROSCOPE
+==========
+
+![MICROSCOPE](https://github.com/bhtz/microscope/blob/master/wwwroot/home.png)
+
+Backed As A Service Platform
+
+* Database (postgres)
+* GraphQL Engine (hasura)
+* Identity Federation Gateway 
+* Administration console
+* Storage
+* Remote configuration
+* Analytics
+
+DEV REQUIREMENTS
+================
+
+* dotnet core SDK 3.1
+* docker engine
+
+GETTING STARTED
 ===============
 
-* Microscope.Admin
-    * add storage
-* Microscope.Api
-    * add storage
-* Microscope.GraphQL
-    * users
-    * roles
-    * storage
-    * clients
-    * ...
-* Microscope.EntityFramework.MySql
-* Microscope.EntityFramework.PostgreSQL
-* Microscope.EntityFramework.Shared
-* Microscope.EntityFramework.SqlServer
-* Microscope.STS.Identity
-    * external providers
-* Microscope.Storage
-    * Storage interface
-    * Storage implementation
+Get the source code: 
 
+    git clone https://github.com/bhtz/microscope.git
 
-UX DESIGN
-=========
+Run the following command :
 
-ADMIN
+    docker-compose up
 
-* Identity
-    * Users
-    * Roles
-    * External Providers (readonly)
-* Applications
-    * Clients
-* STS
-    * Identity ressources
-    * Persisted grants
-    * Api ressources
-* Storage
-* Database
-* Api
-    * REST
-    * GraphQL
-* Logs
-* Account
-    * manage
-    * logout
+Launch the following Backend As A Service stack :
+
+* Postgres
+* Hasura graphql engine
+* Microscope Identity
+* Microscope Admin
+* Microscope API

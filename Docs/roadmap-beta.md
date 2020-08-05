@@ -1,0 +1,70 @@
+Beta roadmap
+============
+
+- [ ] AUTHENTICATION
+  - [x] IDENTITY FEDERATION GATEWAY & SSO
+  - [x] IDENTITY MGT
+  - [x] HASURA CLAIMS 
+    - [x] WEBHOOK
+    - [ ] JWT
+  - [x] IDENTITY ADMIN
+    - [x] ROLES
+    - [x] USERS
+- [x] EXTERNAL PROVIDERS
+  - [x] OIDC
+  - [x] Google
+  - [x] Azure AD
+  - [x] LinkedIn
+  - [x] Github
+  - [x] Facebook
+  - [x] Twitter
+  - [x] Dropbox
+- [x] STORAGE ADAPTER
+    - [x] Azure blob storage
+    - [x] File system
+    - [ ] AWS S3
+    - [ ] Database binary ?
+- [ ] STORAGE ADMIN
+  - [x] List
+  - [x] Download
+  - [x] Delete
+  - [x] Upload
+  - [ ] Container
+- [ ] CLIENTS ADMIN
+  - [ ] List
+  - [ ] Delete
+  - [ ] Create
+  - [ ] Edit
+- [x] REMOTE CONFIGURATIONS
+- [x] ANALYTICS ADAPTER
+- [ ] GRAPHQL API
+  - [x] USERS
+  - [x] ROLES
+  - [x] REMOTE CONFIGS
+  - [x] ANALYTICS
+  - [x] PLAYGROUND
+  - [ ] AUTH
+- [x] REST API
+  - [x] USERS
+  - [x] ROLES
+  - [x] STORAGE
+  - [x] REMOTE CONFIGS
+  - [x] ANALYTICS
+  - [x] SWAGGER
+  - [x] AUTH
+- [x] DOCKER & COMPOSE
+- [x] INSTANCE SETTINGS PAGE
+- [ ] LOGS ADAPTERS
+  - [x] CONSOLE
+  - [x] FILE
+  - [ ] BLOB STORAGE
+  - [ ] APP INSIGHT
+  - [x] VIEWER
+- [ ] STARTER KIT
+- [ ] MAILER
+- [ ] INTEGRATION EVENTS ADAPTER
+    - [ ] RabbitMQ
+    - [ ] Kafka
+    - [ ] Azure Service Bus
+    - [ ] Google Pub/Sub
+- [ ] PUSH NOTIFICATIONS
