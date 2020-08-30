@@ -15,20 +15,42 @@
     <environment include="Development">
         <link href="~/dist/css/bundle.min.css" asp-append-version="true" rel="stylesheet" />
         <link href="~/dist/css/web.css" asp-append-version="true" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     </environment>
     <environment exclude="Development">
         <link href="~/dist/css/bundle.min.css" asp-append-version="true" rel="stylesheet" />
         <link href="~/dist/css/web.min.css" asp-append-version="true" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     </environment>
 
     @RenderSection("styles", required: false)
 </head>
 <body>
 
-    <div class="menu d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <!--Site name -->
-        <h3 class="menu-logo my-0 mr-md-auto font-weight-normal"><a class="logo" asp-area="" asp-controller="Home" asp-action="Index">@RootConfiguration.AdminConfiguration.PageTitle</a></h3>
+    <header>
+        <partial name="_NavHeaderPartial" />
+    </header>
 
+    <div class="container">
+        @RenderBody()
+
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-6 col-md">
+                    @RootConfiguration.AdminConfiguration.PageTitle
+                    <small class="d-block mb-3 text-muted">@Localizer["FooterCopyright"] @DateTime.Now.Year</small>
+                </div>
+                <div class="col-md-6 text-right">
+                    @await Html.PartialAsync("Common/SelectLanguage")
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @* <div class="menu d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 navbar-dark bg-dark border-bottom box-shadow">
+        <!--Site name -->
+        <h3 class="menu-logo my-0 mr-md-auto font-weight-normal text-warning"><a class="logo" asp-area="" asp-controller="Home" asp-action="Index">@RootConfiguration.AdminConfiguration.PageTitle</a></h3>
+    
         <!--Menu item -->
         <vc:identity-server-link></vc:identity-server-link>
 
@@ -79,25 +101,7 @@
         <a class="my-2 btn btn-outline-primary menu-button" href="#">
             <span class="oi oi-menu" title="menu" aria-hidden="true"></span> @Localizer["MenuButton"]
         </a>
-    </div>
-
-    <div class="container">
-        @RenderBody()
-
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
-            <div class="row">
-                <div class="col-6 col-md">
-                    @RootConfiguration.AdminConfiguration.PageTitle
-                    <small class="d-block mb-3 text-muted">@Localizer["FooterCopyright"] @DateTime.Now.Year</small>
-                </div>
-                <div class="col-md-6 text-right">
-                    @await Html.PartialAsync("Common/SelectLanguage")
-                </div>
-            </div>
-
-
-        </footer>
-    </div>
+    </div> *@
 
     <environment include="Development">
         <script src="~/dist/js/bundle.min.js" asp-append-version="true"></script>

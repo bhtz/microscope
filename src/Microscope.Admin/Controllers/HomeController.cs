@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microscope.Admin.Configuration.Constants;
 using Microscope.Admin.ExceptionHandling;
+using Microscope.Admin.Configuration.Interfaces;
 
 namespace Microscope.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace Microscope.Admin.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<ConfigurationController> _logger;
+        private readonly IRootConfiguration _rootConfiguration;
 
-        public HomeController(ILogger<ConfigurationController> logger) : base(logger)
+        public HomeController(ILogger<ConfigurationController> logger, IRootConfiguration rootConfiguration) : base(logger)
         {
             _logger = logger;
+            _rootConfiguration = rootConfiguration;
         }
 
         public IActionResult Index()
@@ -55,10 +58,10 @@ namespace Microscope.Admin.Controllers
 
             return View();
         }
+
+        public IActionResult Hasura()
+        {
+            return Redirect(_rootConfiguration.AdminConfiguration.HasuraConsoleBaseUrl);
+        }
     }
 }
-
-
-
-
-
