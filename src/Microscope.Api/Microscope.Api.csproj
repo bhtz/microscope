@@ -45,13 +45,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Microscope.Admin.EntityFramework.MySql\Microscope.Admin.EntityFramework.MySql.csproj" />
-        <ProjectReference Include="..\Microscope.Admin.EntityFramework.PostgreSQL\Microscope.Admin.EntityFramework.PostgreSQL.csproj" />
-        <ProjectReference Include="..\Microscope.Admin.EntityFramework.Shared\Microscope.Admin.EntityFramework.Shared.csproj" />
-        <ProjectReference Include="..\Microscope.Admin.EntityFramework.SqlServer\Microscope.Admin.EntityFramework.SqlServer.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
         <Compile Update="Resources\ApiErrorResource.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
@@ -64,6 +57,13 @@
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>ApiErrorResource.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Microscope.EntityFramework.MySql\Microscope.EntitityFramework.MySql.csproj" />
+      <ProjectReference Include="..\Microscope.EntityFramework.PostgreSQL\Microscope.EntityFramework.PostgreSQL.csproj" />
+      <ProjectReference Include="..\Microscope.EntityFramework.Shared\Microscope.EntityFramework.Shared.csproj" />
+      <ProjectReference Include="..\Microscope.EntityFramework.SqlServer\Microscope.EntityFramework.SqlServer.csproj" />
     </ItemGroup>
 
 </Project>
