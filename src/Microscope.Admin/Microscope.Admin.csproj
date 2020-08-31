@@ -119,10 +119,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Microscope.EntityFramework.MySql\Microscope.EntitityFramework.MySql.csproj" />
       <ProjectReference Include="..\Microscope.EntityFramework.Shared\Microscope.EntityFramework.Shared.csproj" />
       <ProjectReference Include="..\Microscope.EntityFramework.PostgreSQL\Microscope.EntityFramework.PostgreSQL.csproj" />
       <ProjectReference Include="..\Microscope.EntityFramework.SqlServer\Microscope.EntityFramework.SqlServer.csproj" />
+      <ProjectReference Include="..\Microscope.EntityFramework.MySql\Microscope.EntityFramework.MySql.csproj" />
     </ItemGroup>
 
 </Project>

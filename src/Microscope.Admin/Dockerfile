@@ -5,10 +5,10 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["src/Microscope.Admin/Microscope.Admin.csproj", "src/Microscope.Admin/"]
-COPY ["src/Microscope.EntityFramework.Shared/Microscope.Admin.EntityFramework.Shared.csproj", "src/Microscope.EntityFramework.Shared/"]
-COPY ["src/Microscope.EntityFramework.SqlServer/Microscope.Admin.EntityFramework.SqlServer.csproj", "src/Microscope.EntityFramework.SqlServer/"]
-COPY ["src/Microscope.EntityFramework.PostgreSQL/Microscope.Admin.EntityFramework.PostgreSQL.csproj", "src/Microscope.EntityFramework.PostgreSQL/"]
-COPY ["src/Microscope.EntityFramework.MySql/Microscope.Admin.EntityFramework.MySql.csproj", "src/Microscope.EntityFramework.MySql/"]
+COPY ["src/Microscope.EntityFramework.Shared/Microscope.EntityFramework.Shared.csproj", "src/Microscope.EntityFramework.Shared/"]
+COPY ["src/Microscope.EntityFramework.SqlServer/Microscope.EntityFramework.SqlServer.csproj", "src/Microscope.EntityFramework.SqlServer/"]
+COPY ["src/Microscope.EntityFramework.PostgreSQL/Microscope.EntityFramework.PostgreSQL.csproj", "src/Microscope.EntityFramework.PostgreSQL/"]
+COPY ["src/Microscope.EntityFramework.MySql/Microscope.EntityFramework.MySql.csproj", "src/Microscope.EntityFramework.MySql/"]
 RUN dotnet restore "src/Microscope.Admin/Microscope.Admin.csproj"
 COPY . .
 WORKDIR "/src/src/Microscope.Admin"

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.Api", "src\Micro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.EntityFramework.Shared", "src\Microscope.EntityFramework.Shared\Microscope.EntityFramework.Shared.csproj", "{DBFF908D-3189-4F1F-B1B7-2A91241A2A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.EntitityFramework.MySql", "src\Microscope.EntityFramework.MySql\Microscope.EntitityFramework.MySql.csproj", "{246C6A0D-4E34-4A7D-9953-B3229A063170}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.EntityFramework.MySql", "src\Microscope.EntityFramework.MySql\Microscope.EntityFramework.MySql.csproj", "{246C6A0D-4E34-4A7D-9953-B3229A063170}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.EntityFramework.PostgreSQL", "src\Microscope.EntityFramework.PostgreSQL\Microscope.EntityFramework.PostgreSQL.csproj", "{687ABEAA-237E-4E66-9531-54D255892760}"
 EndProject

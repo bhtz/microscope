@@ -9,7 +9,7 @@ COPY ["src/Microscope.EntityFramework.Shared/Microscope.EntityFramework.Shared.c
 COPY ["src/Microscope.EntityFramework.SqlServer/Microscope.EntityFramework.SqlServer.csproj", "src/Microscope.EntityFramework.SqlServer/"]
 COPY ["src/Microscope.EntityFramework.PostgreSQL/Microscope.EntityFramework.PostgreSQL.csproj", "src/Microscope.EntityFramework.PostgreSQL/"]
 COPY ["src/Microscope.EntityFramework.MySql/Microscope.EntityFramework.MySql.csproj", "src/Microscope.EntityFramework.MySql/"]
-RUN dotnet restore "src/Microscope.Admin.Api/Microscope.Api.csproj"
+RUN dotnet restore "src/Microscope.Api/Microscope.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Microscope.Api"
 RUN dotnet build "Microscope.Api.csproj" -c Release -o /app/build
