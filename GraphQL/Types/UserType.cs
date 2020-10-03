@@ -5,7 +5,7 @@ namespace Microscope.GraphQL.Types
 {
     public class UserType : ObjectGraphType<IdentityUser>
     {
-        public UserType(UserManager<IdentityUser> userManager)
+        public UserType()
         {
             Field(x => x.Id);
             Field(x => x.UserName);

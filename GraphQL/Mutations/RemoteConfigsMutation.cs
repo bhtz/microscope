@@ -3,28 +3,37 @@ using GraphQL;
 using Microscope.Data;
 using Microscope.GraphQL;
 using Microscope.GraphQL.Types;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 public class RemoteConfigsMutation : ObjectGraphType<object>, IGraphMutationMarker
 {
-    public RemoteConfigsMutation(IronHasuraDbContext dbContext)
+    public RemoteConfigsMutation(IServiceProvider serviceProvider)
     {
         FieldAsync<RemoteConfigType>(
             "UpdateRemoteConfig",
             arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<RemoteConfigType>> { Name = "config" }
+                new QueryArgument<NonNullGraphType<RemoteConfigInputType>> { Name = "config" }
             ),
             resolve: async context =>
             {
                 var configInput = context.GetArgument<RemoteConfig>("config");
-                var remoteConfig = await dbContext.RemoteConfig.FindAsync(configInput.Id);
-                
-                remoteConfig.Key = configInput.Key;
-                remoteConfig.Value = configInput.Value;
 
-                dbContext.RemoteConfig.Update(remoteConfig);
-                dbContext.SaveChanges();
+                using (var scope = context.RequestServices.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>();
+                    var remoteConfig = await dbContext.RemoteConfig.FindAsync(configInput.Id);
 
-                return remoteConfig;
+                    remoteConfig.Key = configInput.Key;
+                    remoteConfig.Value = configInput.Value;
+
+                    dbContext.RemoteConfig.Update(remoteConfig);
+                    dbContext.SaveChanges();
+
+                    return remoteConfig;
+
+                }
+
             });
 
 
@@ -36,30 +45,45 @@ public class RemoteConfigsMutation : ObjectGraphType<object>, IGraphMutationMark
             resolve: async context =>
             {
                 var id = context.GetArgument<string>("id");
-                var config = await dbContext.RemoteConfig.FindAsync(id);
 
-                if(config != null) 
+
+                using (var scope = context.RequestServices.CreateScope())
                 {
-                    dbContext.Remove(config);
-                    dbContext.SaveChanges();
+                    var dbContext = scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>();
+                    var config = await dbContext.RemoteConfig.FindAsync(id);
+
+                    if (config != null)
+                    {
+                        dbContext.Remove(config);
+                        dbContext.SaveChanges();
+                    }
+
+                    return config;
+
                 }
 
-                return config;
             });
 
         Field<RemoteConfigType>(
             "CreateRemoteConfig",
             arguments: new QueryArguments(
-                new QueryArgument<NonNullGraphType<RemoteConfigType>> { Name = "config" }
+                new QueryArgument<NonNullGraphType<RemoteConfigInputType>> { Name = "config" }
             ),
             resolve: context =>
             {
                 var remoteConfig = context.GetArgument<RemoteConfig>("config");
-            
-                dbContext.Add(remoteConfig);
-                dbContext.SaveChanges();
 
-                return remoteConfig;
+                using (var scope = context.RequestServices.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>();
+
+                    dbContext.RemoteConfig.Add(remoteConfig);
+                    dbContext.SaveChanges();
+
+                    return remoteConfig;
+
+                }
+
             });
     }
 }

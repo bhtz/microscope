@@ -7,6 +7,8 @@ namespace Microscope.GraphQL.Types
     {
         public RemoteConfigType()
         {
+            Name = "RemoteConfig";
+
             Field(x => x.Id, type:typeof(StringGraphType)).Name("Id");;
             Field(x => x.Key).Name("Key");
             Field(x => x.Value).Name("Value");

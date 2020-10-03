@@ -4,23 +4,34 @@ using Microscope.GraphQL;
 using Microscope.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using GraphQL;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 
 public class AnalyticsQuery : ObjectGraphType<object>, IGraphQueryMarker
 {
-    public AnalyticsQuery(IronHasuraDbContext dbContext)
-    {        
-        FieldAsync<ListGraphType<AnalyticType>>("Analytics", resolve: async context => 
+    public AnalyticsQuery()
+    {
+        FieldAsync<ListGraphType<AnalyticType>>("Analytics", resolve: async context =>
         {
-            return await dbContext.Analytic.ToListAsync();
+            using (var scope = context.RequestServices.CreateScope())
+            {
+                return await scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>().Analytic.ToListAsync();
+
+            }
+
         });
 
-        FieldAsync<AnalyticType>("AnalyticsById", 
-            arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }), 
-            resolve: async context => 
+        FieldAsync<AnalyticType>("AnalyticsById",
+            arguments: new QueryArguments(new QueryArgument<IdGraphType> { Name = "id" }),
+            resolve: async context =>
             {
                 var id = context.GetArgument<string>("id");
-                return await dbContext.Analytic.FindAsync(id);
+
+                using (var scope = context.RequestServices.CreateScope())
+                {
+                    return await scope.ServiceProvider.GetRequiredService<IronHasuraDbContext>().Analytic.FindAsync(id);
+                }
             });
     }
 }
