@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GraphQL;
 using GraphQL.Types;
 using Microscope.GraphQL;
 

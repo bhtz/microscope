@@ -1,4 +1,5 @@
 using GraphQL.Authorization;
+using GraphQL;
 using GraphQL.Types;
 using Microscope.Data;
 using Microscope.GraphQL;

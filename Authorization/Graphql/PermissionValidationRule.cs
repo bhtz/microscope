@@ -1,53 +1,98 @@
 using GraphQL.Language.AST;
 using GraphQL.Validation;
+using GraphQL.Types;
 using Microscope.GraphQL;
 using System.Linq;
+using System.Threading.Tasks;
+using GraphQL.Authorization;
+using GraphQL;
+
 
 
 namespace Microscope.Authorization.Graphql
 {
-    public class PermissionValidationRule : IValidationRule
+ 
+ public class PermissionValidationRule : IValidationRule
     {
-        public INodeVisitor Validate(ValidationContext context)
-        {
-            var userContext = context.UserContext as GraphQLUserContext;
-            var authenticated = userContext.User?.Identity.IsAuthenticated ?? false;
+        private readonly IAuthorizationEvaluator _evaluator;
 
-            return new EnterLeaveListener(_ =>
+        public PermissionValidationRule(IAuthorizationEvaluator evaluator)
+        {
+            _evaluator = evaluator;
+        }
+
+        public Task<INodeVisitor> ValidateAsync(ValidationContext context)
+        {
+            var userContext = context.UserContext as IProvideClaimsPrincipal;
+
+            return Task.FromResult((INodeVisitor)new EnterLeaveListener(_ =>
             {
-                _.Match<Operation>(op =>
+                var operationType = OperationType.Query;
+
+                // this could leak info about hidden fields or types in error messages
+                // it would be better to implement a filter on the Schema so it
+                // acts as if they just don't exist vs. an auth denied error
+                // - filtering the Schema is not currently supported
+
+                _.Match<Operation>(astType =>
                 {
-                    if (op.OperationType == OperationType.Mutation && !authenticated)
-                    {
-                        context.ReportError(new ValidationError(
-                            context.OriginalQuery,
-                            "auth-required",
-                            $"Authorization is required to access {op.Name}.",
-                            op));
-                    }
+                    operationType = astType.OperationType;
+
+                    var type = context.TypeInfo.GetLastType();
+                    CheckAuth(astType, type, userContext, context, operationType);
                 });
 
-                // this could leak info about hidden fields in error messages
-                // it would be better to implement a filter on the schema so it
-                // acts as if they just don't exist vs. an auth denied error
-                // - filtering the schema is not currently supported
+                _.Match<ObjectField>(objectFieldAst =>
+                {
+                    var argumentType = context.TypeInfo.GetArgument().ResolvedType.GetNamedType() as IComplexGraphType;
+                    if (argumentType == null)
+                        return;
+
+                    var fieldType = argumentType.GetField(objectFieldAst.Name);
+                    CheckAuth(objectFieldAst, fieldType, userContext, context, operationType);
+                });
+
                 _.Match<Field>(fieldAst =>
                 {
                     var fieldDef = context.TypeInfo.GetFieldDef();
 
                     if (fieldDef == null) return;
 
-                    if (fieldDef.RequiresPermissions() &&
-                        (!authenticated || !fieldDef.CanAccess(userContext.User.Claims.Select(x => x.Value))))
-                    {
-                        context.ReportError(new ValidationError(
-                            context.OriginalQuery,
-                            "auth-required",
-                            $"You are not authorized to run this query.",
-                            fieldAst));
-                    }
+                    // check target field
+                    CheckAuth(fieldAst, fieldDef, userContext, context, operationType);
+                    // check returned graph type
+                    CheckAuth(fieldAst, fieldDef.ResolvedType.GetNamedType(), userContext, context, operationType);
                 });
-            });
+            }));
+        }
+
+
+
+
+        private void CheckAuth(
+    INode node,
+    IProvideMetadata type,
+    IProvideClaimsPrincipal userContext,
+    ValidationContext context,
+    OperationType operationType)
+        {
+            if (type == null || !type.RequiresAuthorization()) return;
+
+            var result = type
+                .Authorize(userContext?.User, context.UserContext, context.Inputs, _evaluator)
+                .GetAwaiter()
+                .GetResult();
+
+            if (result.Succeeded) return;
+
+            var errors = string.Join("\n", result.Errors);
+
+            context.ReportError(new ValidationError(
+                context.OriginalQuery,
+                "authorization",
+                $"You are not authorized to run this {operationType.ToString().ToLower()}.\n{errors}",
+                node));
         }
     }
+
 }

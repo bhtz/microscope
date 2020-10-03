@@ -134,7 +134,7 @@ namespace Microscope
 
             app.UseGraphiQLServer(new GraphiQLOptions
             {
-                GraphiQLPath = "/ui/graphiql",
+                Path  = "/ui/graphiql",
                 GraphQLEndPoint = GraphQlPath,
             });
 

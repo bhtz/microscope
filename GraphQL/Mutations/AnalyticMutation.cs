@@ -1,4 +1,5 @@
 using GraphQL.Types;
+using GraphQL;
 using Microscope.Data;
 using Microscope.GraphQL;
 using Microscope.GraphQL.Types;

@@ -3,6 +3,8 @@ using Microscope.Data;
 using Microscope.GraphQL;
 using Microscope.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
+using GraphQL;
+
 
 public class AnalyticsQuery : ObjectGraphType<object>, IGraphQueryMarker
 {

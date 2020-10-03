@@ -1,14 +1,16 @@
 using GraphQL;
 using GraphQL.Types;
+using GraphQL.Utilities;
+using System;
 
 namespace Microscope.GraphQL
 {
     public class MicroscopeSchema : Schema
     {
-        public MicroscopeSchema(IDependencyResolver resolver) : base(resolver)
+        public MicroscopeSchema(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            Query = resolver.Resolve<RootQuery>();
-            Mutation = resolver.Resolve<RootMutation>();
+            Query = serviceProvider.GetRequiredService<RootQuery>();
+            Mutation = serviceProvider.GetRequiredService<RootMutation>();
         }
     }
 }

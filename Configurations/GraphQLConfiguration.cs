@@ -5,6 +5,10 @@ using Microscope.Authorization.Graphql;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+
+
 
 
 namespace Microscope.Configurations
@@ -13,7 +17,7 @@ namespace Microscope.Configurations
     {
         public static IServiceCollection AddGraphQLConfiguration(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
         {
-            services.AddTransient<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+            // services.AddTransient<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
             services.AddSingleton<MicroscopeSchema>();
             services.AddSingleton<RootQuery>();
@@ -37,14 +41,19 @@ namespace Microscope.Configurations
             });
 
             services
-                .AddGraphQL(o =>
+                .AddGraphQL((options, provider) =>
                  {
-                     o.EnableMetrics = true;
-                     o.ExposeExceptions = hostingEnvironment.IsDevelopment();
+                    options.EnableMetrics = hostingEnvironment.IsDevelopment();
+                var logger = provider.GetRequiredService<ILogger<Startup>>();
+                options.UnhandledExceptionDelegate = ctx => logger.LogError("{Error} occured", ctx.OriginalException.Message);
 
                  })
-                .AddGraphTypes()
-                .AddUserContextBuilder(context => new GraphQLUserContext { User = context.User });
+                .AddSystemTextJson(deserializerSettings => { }, serializerSettings => { })
+                .AddErrorInfoProvider(opt => opt.ExposeExceptionStackTrace = hostingEnvironment.IsDevelopment())
+                .AddUserContextBuilder(context => new GraphQLUserContext { User = context.User })
+                .AddWebSockets()
+                .AddDataLoader()
+                .AddGraphTypes(typeof(MicroscopeSchema));
 
             return services;
         }
