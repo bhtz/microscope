@@ -1,0 +1,61 @@
+<EditForm Model="@RemoteConfig" OnValidSubmit="OnValidSubmit">
+  <MudDialog>
+    <TitleContent>
+        @{
+          if (RemoteConfig.Id == Guid.Empty)
+          {
+            <MudText Typo="Typo.h6">
+              <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+              Add Remote Config
+            </MudText>
+          }
+          else
+          {
+            <MudText Typo="Typo.h6">
+              <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+              Edit Remote Config
+            </MudText>
+          }
+        }
+      </TitleContent>
+    <DialogContent>
+
+        <DataAnnotationsValidator />
+
+        <MudTextField T="string" Label="Key" HelperText="Min. 2 characters" @bind-Value="RemoteConfig.Key"
+          For="@(() => RemoteConfig.Key)" />
+
+        <MudField Label="Dimension" Variant="Variant.Text">
+          <div id="jsoneditor" style="width:100%;height:400px;"></div>
+          <MudTextField InputType="InputType.Hidden" id="dimension" T="string" HelperText="Valid json"
+            @bind-Value="RemoteConfig.Dimension" For="@(() => RemoteConfig.Dimension)" />
+        </MudField>
+
+        <MudExpansionPanels Class="mt-4">
+          <MudExpansionPanel Text="Show Validation Summary">
+            @if (Success)
+                            {
+            <MudText Color="Color.Success">Success</MudText>
+            }
+                            else
+                            {
+            <MudText Color="@Color.Error">
+              <ValidationSummary />
+            </MudText>
+            }
+          </MudExpansionPanel>
+        </MudExpansionPanels>
+    </DialogContent>
+    <DialogActions>
+      <MudButton Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+      @if (RemoteConfig.Id == Guid.Empty)
+      {
+        <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+      }
+      else
+      {
+        <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+      }
+    </DialogActions>
+  </MudDialog>
+</EditForm>

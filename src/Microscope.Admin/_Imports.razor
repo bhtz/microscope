@@ -1,0 +1,29 @@
+﻿@*Libraries*@
+@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using Microscope.Admin
+@using Microscope.Admin.Shared
+@using MudBlazor
+
+@*Client Services*@
+@using Microscope.Admin.Managers.Preferences
+
+@*Shared Libraries*@
+@using Microscope.SDK.Dotnet
+
+@* Default DI *@
+@inject MicroscopeClient _microscopeClient
+@inject NavigationManager _navigationManager
+@inject PreferenceManager _preferenceManager
+@inject ISnackbar _snackBar
+@inject IDialogService _dialogService
+@inject HttpClient _httpClient

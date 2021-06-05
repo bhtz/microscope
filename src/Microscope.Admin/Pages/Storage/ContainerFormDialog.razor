@@ -1,0 +1,36 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<ContainerFormDialog> localizer
+
+<EditForm Model="@StorageContainer" OnValidSubmit="OnValidSubmit">
+  <MudDialog>
+    <TitleContent>
+      <MudText Typo="Typo.h6">
+        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+         @localizer["Add Container"]    
+      </MudText>
+    </TitleContent>
+    <DialogContent>
+      <DataAnnotationsValidator />
+
+      <MudTextField T="string" Label="Name" @bind-Value="StorageContainer.Name" For="@(() => StorageContainer.Name)" />
+
+      <MudExpansionPanels Class="mt-4">
+        <MudExpansionPanel Text="Show Validation Summary">
+          @if (Success)
+          {
+            <MudText Color="Color.Success">Success</MudText>
+          }
+          else
+          {
+            <MudText Color="@Color.Error">
+              <ValidationSummary />
+            </MudText>
+          }
+        </MudExpansionPanel>
+      </MudExpansionPanels>
+    </DialogContent>
+    <DialogActions>
+      <MudButton Variant="Variant.Filled" OnClick="Cancel">@localizer["Cancel"]</MudButton>
+      <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">@localizer["Save"]</MudButton>
+    </DialogActions>
+  </MudDialog>
+</EditForm>
