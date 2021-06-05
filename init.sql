@@ -1,1 +1,2 @@
--- create database initialize script here
+CREATE SCHEMA IF NOT EXISTS mcsp_identity;
+CREATE SCHEMA IF NOT EXISTS mcsp_common;

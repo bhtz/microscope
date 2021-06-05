@@ -1,0 +1,30 @@
+@using Microscope.Application.Core.Queries.RemoteConfig
+@attribute [Authorize]
+@page "/remoteconfig"
+
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Remote Config</MudText>
+
+<MudButton Variant="Variant.Filled" OnClick="OpenCreateDialog" Color="Color.Primary">NEW</MudButton>
+
+<MudTable Class="mt-2" Items="@RemoteConfigs" Striped="true" Hover="true" Filter="new Func<FilteredRemoteConfigQueryResult, bool>(FilterFunc)">
+  <ToolBarContent>
+    <MudText Typo="Typo.h6">Remote Config</MudText>
+    <MudToolBarSpacer />
+    <MudTextField @bind-Value="SearchTerm" Placeholder="Search" Adornment="Adornment.Start"
+      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+  </ToolBarContent>
+  <HeaderContent>
+    <MudTh>Key</MudTh>
+    <MudTh>Dimension</MudTh>
+    <MudTh></MudTh>
+  </HeaderContent>
+  <RowTemplate>
+    <MudTd DataLabel="Id">@context.Key</MudTd>
+    <MudTd DataLabel="Dimension">@context.Dimension</MudTd>
+    <MudTd DataLabel="Actions"  Style="text-align:right">
+      <MudIconButton @onclick="() => Delete(context)"  title="Delete" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
+      <MudIconButton @onclick="() => OnSelectItem(context)"  title="Edit" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+    </MudTd>
+  </RowTemplate>
+</MudTable>

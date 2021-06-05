@@ -1,0 +1,82 @@
+version: "3.6"
+services:
+  postgres:
+    image: postgres:12
+    container_name: mcsp_database
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgres
+  baas:
+    image: hasura/graphql-engine:v2.0.0-alpha.10
+    container_name: mcsp_baas
+    ports:
+    - "8080:8000"
+    depends_on:
+    - "postgres"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:root@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ADMIN_SECRET: microscope
+      HASURA_GRAPHQL_SERVER_PORT: 8000
+      HASURA_GRAPHQL_AUTH_HOOK: http://host.docker.internal:5010/api/Webhook/hasura
+  # lab:
+  #     build: ./src/Microscope.Lab
+  #     container_name: mcsp_lab
+  #     ports:
+  #         - "8081:8888"
+  #     environment:
+  #         JUPYTER_NO_PASSWORD: "true"
+  #     volumes:
+  #         - ./src/Microscope.Lab/work:/home/jupyter/work
+  storage:
+    image: bitnami/minio:latest
+    container_name: mcsp_storage
+    ports:
+        - "8082:9000"
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: microscope
+  admin:
+    build:
+      context: .
+      dockerfile: src/Microscope.Admin/Dockerfile
+    container_name: mcsp_admin
+    ports:
+        - "8085:80"
+  api:
+    build:
+      context: .
+      dockerfile: src/Microscope.Api/Dockerfile
+    container_name: mcsp_api
+    ports:
+        - "8086:80"
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: mcsp_identity
+    environment:
+      KEYCLOAK_IMPORT: tmp/realm-export.json
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: postgres
+      DB_USER: postgres
+      DB_SCHEMA: mcsp_identity
+      DB_PASSWORD: root
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: microscope
+    volumes:
+      - ./realm-export.json:/tmp/realm-export.json
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "ssl=true"
+    ports:
+      - 8083:8080
+    depends_on:
+      - postgres
+volumes:
+  db_data:

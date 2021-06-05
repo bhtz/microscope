@@ -1,52 +1,38 @@
-MICROSCOPE
-==========
+# Microscope
 
-![MICROSCOPE](https://github.com/bhtz/microscope/blob/master/wwwroot/home.png)
+    WORK IN PROGRESS
 
-Digital Platform Factory (alpha)
+Admin & API on top of awesomes OSS products in order to provide BaaS experience :
 
-* Postgres
-* GraphQL Engine (hasura)
-* Identity federation gateway
-* Cloud & local Storage
-* Remote configurations
-* Analytics
-* Swagger & GraphQL playground
-* Cloud functions
+* Interactive programming & data exploration (jupyterLab)
+* GraphQL & event engine (hasura)
+* Identity and access management (keycloak)
+* Storage engine (minio)
 
-BETA ROADMAP
-============
+related to https://github.com/bhtz/microscope
 
-[roadmap](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/roadmap.md)
+## Requirements: 
 
-
-DEV REQUIREMENTS
-================
-
-* dotnet core SDK 3.1
 * docker engine
 
-GETTING STARTED
-===============
+## Getting started
 
-Get the source code: 
+    git clone https://github.com/bhtz/HKLM.git
 
-    git clone https://github.com/bhtz/microscope.git
-
-Run the following command :
+    cd datastack
 
     docker-compose up
 
-Launch the following Backend As A Service stack :
-* Postgres 12 (Database)
-* Hasura (Domain Events & GraphQL Engine)
-* Microscope (Identity, Storage, remote configs, analytics, ...)
+* [NAVIGATE TO PORTAL](http://localhost:8085)
 
+Migration cmd : 
 
-Navigate to [http://localhost:5000/](http://localhost:5000/) and enjoy your backend as a service experience !
+run to src/Microscope.Infrastructure : 
 
-SETTINGS
---------
+    dotnet ef --startup-project ../Microscope.Api/ migrations add InitialCreate -o Migrations
 
-* [Storage providers](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/Storage.md)
-* [External auth providers](https://github.com/bhtz/microscope/blob/master/wwwroot/docs/ExternalProviders.md)
+    dotnet ef --startup-project ../Microscope.Api/ database update
+
+Generate controller : 
+
+    dotnet aspnet-codegenerator controller -api -name RemoteConfigController -m RemoteConfig -dc MicroscopeDbContext
