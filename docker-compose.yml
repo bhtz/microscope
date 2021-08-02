@@ -13,7 +13,7 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
   baas:
-    image: hasura/graphql-engine:v2.0.0-alpha.10
+    image: hasura/graphql-engine:v2.0.4
     container_name: mcsp_baas
     ports:
     - "8080:8000"
@@ -49,14 +49,18 @@ services:
       dockerfile: src/Microscope.Admin/Dockerfile
     container_name: mcsp_admin
     ports:
-        - "8085:80"
+      - "8085:80"
+    depends_on:
+      - "api"
   api:
     build:
       context: .
       dockerfile: src/Microscope.Api/Dockerfile
     container_name: mcsp_api
     ports:
-        - "8086:80"
+      - "8086:80"
+    depends_on:
+      - "postgres"
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: mcsp_identity
