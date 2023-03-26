@@ -36,3 +36,53 @@ run to src/Microscope.Infrastructure :
 Generate controller : 
 
     dotnet aspnet-codegenerator controller -api -name RemoteConfigController -m RemoteConfig -dc MicroscopeDbContext
+
+
+ROADMAP
+=======
+
+* Services : 
+    * Reverse proxy -- OK
+        * Yarp -- OK
+        * Envoy
+    * Identity
+        * Keycloak -- OK
+        * OpenIddict -- TARGET
+    * Storage -- OK
+        * S3  
+        * Blob storage -- OK
+        * filesystem -- OK
+        * minio -- OK
+    * Remote configs -- OK
+        * Feature flipping -- OK
+        * JSON Remote configs -- OK
+        * Analytics -- OK
+    * API
+        * postgrest -- OK
+        * hasura
+        * JSON Server -- OK
+        * mcsp_api_engine -- TARGET
+    * Schema
+        * DSL schema 
+            * database
+                * schema
+                    * Table
+                        * Fields
+                            * Type
+                            * Widget
+    * Functions
+        * azure functions
+        * serverless
+    * Automation -- OK
+        * Workflows
+            * Elsa -- OK
+            * Logic app
+        * Webhooks -- OK
+* Clients
+    * Blazor
+        * Storage admin
+        * Schema admin
+        * Function admin
+        * Workflows admin
+        * Identity admin
+        * Automation admin
