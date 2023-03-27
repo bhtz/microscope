@@ -10,7 +10,7 @@
 <MudTable Class="mt-2" Items="@Analytics" Striped="true" Hover="true" Filter="new Func<AnalyticQueryResult, bool>(FilterFunc)">
   <ToolBarContent>
     <MudText Typo="Typo.h6">Analytic</MudText>
-    <MudToolBarSpacer />
+    <MudSpacer />
     <MudTextField @bind-Value="SearchTerm" Placeholder="Search" Adornment="Adornment.Start"
       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
   </ToolBarContent>

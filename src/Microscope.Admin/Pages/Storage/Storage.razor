@@ -42,7 +42,7 @@
 <MudTable Class="mt-2" Items="@Blobs" Filter="new Func<string,bool>(FilterFunc)">
   <ToolBarContent>
     <MudText Typo="Typo.h6">Blobs</MudText>
-    <MudToolBarSpacer />
+    <MudSpacer />
     <MudTextField @bind-Value="SearchTerm" Placeholder="Search" Adornment="Adornment.Start"
       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
   </ToolBarContent>

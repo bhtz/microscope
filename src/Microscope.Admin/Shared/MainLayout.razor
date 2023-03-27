@@ -1,7 +1,6 @@
 @inherits LayoutComponentBase
 @using Microscope.Admin.Shared.Components
 
-
 <MudThemeProvider Theme="currentTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -16,7 +15,7 @@
         <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
             <MudText Typo="Typo.subtitle2">Microscope</MudText>
         </MudHidden>
-        <MudAppBarSpacer />
+        <MudSpacer />
         <LanguageSelector />
         <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="DarkMode" />
         <LoginDisplay></LoginDisplay>

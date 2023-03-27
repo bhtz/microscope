@@ -24,7 +24,10 @@ namespace Microscope.Infrastructure.Storage
         public MinioStorageService(IOptions<StorageOptions> options)
         {
             _options = options.Value;
-            this._client = new MinioClient(_options.Host, _options.Key, _options.Secret);
+            // this._client = new MinioClient(_options.Host, _options.Key, _options.Secret);
+            this._client = new MinioClient()
+                .WithEndpoint(_options.Host)
+                .WithCredentials(_options.Key, _options.Secret).Build();
         }
 
         /// <summary>
