@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D8A1E1F3-F2E0-40EE-8183-50D05FA65A00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.Admin", "src\Microscope.Admin\Microscope.Admin.csproj", "{20E3DA9B-40A5-4E2E-9411-945DF920F242}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.Web.Blazor", "src\Microscope.Web.Blazor\Microscope.Web.Blazor.csproj", "{20E3DA9B-40A5-4E2E-9411-945DF920F242}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microscope.Api", "src\Microscope.Api\Microscope.Api.csproj", "{049279C8-4264-421E-88F4-0423F6F38CF4}"
 EndProject

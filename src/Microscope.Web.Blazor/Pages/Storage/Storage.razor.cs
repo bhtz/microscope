@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microscope.Admin.Shared.Dialogs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using MudBlazor;
-using static Microscope.Admin.Pages.Storage.ContainerFormDialog;
+using static Microscope.Web.Blazor.Pages.Storage.ContainerFormDialog;
 
-namespace Microscope.Admin.Pages.Storage
+namespace Microscope.Web.Blazor.Pages.Storage
 {
     public partial class Storage : ComponentBase
     {

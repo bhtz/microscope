@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microscope.Admin.Settings;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace Microscope.Admin.Shared
+namespace Microscope.Web.Blazor.Shared
 {
     public partial class MainLayout : LayoutComponentBase
     {

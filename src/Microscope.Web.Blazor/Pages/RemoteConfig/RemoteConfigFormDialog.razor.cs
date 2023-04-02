@@ -1,13 +1,10 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using Microscope.Application.Features.RemoteConfig.Commands;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 
-namespace Microscope.Admin.Pages.RemoteConfig
+namespace Microscope.Web.Blazor.Pages.RemoteConfig
 {
     public partial class RemoteConfigFormDialog : ComponentBase
     {

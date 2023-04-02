@@ -13,6 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.4.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
@@ -23,5 +24,12 @@
     <ProjectReference Include="..\Microscope.Application\Microscope.Application.csproj" />
     <ProjectReference Include="..\Microscope.Application.Features\Microscope.Application.Features.csproj" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <ContainerImageName>microscope/api</ContainerImageName>
+    <PublishProfile>DefaultContainer</PublishProfile>
+    <ContainerImageTags>latest</ContainerImageTags>
+    <RuntimeIdentifier>linux-arm64</RuntimeIdentifier>
+  </PropertyGroup>
 
 </Project>

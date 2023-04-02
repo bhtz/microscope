@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microscope.Admin.Extensions;
 using Microscope.Admin.Managers.Preferences;
 using System.Globalization;
+using Microscope.Web.Blazor.Extensions;
 
 namespace Microscope.Admin
 {

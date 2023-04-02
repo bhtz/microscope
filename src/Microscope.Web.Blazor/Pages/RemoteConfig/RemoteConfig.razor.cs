@@ -1,35 +1,40 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using MudBlazor;
-using static Microscope.Admin.Pages.Analytic.AnalyticFormDialog;
 using Microscope.Admin.Shared.Dialogs;
-using Microscope.Application.Features.Analytic.Queries;
+using Microscope.Application.Core.Queries.RemoteConfig;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using MudBlazor;
+using static Microscope.Web.Blazor.Pages.RemoteConfig.RemoteConfigFormDialog;
 
-namespace Microscope.Admin.Pages.Analytic
+namespace Microscope.Web.Blazor.Pages.RemoteConfig
 {
-    public partial class Analytic : ComponentBase
+    public partial class RemoteConfig : ComponentBase
     {
-        #region properties
-        public IList<AnalyticQueryResult> Analytics { get; set; } = new List<AnalyticQueryResult>();
+        #region injected properties
 
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; }
+
+        // [Inject]
+        // private IToastService ToastService { get; set; }
+        #endregion
+
+        #region properties
+        public IList<FilteredRemoteConfigQueryResult> RemoteConfigs { get; set; } = new List<FilteredRemoteConfigQueryResult>();
         public string SearchTerm { get; set; } = String.Empty;
         #endregion
 
         protected override async Task OnInitializedAsync()
         {
-            await this.GetAnalytic();
+            await this.GetRemoteConfigs();
         }
 
-        private async Task GetAnalytic()
+        private async Task GetRemoteConfigs()
         {
-            IEnumerable<AnalyticQueryResult> analytics = await _microscopeClient.GetAnalyticsAsync();
-            this.Analytics = analytics.ToList();
+            IEnumerable<FilteredRemoteConfigQueryResult> remotes = await _microscopeClient.GetRemoteConfigsAsync();
+            this.RemoteConfigs = remotes.ToList();
         }
 
-        private bool FilterFunc(AnalyticQueryResult element)
+        private bool FilterFunc(FilteredRemoteConfigQueryResult element)
         {
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return true;
@@ -42,7 +47,7 @@ namespace Microscope.Admin.Pages.Analytic
         private async Task OpenCreateDialog()
         {
 
-            var dialog = _dialogService.Show<AnalyticFormDialog>("Modal", new DialogOptions
+            var dialog = _dialogService.Show<RemoteConfigFormDialog>("Modal", new DialogOptions
             {
                 MaxWidth = MaxWidth.Medium,
                 FullWidth = true,
@@ -54,58 +59,59 @@ namespace Microscope.Admin.Pages.Analytic
 
             if (!result.Cancelled)
             {
-                var newItem = (AnalyticFormViewModel)result.Data;
+                var newItem = (RemoteConfigFormViewModel)result.Data;
                 //In a real world scenario we would reload the data from the source
-                AnalyticQueryResult newAnalytic = new AnalyticQueryResult
+                FilteredRemoteConfigQueryResult newRemoteConfig = new FilteredRemoteConfigQueryResult
                 {
                     Id = newItem.Id,
                     Key = newItem.Key,
                     Dimension = newItem.Dimension
                 };
 
-                this.Analytics.Add(newAnalytic);
+                this.RemoteConfigs.Add(newRemoteConfig);
+
             }
         }
 
-        private async Task OnSelectItem(AnalyticQueryResult item)
+        private async Task OnSelectItem(FilteredRemoteConfigQueryResult item)
         {
 
-            AnalyticFormViewModel dto = new AnalyticFormViewModel
+            RemoteConfigFormViewModel dto = new RemoteConfigFormViewModel
             {
                 Id = item.Id,
                 Key = item.Key,
                 Dimension = item.Dimension
             };
 
-            var parameters = new DialogParameters { ["Analytic"] = dto };
+            var parameters = new DialogParameters { ["RemoteConfig"] = dto };
 
-            var dialog = _dialogService.Show<AnalyticFormDialog>("Modal", parameters, new DialogOptions
+            //await this.JSONEditor();
+
+            var dialog = _dialogService.Show<RemoteConfigFormDialog>("Modal", parameters, new DialogOptions
             {
                 MaxWidth = MaxWidth.Medium,
                 FullWidth = true,
                 CloseButton = true,
                 DisableBackdropClick = true
             });
-
             var result = await dialog.Result;
 
             if (!result.Cancelled)
             {
                 //In a real world scenario we would reload the data 
 
-                var editedItem = (AnalyticFormViewModel)result.Data;
+                var editedItem = (RemoteConfigFormViewModel)result.Data;
 
-                var analyticToUpdate = this.Analytics.FirstOrDefault(a => a.Id == editedItem.Id);
-                if (analyticToUpdate != null)
+                var remoteConfigToUpdate = this.RemoteConfigs.FirstOrDefault(a => a.Id == editedItem.Id);
+                if (remoteConfigToUpdate != null)
                 {
-                    analyticToUpdate.Key = editedItem.Key;
-                    analyticToUpdate.Dimension = editedItem.Dimension;
+                    remoteConfigToUpdate.Key = editedItem.Key;
+                    remoteConfigToUpdate.Dimension = editedItem.Dimension;
                 }
 
             }
         }
-
-        private async Task Delete(AnalyticQueryResult item)
+        private async Task Delete(FilteredRemoteConfigQueryResult item)
         {
             var parameters = new DialogParameters();
             parameters.Add("ContentText", "Are you sure ?");
@@ -118,18 +124,19 @@ namespace Microscope.Admin.Pages.Analytic
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var res = await this._httpClient.DeleteAsync("api/analytic/" + item.Id);
-
+                var res = await this._httpClient.DeleteAsync("api/remoteconfig/" + item.Id);
                 if (res.IsSuccessStatusCode)
                 {
-                    this.Analytics.Remove(item);
+                    this.RemoteConfigs.Remove(item);
                     _snackBar.Add("Remote Config deleted", Severity.Success);
                 }
                 else
                 {
-                    _snackBar.Add("Error", Severity.Error);
+                     _snackBar.Add("Error", Severity.Error);
                 }
             }
+
         }
+
     }
 }

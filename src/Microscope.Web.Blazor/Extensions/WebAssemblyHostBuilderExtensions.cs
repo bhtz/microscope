@@ -1,19 +1,14 @@
-using System;
-using System.Linq;
-using System.Net.Http;
 using Blazored.LocalStorage;
 using Microscope.Admin.Core.Handlers;
 using Microscope.Admin.Managers;
 using Microscope.Admin.Managers.Preferences;
 using Microscope.SDK.Dotnet;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MudBlazor.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
-namespace Microscope.Admin.Extensions
+namespace Microscope.Web.Blazor.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
