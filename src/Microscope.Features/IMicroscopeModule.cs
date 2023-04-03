@@ -1,6 +1,6 @@
 using System;
 
-namespace Microscope.Application.Core
+namespace Microscope.Core
 {
     public interface IMicroscopeApplicationCoreModule
     {

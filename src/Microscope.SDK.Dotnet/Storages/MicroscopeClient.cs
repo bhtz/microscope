@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microscope.SDK.Dotnet.Routes;
-using Microscope.Application.Features.Storage.Commands;
+using Microscope.Features.Storage.Commands;
 using System.Net.Http;
 
 namespace Microscope.SDK.Dotnet

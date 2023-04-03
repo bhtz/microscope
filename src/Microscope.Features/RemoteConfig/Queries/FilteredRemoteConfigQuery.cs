@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MediatR;
 
-namespace Microscope.Application.Core.Queries.RemoteConfig
+namespace Microscope.Core.Queries.RemoteConfig
 {
     public class FilteredRemoteConfigQuery : IRequest<IEnumerable<FilteredRemoteConfigQueryResult>>
     {

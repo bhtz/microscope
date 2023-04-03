@@ -22,7 +22,7 @@
     <ProjectReference Include="..\Microscope.Infrastructure\Microscope.Infrastructure.csproj" />
     <ProjectReference Include="..\Microscope.Hasura\Microscope.Hasura.csproj" />
     <ProjectReference Include="..\Microscope.Application\Microscope.Application.csproj" />
-    <ProjectReference Include="..\Microscope.Application.Features\Microscope.Application.Features.csproj" />
+    <ProjectReference Include="..\Microscope.Features\Microscope.Features.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

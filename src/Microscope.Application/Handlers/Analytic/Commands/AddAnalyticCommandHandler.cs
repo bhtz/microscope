@@ -3,11 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Features.Analytic.Commands;
 using Microscope.Domain.Aggregates.AnalyticAggregate;
 using Microscope.Domain.Entities;
+using Microscope.Features.Analytic.Commands;
 
-namespace Microscope.Application.Commands.AnalyticHandlers
+namespace Microscope.Commands.AnalyticHandlers
 {
     public class AddAnalyticCommandHandler : IRequestHandler<AddAnalyticCommand, Guid>
     {

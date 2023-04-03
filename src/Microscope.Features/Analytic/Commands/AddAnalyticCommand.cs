@@ -2,7 +2,7 @@ using System;
 using FluentValidation;
 using MediatR;
 
-namespace Microscope.Application.Features.Analytic.Commands
+namespace Microscope.Features.Analytic.Commands
 {
     public class AddAnalyticCommand : IRequest<Guid>
     {

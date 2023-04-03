@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microscope.Application.Features.Storage.Commands;
 using Microscope.Domain.Services;
+using Microscope.Features.Storage.Commands;
 
-namespace Microscope.Application.Commands.Storage
+namespace Microscope.Commands.Storage
 {
     public class AddContainerCommandHandler : IRequestHandler<AddContainerCommand, string>
     {

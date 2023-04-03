@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Microscope.Application.Features.Analytic.Queries
+namespace Microscope.Features.Analytic.Queries
 {
     public class GetAnalyticByIdQuery : IRequest<GetAnalyticByIdQueryResult>
     {

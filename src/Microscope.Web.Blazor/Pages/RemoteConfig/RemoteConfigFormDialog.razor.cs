@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Microscope.Application.Features.RemoteConfig.Commands;
+using Microscope.Features.RemoteConfig.Commands;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;

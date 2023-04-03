@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Features.Analytic.Queries;
 using Microscope.Domain.Aggregates.AnalyticAggregate;
+using Microscope.Features.Analytic.Queries;
 
-namespace Microscope.Application.QueryHandlers.Analytics
+namespace Microscope.QueryHandlers.Analytics
 {
     public class FilteredAnalyticQueryHandler : IRequestHandler<FilteredAnalyticQuery, IEnumerable<AnalyticQueryResult>>
     {

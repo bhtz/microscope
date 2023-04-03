@@ -1,5 +1,5 @@
 using Microscope.Admin.Shared.Dialogs;
-using Microscope.Application.Features.Analytic.Queries;
+using Microscope.Features.Analytic.Queries;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using static Microscope.Web.Blazor.Pages.Analytic.AnalyticFormDialog;

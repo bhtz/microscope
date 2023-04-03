@@ -2,10 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microscope.Application.Features.Storage.Commands;
 using Microscope.Domain.Services;
+using Microscope.Features.Storage.Commands;
 
-namespace Microscope.Application.CommandHandlers.Storage
+namespace Microscope.CommandHandlers.Storage
 {
     public class AddBlobCommandHandler : IRequestHandler<AddBlobCommand, bool>
     {

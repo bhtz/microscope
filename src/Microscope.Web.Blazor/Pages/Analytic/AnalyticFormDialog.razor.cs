@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Microscope.Application.Features.Analytic.Commands;
+using Microscope.Features.Analytic.Commands;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;

@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microscope.Application.Common;
+using Microscope.Common;
 using Microscope.Domain.Events;
 
-namespace Microscope.Application.DomainEventHandlers
+namespace Microscope.DomainEventHandlers
 {
     public class CreatedAnalyticEventHandler : INotificationHandler<DomainEventNotification<CreatedAnalyticEvent>>
     {

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microscope.Application.Features.Storage.Queries;
 using Microscope.Domain.Services;
+using Microscope.Features.Storage.Queries;
 
-namespace Microscope.Application.QueryHandlers.Storage
+namespace Microscope.QueryHandlers.Storage
 {
     public class GetBlobsByContainerQueryHandler : IRequestHandler<GetBlobsByContainerQuery, IEnumerable<GetBlobsByContainerQueryResult>>
     {

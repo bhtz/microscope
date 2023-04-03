@@ -70,9 +70,7 @@ services:
     depends_on:
       - "api"
   api:
-    build:
-      context: .
-      dockerfile: src/Microscope.Api/Dockerfile
+    image: microscope/api
     container_name: mcsp_api
     ports:
       - "8086:80"

@@ -1,4 +1,4 @@
-using Microscope.Application;
+using Microscope;
 using Microscope.Configurations;
 using Microscope.Infrastructure;
 using Microsoft.AspNetCore.Builder;

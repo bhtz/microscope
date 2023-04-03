@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Features.RemoteConfig.Commands;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
+using Microscope.Features.RemoteConfig.Commands;
 
-namespace Microscope.Application.Commands.RemoteConfig
+namespace Microscope.Commands.RemoteConfig
 {
     public class EditRemoteConfigCommandHandler : IRequestHandler<EditRemoteConfigCommand, Guid>
     {

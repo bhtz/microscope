@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Microscope.Application.Features.Storage.Commands;
+using Microscope.Features.Storage.Commands;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 

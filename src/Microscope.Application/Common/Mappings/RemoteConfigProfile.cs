@@ -1,9 +1,9 @@
 using AutoMapper;
-using Microscope.Application.Core.Queries.RemoteConfig;
-using Microscope.Application.Features.RemoteConfig.Queries;
+using Microscope.Core.Queries.RemoteConfig;
 using Microscope.Domain.Entities;
+using Microscope.Features.RemoteConfig.Queries;
 
-namespace Microscope.Application.Common.Mappings
+namespace Microscope.Common.Mappings
 {
     public class RemoteConfigProfile : Profile
     {

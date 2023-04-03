@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 
-namespace Microscope.Application.Common.Behaviors
+namespace Microscope.Common.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

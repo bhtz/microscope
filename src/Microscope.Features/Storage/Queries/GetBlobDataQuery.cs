@@ -1,7 +1,7 @@
 using System.IO;
 using MediatR;
 
-namespace Microscope.Application.Features.Storage.Queries
+namespace Microscope.Features.Storage.Queries
 {
     public class GetBlobDataQuery : IRequest<BlobDataQueryResult>
     {

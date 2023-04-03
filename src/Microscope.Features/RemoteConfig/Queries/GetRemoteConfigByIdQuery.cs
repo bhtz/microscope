@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Microscope.Application.Features.RemoteConfig.Queries
+namespace Microscope.Features.RemoteConfig.Queries
 {
     public class GetRemoteConfigByIdQuery : IRequest<GetRemoteConfigByIdQueryResult>
     {

@@ -1,7 +1,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace Microscope.Application.Features.Storage.Commands
+namespace Microscope.Features.Storage.Commands
 {
     public class AddContainerCommand : IRequest<string>
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace Microscope.Application.Features.Storage.Queries
+namespace Microscope.Features.Storage.Queries
 {
     public class GetBlobsByContainerQuery : IRequest<IEnumerable<GetBlobsByContainerQueryResult>>
     {

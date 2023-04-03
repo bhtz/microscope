@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MediatR;
 
-namespace Microscope.Application.Features.Storage.Queries
+namespace Microscope.Features.Storage.Queries
 {
     public class FilteredContainerQuery : IRequest<IEnumerable<FilteredContainerQueryResult>>
     {

@@ -1,7 +1,7 @@
 using MediatR;
 using Microscope.Domain.SharedKernel;
 
-namespace Microscope.Application.Common
+namespace Microscope.Common
 {
     public class DomainEventNotification<TDomainEvent> : INotification where TDomainEvent : DomainEvent
     {

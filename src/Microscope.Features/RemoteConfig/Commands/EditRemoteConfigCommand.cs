@@ -2,7 +2,7 @@ using System;
 using FluentValidation;
 using MediatR;
 
-namespace Microscope.Application.Features.RemoteConfig.Commands
+namespace Microscope.Features.RemoteConfig.Commands
 {
     public class EditRemoteConfigCommand : IRequest<Guid>
     {

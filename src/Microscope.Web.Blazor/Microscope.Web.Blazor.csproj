@@ -19,13 +19,12 @@
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="MudBlazor" Version="6.2.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
-    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Microscope.SDK.Dotnet\Microscope.SDK.Dotnet.csproj" />
-    <ProjectReference Include="..\Microscope.Application.Features\Microscope.Application.Features.csproj" />
+    <ProjectReference Include="..\Microscope.Features\Microscope.Features.csproj" />
   </ItemGroup>
 
 </Project>

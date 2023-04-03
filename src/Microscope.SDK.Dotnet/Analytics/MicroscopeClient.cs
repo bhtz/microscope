@@ -3,8 +3,8 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microscope.SDK.Dotnet.Routes;
 using System;
-using Microscope.Application.Features.Analytic.Commands;
-using Microscope.Application.Features.Analytic.Queries;
+using Microscope.Features.Analytic.Commands;
+using Microscope.Features.Analytic.Queries;
 
 namespace Microscope.SDK.Dotnet
 {

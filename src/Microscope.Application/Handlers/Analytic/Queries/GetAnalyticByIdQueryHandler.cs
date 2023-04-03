@@ -3,11 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Features.Analytic.Queries;
 using Microscope.Domain.Aggregates.AnalyticAggregate;
 using Microscope.Domain.Entities;
+using Microscope.Features.Analytic.Queries;
 
-namespace Microscope.Application.QueryHandlers.Analytics
+namespace Microscope.QueryHandlers.Analytics
 {
     public class GetAnalyticByIdQueryHandler : IRequestHandler<GetAnalyticByIdQuery, GetAnalyticByIdQueryResult>
     {

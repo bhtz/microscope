@@ -1,8 +1,8 @@
 using AutoMapper;
-using Microscope.Application.Features.Analytic.Queries;
 using Microscope.Domain.Entities;
+using Microscope.Features.Analytic.Queries;
 
-namespace Microscope.Application.Common.Mappings
+namespace Microscope.Common.Mappings
 {
     public class AnalyticProfile : Profile
     {

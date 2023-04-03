@@ -3,11 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Features.RemoteConfig.Queries;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
 using Microscope.Domain.Entities;
+using Microscope.Features.RemoteConfig.Queries;
 
-namespace Microscope.Application.QueryHandlers.RemoteConfigs
+namespace Microscope.QueryHandlers.RemoteConfigs
 {
     public class GetRemoteConfigByIdQueryHandler : IRequestHandler<GetRemoteConfigByIdQuery, GetRemoteConfigByIdQueryResult>
     {

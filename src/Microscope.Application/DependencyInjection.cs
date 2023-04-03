@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
-using Microscope.Application.Common.Behaviors;
-using Microscope.Application.Core;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microscope.Common.Behaviors;
+using Microscope.Core;
 
-namespace Microscope.Application
+namespace Microscope
 {
     public static class DependencyInjection
     {

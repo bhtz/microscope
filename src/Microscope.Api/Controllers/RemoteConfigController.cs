@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microscope.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using MediatR;
-using Microscope.Application.Features.RemoteConfig.Commands;
-using Microscope.Application.Core.Queries.RemoteConfig;
-using Microscope.Application.Features.RemoteConfig.Queries;
+using Microscope.Features.RemoteConfig.Commands;
+using Microscope.Core.Queries.RemoteConfig;
+using Microscope.Features.RemoteConfig.Queries;
 
 namespace Microscope.Api.Controllers
 {

@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Application.Core.Queries.RemoteConfig;
+using Microscope.Core.Queries.RemoteConfig;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
 
-namespace Microscope.Application.QueryHandlers.RemoteConfigs
+namespace Microscope.QueryHandlers.RemoteConfigs
 {
     public class FilteredRemoteConfigQueryHandler : IRequestHandler<FilteredRemoteConfigQuery, IEnumerable<FilteredRemoteConfigQueryResult>>
     {

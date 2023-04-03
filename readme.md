@@ -1,13 +1,14 @@
 # Microscope
 
-    WORK IN PROGRESS
+    EXPERIMENTAL / WORK IN PROGRESS
 
 Admin & API on top of awesomes OSS products in order to provide BaaS experience :
 
-* Interactive programming & data exploration (jupyterLab)
-* GraphQL & event engine (hasura)
+* GraphQL api engine (hasura)
+* REST api engine (postgREST)
 * Identity and access management (keycloak)
 * Storage engine (minio)
+* Interactive programming & data exploration (jupyterLab)
 
 related to https://github.com/bhtz/microscope
 
@@ -17,9 +18,11 @@ related to https://github.com/bhtz/microscope
 
 ## Getting started
 
-    git clone https://github.com/bhtz/HKLM.git
+    git clone https://github.com/bhtz/microscope
 
-    cd datastack
+    cd microscope
+
+    dotnet publish
 
     docker-compose up
 
@@ -36,7 +39,6 @@ run to src/Microscope.Infrastructure :
 Generate controller : 
 
     dotnet aspnet-codegenerator controller -api -name RemoteConfigController -m RemoteConfig -dc MicroscopeDbContext
-
 
 ROADMAP
 =======
