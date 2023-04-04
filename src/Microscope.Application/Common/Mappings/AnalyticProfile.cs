@@ -2,7 +2,7 @@ using AutoMapper;
 using Microscope.Domain.Entities;
 using Microscope.Features.Analytic.Queries;
 
-namespace Microscope.Common.Mappings
+namespace Microscope.Application.Common.Mappings
 {
     public class AnalyticProfile : Profile
     {

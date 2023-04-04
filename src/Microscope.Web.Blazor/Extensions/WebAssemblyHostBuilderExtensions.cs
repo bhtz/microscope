@@ -1,8 +1,8 @@
 using Blazored.LocalStorage;
-using Microscope.Admin.Core.Handlers;
 using Microscope.Admin.Managers;
 using Microscope.Admin.Managers.Preferences;
 using Microscope.SDK.Dotnet;
+using Microscope.Web.Blazor.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
@@ -23,8 +23,13 @@ namespace Microscope.Web.Blazor.Extensions
 
         public static WebAssemblyHostBuilder AddClientServices(this WebAssemblyHostBuilder builder)
         {
-            var baseAddress = builder.Configuration.GetValue<string>("APIBaseAddress");
-            Console.WriteLine(baseAddress);
+            Uri apiAddress;
+            var baseAddressConfiguration = builder.Configuration.GetValue<string>("APIBaseAddress");
+
+            if (String.IsNullOrEmpty(baseAddressConfiguration))
+                apiAddress = new Uri(builder.HostEnvironment.BaseAddress);
+            else
+                apiAddress = new Uri(baseAddressConfiguration);
 
             builder
                 .Services
@@ -46,14 +51,10 @@ namespace Microscope.Web.Blazor.Extensions
                     config.SnackbarConfiguration.SnackbarVariant = Variant.Outlined;
 
                 })
-                .AddScoped<PreferenceManager>() // CHECK BLAZORHERO
+                .AddScoped<PreferenceService>()
                 .AddManagers()
-                // .AddScoped(sp => sp
-                //     .GetRequiredService<IHttpClientFactory>()
-                //     .CreateClient(ClientName).EnableIntercept(sp))
-                // .AddHttpClient(ClientName, client => client.BaseAddress = new Uri(baseAddress))
                 .AddTransient<AuthenticationHeaderHandler>()
-                .AddHttpClient<MicroscopeClient>(client => client.BaseAddress = new Uri(baseAddress))
+                .AddHttpClient<MicroscopeClient>(client => client.BaseAddress = apiAddress)
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
 
             builder.Services.AddHttpClientInterceptor();
@@ -65,10 +66,22 @@ namespace Microscope.Web.Blazor.Extensions
         {
             services.AddOidcAuthentication(options =>
                 {
-                    builder.Configuration.Bind("Auth", options.ProviderOptions);
+                    string tenant = "master";
+                    var subDomain = GetSubDomain(new Uri(builder.HostEnvironment.BaseAddress));
+
+                    // if (!string.IsNullOrEmpty(subDomain))
+                    //     tenant = subDomain.Split('.')[0];
+                    //     //tenant = subDomain;
+            
+                    var configKey = $"OIDC:{tenant}";
+                    builder.Configuration.Bind(configKey, options.ProviderOptions);
+
                     options.ProviderOptions.ResponseType = "code";
                     options.ProviderOptions.DefaultScopes.Add("roles");
-                });
+                    options.UserOptions.RoleClaim = "roles";
+                })
+                .AddAccountClaimsPrincipalFactory<CustomClaimsPrincipalFactory>();
+            
             return services;
         }
 
@@ -96,6 +109,22 @@ namespace Microscope.Web.Blazor.Extensions
             }
 
             return services;
+        }
+        
+        private static string GetSubDomain(Uri url)
+        {
+            if (url.HostNameType == UriHostNameType.Dns)
+            {
+                var host = url.Host;
+                if (host.Split('.').Length > 2)
+                {
+                    var lastIndex = host.LastIndexOf(".");
+                    var index = host.LastIndexOf(".", lastIndex - 1);
+                    return host.Substring(0, index);
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microscope.Common;
+using Microscope.Application.Common;
 using Microscope.Domain.Events;
 
 namespace Microscope.DomainEventHandlers

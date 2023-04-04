@@ -1,16 +1,28 @@
 # Microscope
 
+MULTI CLOUD BACKEND AS A SERVICE
+
     EXPERIMENTAL / WORK IN PROGRESS
 
-Admin & API on top of awesomes OSS products in order to provide BaaS experience :
+Admin & API on top of awesome OSS products in order to provide Backend As A Service (BaaS) experience :
 
-* GraphQL api engine (hasura)
-* REST api engine (postgREST)
-* Identity and access management (keycloak)
-* Storage engine (minio)
-* Interactive programming & data exploration (jupyterLab)
+* GraphQL api engine (Hasura)
+* REST api engine (PostgREST)
+* Identity and access management (Keycloak)
+* Storage engine (Minio)
+* Interactive programming & data exploration (JupyterLab)
 
-related to https://github.com/bhtz/microscope
+### Inspired by :
+
+* Hasura
+* Parse server
+* Directus
+* Pocketbase
+* Firebase
+* Supabase
+* Appwrite
+* Strapi
+* and many others
 
 ## Requirements: 
 
@@ -22,11 +34,13 @@ related to https://github.com/bhtz/microscope
 
     cd microscope
 
-    dotnet publish
+    dotnet publish -r linux-arm64
 
     docker-compose up
 
-* [NAVIGATE TO PORTAL](http://localhost:8085)
+* [OPEN CONSOLE APPLICATION](http://localhost:8086)
+
+### HELPERS :
 
 Migration cmd : 
 
@@ -61,7 +75,7 @@ ROADMAP
         * Analytics -- OK
     * API
         * postgrest -- OK
-        * hasura
+        * hasura -- OK
         * JSON Server -- OK
         * mcsp_api_engine -- TARGET
     * Schema

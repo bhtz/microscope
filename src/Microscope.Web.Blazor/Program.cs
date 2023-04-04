@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microscope.Admin.Managers.Preferences;
 using System.Globalization;
 using Microscope.Web.Blazor.Extensions;
+using Microscope.Web.Blazor.Services;
 
 namespace Microscope.Admin
 {
@@ -17,7 +18,7 @@ namespace Microscope.Admin
                  .AddClientServices();
 
             var host = builder.Build();
-            var storageService = host.Services.GetRequiredService<PreferenceManager>();
+            var storageService = host.Services.GetRequiredService<PreferenceService>();
             if (storageService != null)
             {
                 CultureInfo culture;

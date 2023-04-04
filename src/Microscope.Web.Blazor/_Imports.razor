@@ -19,11 +19,13 @@
 
 @*Shared Libraries*@
 @using Microscope.SDK.Dotnet
+@using Microscope.Web.Blazor.Services
 
 @* Default DI *@
 @inject MicroscopeClient _microscopeClient
 @inject NavigationManager _navigationManager
-@inject PreferenceManager _preferenceManager
+@* @inject PreferenceManager _preferenceManager *@
+@inject PreferenceService _preferenceService
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient

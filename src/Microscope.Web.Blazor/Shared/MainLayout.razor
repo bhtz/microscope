@@ -1,26 +1,15 @@
 @inherits LayoutComponentBase
-@using Microscope.Admin.Shared.Components
+@using MudBlazor.Services
+
+@inject IBreakpointService BreakpointListener
 
 <MudThemeProvider Theme="currentTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="4">
-        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Edge="Edge.Start"
-            OnClick="@((e) => DrawerToggle())" />
-        <MudHidden Breakpoint="Breakpoint.Xs">
-            <MudText Typo="Typo.h6" Class="ml-4">Microscope</MudText>
-        </MudHidden>
-        <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
-            <MudText Typo="Typo.subtitle2">Microscope</MudText>
-        </MudHidden>
-        <MudSpacer />
-        <LanguageSelector />
-        <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="DarkMode" />
-        <LoginDisplay></LoginDisplay>
-    </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Never">
+    <Header DarkMode="DarkMode" DrawerToggle="DrawerToggle" />
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Never" Variant="@DrawerConfig" MiniWidth="60px">
         <NavMenu />
     </MudDrawer>
     <MudMainContent>

@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.4" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -23,13 +24,13 @@
     <ProjectReference Include="..\Microscope.Hasura\Microscope.Hasura.csproj" />
     <ProjectReference Include="..\Microscope.Application\Microscope.Application.csproj" />
     <ProjectReference Include="..\Microscope.Features\Microscope.Features.csproj" />
+    <ProjectReference Include="..\Microscope.Web.Blazor\Microscope.Web.Blazor.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
     <ContainerImageName>microscope/api</ContainerImageName>
     <PublishProfile>DefaultContainer</PublishProfile>
     <ContainerImageTags>latest</ContainerImageTags>
-    <RuntimeIdentifier>linux-arm64</RuntimeIdentifier>
   </PropertyGroup>
 
 </Project>

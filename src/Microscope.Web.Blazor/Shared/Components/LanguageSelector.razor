@@ -1,3 +1,5 @@
+@namespace Microscope.Web.Blazor.Shared.Components
+
 <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
     @foreach (var language in languages)
     {
@@ -9,7 +11,7 @@
 {
     private async Task ChangeLanguageAsync(string languageCode)
     {
-        await _preferenceManager.ChangeLanguageAsync(languageCode);
+        await _preferenceService.ChangeLanguageAsync(languageCode);
         _navigationManager.NavigateTo(_navigationManager.Uri, forceLoad: true);
     }
     public class LanguageCodes

@@ -3,7 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Microscope.Common.Behaviors;
+using Microscope.Application.Common.Behaviors;
 using Microscope.Core;
 
 namespace Microscope

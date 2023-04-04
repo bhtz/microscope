@@ -25,8 +25,11 @@ namespace Microscope.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+            
             services.AddInfrastructure(Configuration);
             services.AddStorage(Configuration);
+            
+            services.AddRazorPages();
             services.AddControllers();
             services.AddCorsConfiguration(Configuration);
             services.AddSwaggerConfiguration(Configuration);
@@ -43,6 +46,7 @@ namespace Microscope.Api
         {
             if (env.IsDevelopment())
             {
+                app.UseWebAssemblyDebugging();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -54,12 +58,19 @@ namespace Microscope.Api
             {
                 this.InitializeDatabase(app);
             }
+            
+            var isWebConsoleEnabled = Configuration.GetValue<bool>("EnableWebConsole");
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microscope.Api v1"));
             
+            if(isWebConsoleEnabled)
+            {
+                app.UseBlazorFrameworkFiles();
+                app.UseStaticFiles();
+            }
+            
             app.UseCors("allow-all");
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -67,7 +78,11 @@ namespace Microscope.Api
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                
+                if(isWebConsoleEnabled)
+                    endpoints.MapFallbackToFile("index.html");
             });
         }
 

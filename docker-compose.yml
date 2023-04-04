@@ -42,6 +42,7 @@ services:
       PGRST_DB_SCHEMAS: public
       PGRST_DB_ANON_ROLE: anon
       PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+      
   # lab:
   #     build: ./src/Microscope.Lab
   #     container_name: mcsp_lab
@@ -51,6 +52,7 @@ services:
   #         JUPYTER_NO_PASSWORD: "true"
   #     volumes:
   #         - ./src/Microscope.Lab/work:/home/jupyter/work
+  
   storage:
     image: bitnami/minio:latest
     container_name: mcsp_storage
@@ -60,15 +62,7 @@ services:
     environment:
       MINIO_ROOT_USER: admin
       MINIO_ROOT_PASSWORD: microscope
-  admin:
-    build:
-      context: .
-      dockerfile: src/Microscope.Admin/Dockerfile
-    container_name: mcsp_admin
-    ports:
-      - "8085:80"
-    depends_on:
-      - "api"
+      
   api:
     image: microscope/api
     container_name: mcsp_api
@@ -76,9 +70,10 @@ services:
       - "8086:80"
     depends_on:
       - "postgres"
+  
   keycloak:
     image: mihaibob/keycloak:18.0.2-legacy
-    container_name: microscope_identity
+    container_name: mcsp_identity
     environment:
       # KEYCLOAK_IMPORT: tmp/realm-export.json
       DB_VENDOR: postgres
@@ -98,5 +93,6 @@ services:
       - 8083:8080
     depends_on:
       - postgres
+
 volumes:
   db_data:
