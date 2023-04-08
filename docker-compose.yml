@@ -70,6 +70,12 @@ services:
       - "8086:80"
     depends_on:
       - "postgres"
+
+  proxy:
+    image: microscope/proxy
+    container_name: mcsp_proxy
+    ports:
+      - "8084:80"
   
   keycloak:
     image: mihaibob/keycloak:18.0.2-legacy

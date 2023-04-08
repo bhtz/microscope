@@ -15,6 +15,13 @@
 
     <ItemGroup>
       <PackageReference Include="Yarp.ReverseProxy" Version="2.0.0" />
+        <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.4.0" />
     </ItemGroup>
+
+    <PropertyGroup>
+        <ContainerImageName>microscope/proxy</ContainerImageName>
+        <PublishProfile>DefaultContainer</PublishProfile>
+        <ContainerImageTags>latest</ContainerImageTags>
+    </PropertyGroup>
 
 </Project>
