@@ -1,4 +1,6 @@
-﻿using System.Net.Mail;
+﻿using System.Collections.Generic;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Microscope.ExternalSystems.Services;
 

@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
 namespace Microscope.ExternalSystems.Services;
 
 public interface IStorageService
