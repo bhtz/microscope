@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Microscope.Domain\Microscope.Domain.csproj" />
+    <ProjectReference Include="..\Microscope.ExternalSystems\Microscope.ExternalSystems.csproj" />
   </ItemGroup>
 
 </Project>

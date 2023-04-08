@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace Microscope.Infrastructure.Migrations
 {
     [DbContext(typeof(MicroscopeDbContext))]
@@ -16,9 +18,10 @@ namespace Microscope.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("mcsp_common")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.4")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microscope.Domain.Entities.Analytic", b =>
                 {
@@ -31,11 +34,15 @@ namespace Microscope.Infrastructure.Migrations
                         .HasColumnType("jsonb");
 
                     b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenantId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Analytics");
+                    b.ToTable("Analytics", "mcsp_common");
                 });
 
             modelBuilder.Entity("Microscope.Domain.Entities.RemoteConfig", b =>
@@ -49,11 +56,15 @@ namespace Microscope.Infrastructure.Migrations
                         .HasColumnType("jsonb");
 
                     b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenantId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RemoteConfigs");
+                    b.ToTable("RemoteConfigs", "mcsp_common");
                 });
 #pragma warning restore 612, 618
         }

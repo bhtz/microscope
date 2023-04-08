@@ -1,74 +1,94 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microscope.Domain.SharedKernel;
+using System.Linq.Expressions;
+using Microscope.BuildingBlocks.SharedKernel;
 using Microsoft.EntityFrameworkCore;
 
-namespace Microscope.Infrastructure.Repositories
+namespace Microscope.Infrastructure.Repositories.Base;
+
+public class EFRepositoryBase<TEntity> : EFRepositoryBase<TEntity, Guid>, IBaseRepository<TEntity> where TEntity : class, IAggregateRoot<Guid>
 {
-    public class EFRepositoryBase<TEntity> : EFRepositoryBase<TEntity, Guid>, IBaseRepository<TEntity> where TEntity : class, IAggregateRoot<Guid>
+    public EFRepositoryBase(MicroscopeDbContext context) : base(context)
     {
-        public EFRepositoryBase(MicroscopeDbContext context) : base(context)
-        {
-        }
+    }
+}
+
+public class EFRepositoryBase<TEntity, TPrimaryKey> : IBaseRepository<TEntity, TPrimaryKey> where TEntity : class, IAggregateRoot<TPrimaryKey>
+{
+    protected readonly MicroscopeDbContext _context;
+
+    public EFRepositoryBase(MicroscopeDbContext context)
+    {
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public class EFRepositoryBase<TEntity, TPrimaryKey> : IBaseRepository<TEntity, TPrimaryKey> where TEntity : class, IAggregateRoot<TPrimaryKey>
+    protected DbSet<TEntity> DbSet => _context.Set<TEntity>();
+
+    public virtual async Task<TEntity> AddAsync(TEntity entity)
     {
+        var added = await DbSet.AddAsync(entity);
+        return added.Entity;
+    }
 
-        protected readonly MicroscopeDbContext _context;
+    public virtual Task DeleteAsync(TEntity entity)
+    {
+        AttachIfNot(entity);
+        DbSet.Remove(entity);
 
+        return Task.FromResult(true);
+    }
 
-        public EFRepositoryBase(MicroscopeDbContext context)
+    public virtual Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate = null, string includes = null)
+    {
+        IQueryable<TEntity> query = DbSet;
+        
+        if (!string.IsNullOrEmpty(includes))
+            query = query.Include(includes);
+
+        if(predicate is not null)
+            query = query.Where(predicate);
+        
+        return Task.FromResult(query.AsEnumerable());
+    }
+
+    public virtual Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate = null, string includes = null)
+    {
+        IQueryable<TEntity> query = DbSet;
+        
+        if (!string.IsNullOrEmpty(includes))
+            query = query.Include(includes);
+        
+        return query.SingleOrDefaultAsync(predicate);
+    }
+
+    public virtual async Task<List<TEntity>> GetAllAsync()
+    {
+        return await DbSet.AsQueryable().ToListAsync();
+    }
+
+    public virtual async Task<TEntity> GetByIdAsync(TPrimaryKey id)
+    {
+        return await DbSet.FindAsync(id);
+    }
+
+    public virtual Task UpdateAsync(TEntity entity)
+    {
+        AttachIfNot(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+        return Task.FromResult(entity);
+    }
+
+    private void AttachIfNot(TEntity entity)
+    {
+        var entry = _context.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
+        if (entry != null)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            return;
         }
 
-        public IUnitOfWork UnitOfWork => _context;
+        DbSet.Attach(entity);
+    }
 
-        private DbSet<TEntity> DbSet => _context.Set<TEntity>();
-
-        public async Task<TEntity> AddAsync(TEntity entity)
-        {
-            var added = await DbSet.AddAsync(entity);
-            return added.Entity;
-        }
-
-        public Task DeleteAsync(TEntity entity)
-        {
-            AttachIfNot(entity);
-            DbSet.Remove(entity);
-
-            return Task.FromResult(true);
-        }
-
-        public async Task<List<TEntity>> GetAllAsync()
-        {
-            return await DbSet.AsQueryable().ToListAsync();
-        }
-
-        public async Task<TEntity> GetByIdAsync(TPrimaryKey id)
-        {
-            return await DbSet.FindAsync(id);
-        }
-
-        public Task UpdateAsync(TEntity entity)
-        {
-            AttachIfNot(entity);
-            _context.Entry(entity).State = EntityState.Modified;
-            return Task.FromResult(entity);
-        }
-
-        private void AttachIfNot(TEntity entity)
-        {
-            var entry = _context.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
-            if (entry != null)
-            {
-                return;
-            }
-
-            DbSet.Attach(entity);
-        }
+    public IQueryable<TEntity> Query()
+    {
+        return DbSet.AsQueryable();
     }
 }

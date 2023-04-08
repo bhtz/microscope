@@ -1,18 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using MediatR;
 using Microscope.Domain.Entities;
-using Microscope.Domain.SharedKernel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Microscope.Infrastructure
 {
-    public class MicroscopeDbContext : DbContext, IUnitOfWork
+    public class MicroscopeDbContext : DbContext
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<MicroscopeDbContext> _logger;
 
         #region DbSets
 
@@ -21,9 +18,10 @@ namespace Microscope.Infrastructure
         
         #endregion
         
-        public MicroscopeDbContext(DbContextOptions<MicroscopeDbContext> options, IMediator mediator) : base(options)
+        public MicroscopeDbContext(DbContextOptions<MicroscopeDbContext> options, IMediator mediator, ILogger<MicroscopeDbContext> logger) : base(options)
         {
-            this._mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _logger = logger;
         }
 
         public void Migrate()
@@ -35,28 +33,10 @@ namespace Microscope.Infrastructure
         {
             builder.HasDefaultSchema("mcsp_common");
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
             base.OnModelCreating(builder);
         }
 
-        public async Task<bool> SaveChangesAndDispatchEventsAsync(CancellationToken cancellationToken = default)
-        {
-            var domainEntities = this.ChangeTracker
-                .Entries<Entity>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any());
 
-            var domainEvents = domainEntities
-                .SelectMany(x => x.Entity.DomainEvents)
-                .ToList();
-
-            domainEntities.ToList()
-                .ForEach(entity => entity.Entity.ClearDomainEvents());
-
-            foreach (var domainEvent in domainEvents)
-                await this._mediator.Publish(domainEvent);
-
-            var result = await base.SaveChangesAsync(cancellationToken);
-            
-            return true;
-        }
     }
 }

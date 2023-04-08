@@ -1,12 +1,9 @@
-using System;
+namespace Microscope.Infrastructure.Services.Storage;
 
-namespace Microscope.Infrastructure.Storage
+public class StorageOptions
 {
-    public class StorageOptions
-    {
-        public string Adapter { get; set; }
-        public string Host { get; set; }
-        public string Key { get; set; }
-        public string Secret { get; set; }
-    }
+    public string Adapter { get; set; }
+    public string Host { get; set; }
+    public string Key { get; set; }
+    public string Secret { get; set; }
 }

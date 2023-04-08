@@ -1,13 +1,9 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
-using Microscope.Domain.Entities;
 using Microscope.Features.RemoteConfig.Queries;
 
-namespace Microscope.QueryHandlers.RemoteConfigs
+namespace Microscope.Application.Handlers.RemoteConfig.Queries
 {
     public class GetRemoteConfigByIdQueryHandler : IRequestHandler<GetRemoteConfigByIdQuery, GetRemoteConfigByIdQueryResult>
     {
@@ -24,7 +20,7 @@ namespace Microscope.QueryHandlers.RemoteConfigs
         {
             var entity = await this._repository.GetByIdAsync(request.Id);
             
-            return _mapper.Map<RemoteConfig, GetRemoteConfigByIdQueryResult>(entity);
+            return _mapper.Map<Domain.Entities.RemoteConfig, GetRemoteConfigByIdQueryResult>(entity);
         }
     }
 }

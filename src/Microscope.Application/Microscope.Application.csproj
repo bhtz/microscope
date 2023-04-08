@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Microscope.Domain\Microscope.Domain.csproj" />
+    <ProjectReference Include="..\Microscope.ExternalSystems\Microscope.ExternalSystems.csproj" />
     <ProjectReference Include="..\Microscope.Features\Microscope.Features.csproj" />
   </ItemGroup>
 

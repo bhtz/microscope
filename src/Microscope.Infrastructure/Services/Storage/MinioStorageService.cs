@@ -1,16 +1,11 @@
-using System;
+using System.Reactive.Linq;
+using Microscope.ExternalSystems.Services;
+using Microsoft.Extensions.Options;
 using Minio;
 using Minio.DataModel;
 using Minio.Exceptions;
-using Microsoft.Extensions.Options;
-using System.IO;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Reactive.Linq;
-using System.Linq;
-using Microscope.Domain.Services;
 
-namespace Microscope.Infrastructure.Storage
+namespace Microscope.Infrastructure.Services.Storage
 {
     public class MinioStorageService : IStorageService
     {
@@ -24,7 +19,6 @@ namespace Microscope.Infrastructure.Storage
         public MinioStorageService(IOptions<StorageOptions> options)
         {
             _options = options.Value;
-            // this._client = new MinioClient(_options.Host, _options.Key, _options.Secret);
             this._client = new MinioClient()
                 .WithEndpoint(_options.Host)
                 .WithCredentials(_options.Key, _options.Secret).Build();

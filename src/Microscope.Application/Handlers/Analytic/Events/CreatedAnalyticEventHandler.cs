@@ -1,21 +1,18 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using Microscope.Application.Common;
 using Microscope.Domain.Events;
 
-namespace Microscope.DomainEventHandlers
+namespace Microscope.Application.Handlers.Analytic.Events
 {
-    public class CreatedAnalyticEventHandler : INotificationHandler<DomainEventNotification<CreatedAnalyticEvent>>
+    public class CreatedAnalyticEventHandler : INotificationHandler<CreatedAnalyticEvent>
     {
         public CreatedAnalyticEventHandler()
         {
             
         }
 
-        public Task Handle(DomainEventNotification<CreatedAnalyticEvent> notification, CancellationToken cancellationToken)
+        public Task Handle(CreatedAnalyticEvent notification, CancellationToken cancellationToken)
         {
-            var domainEvent = notification.DomainEvent;
+            var domainEvent = notification;
             
             return Task.CompletedTask;
         }

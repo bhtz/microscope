@@ -1,28 +1,35 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
 using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Microscope.Application.Common.Behaviors;
 using Microscope.Core;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microscope
+namespace Microscope.Application;
+
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    public static IServiceCollection AddMicroscopeApplication(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddValidatorsFromAssembly(typeof(IMicroscopeApplicationCoreModule).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(IMicroscopeApplicationCoreModule).GetTypeInfo().Assembly);
-            
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
-            // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            // services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+        var execAssembly = Assembly.GetExecutingAssembly();
+        var featuresAssembly = typeof(IMicroscopeModule).GetTypeInfo().Assembly;
 
-            return services;
-        }   
+        services.AddAutoMapper(execAssembly);
+        services.AddValidatorsFromAssembly(featuresAssembly);
+        services.AddMediatR(featuresAssembly);
+        services.AddMediatR(execAssembly);
+
+        // services.AddSingleton<IAuthorizationHandler, GridOwnedByRequirementHandler>();
+        // services.AddSingleton<IAuthorizationHandler, GridCreatedByRequirementHandler>();
+        // services.AddSingleton<IAuthorizationHandler, TemplateOwnedByRequirementHandler>();
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
+
+        return services;
     }
 }

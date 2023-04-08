@@ -1,8 +1,12 @@
 ﻿@attribute [AllowAnonymous]
 @page "/"
+@using BlazorTypewriter
 
 <MudText Typo="Typo.h2" Color="Color.Primary" Align="Align.Center">MICROSCOPE</MudText>
-<MudText Typo="Typo.h5" Color="Color.Primary" Align="Align.Center">multi cloud backend as a service</MudText>
+<MudText Typo="Typo.h5" Align="Align.Center">Multi cloud backend as a service</MudText>
+<MudText Typo="Typo.h6" Align="Align.Center" Class="mt-5">
+  <Typewriter Builder="@typewriter" />
+</MudText>
 
 <MudGrid  Class="mt-4">
   <MudItem xs="12" sm="6" md="2">
@@ -60,3 +64,23 @@
     </MudPaper>
   </MudItem>
 </MudGrid>
+
+@code
+{
+  private TypewriterBuilder typewriter { get; set; } = new TypewriterBuilder(defaultCharacterPause: 6)
+    .TypeString("Manage storage")
+    .Pause(2000)
+    .Delete(7)
+    .TypeString("API", 50)
+    .Pause(2000)
+    .Delete(3)
+    .TypeString("Database", 20)
+    .Pause(2000)
+    .Delete(8)
+    .TypeString("Remote config", 20)
+    .Pause(2000)
+    .Delete(13)
+    .TypeString("Analytics", 20)
+    .DeleteAll()
+    .Loop();
+}

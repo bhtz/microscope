@@ -1,26 +1,79 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+using Microscope.Api.Configurations;
+using Microscope.Api.Middlewares;
+using Microscope.Application;
+using Microscope.Infrastructure;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
+using Serilog;
+using Serilog.Events;
 
-namespace Microscope.Api
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, lc) => 
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    lc.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+        .Enrich.FromLogContext()
+        .WriteTo.File("Logs/microscope.txt")
+        .WriteTo.Console();
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services
+    .AddFeatureManagement(builder.Configuration.GetSection("FeatureManagement"));
+    
+builder.Services.AddMicroscopeApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddStorage(builder.Configuration);
+            
+builder.Services.AddRazorPages();
+builder.Services.AddControllers();
+builder.Services.AddCorsConfiguration(builder.Configuration);
+builder.Services.AddSwaggerConfiguration(builder.Configuration);
+
+builder.Services.AddAuthenticationConfiguration(builder.Configuration);
+builder.Services.AddAuthorizationConfiguration(builder.Configuration);
+
+var app = builder.Build();
+
+var isMigrationEnabled = builder.Configuration.GetValue<bool>("EnableMigration");
+var isWebConsoleEnabled = builder.Configuration.GetValue<bool>("EnableWebConsole");
+
+if(app.Environment.IsDevelopment())
+{
+    app.UseWebAssemblyDebugging();
 }
+else 
+{
+    app.UseHsts();
+    app.UseHttpsRedirection();
+}
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuditExOp.Api v1"));
+
+if(isMigrationEnabled)
+    app.Services.GetRequiredService<MicroscopeDbContext>().Migrate();
+
+if(isWebConsoleEnabled)
+{
+    app.UseBlazorFrameworkFiles();
+    app.UseStaticFiles();
+}
+
+app.UseMiddleware<HttpExceptionMiddleware>();
+
+app.UseRouting();
+app.UseCors("allow-all");
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
+app.MapControllers();
+
+if(isWebConsoleEnabled)
+    app.MapFallbackToFile("index.html");
+
+app.Run();

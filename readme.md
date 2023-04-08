@@ -54,6 +54,28 @@ Generate controller :
 
     dotnet aspnet-codegenerator controller -api -name RemoteConfigController -m RemoteConfig -dc MicroscopeDbContext
 
+MIGRATIONS
+----------
+
+Update environment :
+
+    export ASPNETCORE_ENVIRONMENT=Development
+    export ASPNETCORE_ENVIRONMENT=Production
+
+Publish :
+
+    dotnet publish -c Release
+
+GENERATE READ DBCONTEXT
+-----------------------
+
+dotnet ef dbcontext scaffold "Host=localhost;Database=mydatabase;Username=myuser;Password=mypassword" Npgsql.EntityFrameworkCore.PostgreSQL -o Models -n MyReadDbContext
+
+NUMBER OF CODE LIGNE
+--------------------
+
+git ls-files | xargs wc -l
+
 ROADMAP
 =======
 
@@ -75,7 +97,6 @@ ROADMAP
         * Analytics -- OK
     * API
         * postgrest -- OK
-        * hasura -- OK
         * JSON Server -- OK
         * mcsp_api_engine -- TARGET
     * Schema
@@ -86,6 +107,9 @@ ROADMAP
                         * Fields
                             * Type
                             * Widget
+    * Back office 
+      * Introspect microscope schema
+        * Aka directus
     * Functions
         * azure functions
         * serverless

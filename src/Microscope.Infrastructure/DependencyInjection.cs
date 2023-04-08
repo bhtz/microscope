@@ -1,12 +1,13 @@
+using AuditExOp.Infrastructure;
+using Microscope.BuildingBlocks.SharedKernel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microscope.Domain.Services;
-using Microscope.Infrastructure.Storage;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
 using Microscope.Infrastructure.Repositories;
 using Microscope.Domain.Aggregates.AnalyticAggregate;
-using System;
+using Microscope.ExternalSystems.Services;
+using Microscope.Infrastructure.Services.Storage;
 
 namespace Microscope.Infrastructure
 {
@@ -30,6 +31,7 @@ namespace Microscope.Infrastructure
                 switch (provider)
                 {
                     case "postgres":
+                        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
                         options.UseNpgsql(connectionString, o => o.MigrationsAssembly(assemblyName));
                         break;
 
@@ -42,7 +44,8 @@ namespace Microscope.Infrastructure
                         break;
                 }
             });
-
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IRemoteConfigRepository, RemoteConfigRepository>();
             services.AddScoped<IAnalyticRepository, AnalyticRepository>();
 

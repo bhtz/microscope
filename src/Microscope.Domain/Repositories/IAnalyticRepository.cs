@@ -1,6 +1,5 @@
-using System.Linq;
+using Microscope.BuildingBlocks.SharedKernel;
 using Microscope.Domain.Entities;
-using Microscope.Domain.SharedKernel;
 
 namespace Microscope.Domain.Aggregates.AnalyticAggregate
 {

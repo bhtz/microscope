@@ -1,11 +1,8 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using Microscope.Domain.Services;
+using Microscope.ExternalSystems.Services;
 using Microscope.Features.Storage.Queries;
 
-namespace Microscope.QueryHandlers.Storage
+namespace Microscope.Application.Handlers.Storage.Queries
 {
     public class GetBlobDataQueryHandler : IRequestHandler<GetBlobDataQuery, BlobDataQueryResult>
     {

@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Microscope.Configurations
+namespace Microscope.Api.Configurations
 {
     public static class SwaggerConfiguration
     {

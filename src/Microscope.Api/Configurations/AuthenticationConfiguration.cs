@@ -1,54 +1,71 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using Microscope.Api.Services;
+using Microscope.ExternalSystems.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
-using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microscope.Configurations
+namespace Microscope.Api.Configurations;
+
+public static class AuthenticationConfiguration
 {
-    public static class AuthenticationConfiguration
+    public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddAuthenticationConfiguration(this IServiceCollection services, IConfiguration configuration)
+        var authenticationBuilder = services.AddAuthentication(options =>
         {
-            services.AddAuthentication(options =>
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        });
+
+        var JwtEvent = new JwtBearerEvents()
+        {
+            OnAuthenticationFailed = c =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                c.NoResult();
 
-            }).AddJwtBearer(o =>
+                c.Response.StatusCode = 500;
+                c.Response.ContentType = "text/plain";
+
+                return c.Response.WriteAsync(c.Exception.InnerException.Message);
+            }
+        };
+
+        var tenants = configuration.GetSection("Tenants").Get<List<JWTTenantConfiguration>>();
+
+        foreach (var tenant in tenants)
+        {
+            authenticationBuilder.AddJwtBearer(o =>
             {
-                o.Authority = configuration["Jwt:Authority"];
-                o.Audience = configuration["Jwt:Audience"];
-
-                //Docker OK : TODO ValidIssuer for prod ???
-             // o.TokenValidationParameters.ValidIssuer = configuration["Jwt:Authority"]
-                o.TokenValidationParameters.ValidateIssuer = false;
-                //END Docker OK
-
-                o.TokenValidationParameters.ValidateAudience = false;
-                o.RequireHttpsMetadata = false;
-
-                //o.TokenValidationParameters.ValidAudiences = new string[] { "master-realm", "account", Configuration["Jwt:Audience"] };
-
-                o.Events = new JwtBearerEvents()
+                JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+                
+                o.Authority = tenant.Authority;
+                o.Audience = tenant.Audience;
+                
+                if (!string.IsNullOrEmpty(tenant.RoleClaim))
                 {
-                    OnAuthenticationFailed = c =>
-                    {
-                        c.NoResult();
+                    o.TokenValidationParameters.RoleClaimType = tenant.RoleClaim;
+                }
 
-                        c.Response.StatusCode = 500;
-                        c.Response.ContentType = "text/plain";
-
-                        var t = o.Authority;
-                        var r = o.Audience;
-                        Console.WriteLine("\n" + t + " : " + r + "\n");
-
-                        return c.Response.WriteAsync(c.Exception.InnerException.Message);
-                    }
-                };
-            });
-
-            return services;
+                o.TokenValidationParameters.ValidateIssuer = false;
+                o.TokenValidationParameters.ValidateAudience = false;
+                
+                o.RequireHttpsMetadata = false;
+                o.Events = JwtEvent;
+            });    
         }
+        
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<IIdentityService, IdentityService>();
+
+        return services;
     }
+}
+
+public class JWTTenantConfiguration
+{
+    public string Authority { get; set; }
+    public string Audience { get; set; }
+    public string RoleClaim { get; set; }
 }

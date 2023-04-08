@@ -1,11 +1,8 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using Microscope.Domain.Services;
+using Microscope.ExternalSystems.Services;
 using Microscope.Features.Storage.Commands;
 
-namespace Microscope.CommandHandlers.Storage
+namespace Microscope.Application.Handlers.Storage.Commands
 {
     public class AddBlobCommandHandler : IRequestHandler<AddBlobCommand, bool>
     {

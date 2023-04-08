@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using Microscope.Domain.Services;
+using Microscope.ExternalSystems.Services;
 using Microscope.Features.Storage.Queries;
 
-namespace Microscope.QueryHandlers.Storage
+namespace Microscope.Application.Handlers.Storage.Queries
 {
     public class GetBlobsByContainerQueryHandler : IRequestHandler<GetBlobsByContainerQuery, IEnumerable<GetBlobsByContainerQueryResult>>
     {
