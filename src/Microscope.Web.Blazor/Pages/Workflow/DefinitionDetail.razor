@@ -2,14 +2,21 @@
 @attribute [Authorize]
 <PageTitle>Workflow definition @Id</PageTitle>
 
-@* <WorkflowEditor ServerUrl="https://localhost:5011" WorkflowDefinitionId="@Id" /> *@
-
-<elsa-studio-root server-url="https://localhost:5011" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
+<elsa-studio-root server-url="@Host" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
     <elsa-workflow-definition-editor-screen workflow-definition-id="@Id" />
 </elsa-studio-root>
 
 @code {
     [Parameter] public string Id { get; set; }
+    
+    public string Host { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Host = _navigationManager.BaseUri;
+        base.OnInitialized();
+    }
+
 }
 
 
