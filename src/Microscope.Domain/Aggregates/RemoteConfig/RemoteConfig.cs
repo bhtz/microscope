@@ -1,25 +1,26 @@
 using Microscope.BuildingBlocks.SharedKernel;
 
-namespace Microscope.Domain.Entities
+namespace Microscope.Domain.Aggregates.RemoteConfig
 {
-    public class Analytic : Entity, IAggregateRoot
+    public class RemoteConfig : Entity, IAggregateRoot
     {
         #region ctor
-        protected Analytic()
+        
+        protected RemoteConfig()
         {
 
         }
-
-        protected Analytic(Guid id, string key, string dimension) : this()
+        
+        protected RemoteConfig(Guid id, string key, string dimension) : this()
         {
             this.Id = id;
             this.Key = key;
             this.Dimension = dimension;
         }
 
-        public static Analytic NewAnalytic(Guid id, string key, string dimension)
+        public static RemoteConfig NewRemoteConfig(Guid id, string key, string dimension)
         {
-            return new Analytic(id, key, dimension);
+            return new RemoteConfig(id, key, dimension);
         }
 
         #endregion

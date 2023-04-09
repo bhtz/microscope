@@ -1,5 +1,5 @@
+using Microscope.Domain.Aggregates.Analytic;
 using Microscope.Domain.Aggregates.AnalyticAggregate;
-using Microscope.Domain.Entities;
 using Microscope.Infrastructure.Repositories.Base;
 
 namespace Microscope.Infrastructure.Repositories

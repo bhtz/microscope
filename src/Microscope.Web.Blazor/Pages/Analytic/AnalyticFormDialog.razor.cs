@@ -42,9 +42,7 @@ namespace Microscope.Web.Blazor.Pages.Analytic
         {
             Success = true;
             StateHasChanged();
-
-
-
+            
             if (this.Analytic.Id != Guid.Empty)
             {
                 var analytic = new EditAnalyticCommand

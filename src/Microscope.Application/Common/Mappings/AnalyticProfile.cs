@@ -1,5 +1,5 @@
 using AutoMapper;
-using Microscope.Domain.Entities;
+using Microscope.Domain.Aggregates.Analytic;
 using Microscope.Features.Analytic.Queries;
 
 namespace Microscope.Application.Common.Mappings

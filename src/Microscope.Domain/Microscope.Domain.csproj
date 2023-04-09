@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Microscope.BuildingBlocks.SharedKernel\Microscope.BuildingBlocks.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\Analytic\Entities" />
+    <Folder Include="Aggregates\RemoteConfig\Entities" />
+    <Folder Include="Aggregates\RemoteConfig\Events" />
+  </ItemGroup>
+
 </Project>

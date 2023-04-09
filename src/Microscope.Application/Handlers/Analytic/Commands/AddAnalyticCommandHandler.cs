@@ -21,7 +21,7 @@ namespace Microscope.Application.Handlers.Analytic.Commands
 
         public async Task<Guid> Handle(AddAnalyticCommand command, CancellationToken cancellationToken)
         {
-            var entity = Domain.Entities.Analytic.NewAnalytic(Guid.NewGuid(), command.Key, command.Dimension);
+            var entity = Domain.Aggregates.Analytic.Analytic.NewAnalytic(Guid.NewGuid(), command.Key, command.Dimension);
             
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAndDispatchEventsAsync(cancellationToken);

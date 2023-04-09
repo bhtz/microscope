@@ -20,7 +20,7 @@ namespace Microscope.Application.Handlers.RemoteConfig.Queries
         {
             var entity = await this._repository.GetByIdAsync(request.Id);
             
-            return _mapper.Map<Domain.Entities.RemoteConfig, GetRemoteConfigByIdQueryResult>(entity);
+            return _mapper.Map<Domain.Aggregates.RemoteConfig.RemoteConfig, GetRemoteConfigByIdQueryResult>(entity);
         }
     }
 }

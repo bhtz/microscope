@@ -1,6 +1,6 @@
 using Microscope.BuildingBlocks.SharedKernel;
 
-namespace Microscope.Domain.Events
+namespace Microscope.Domain.Aggregates.Analytic.Events
 {
     public class CreatedAnalyticEvent : DomainEvent
     {

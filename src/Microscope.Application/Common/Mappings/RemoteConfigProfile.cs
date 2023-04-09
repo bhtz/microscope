@@ -1,6 +1,6 @@
 using AutoMapper;
 using Microscope.Core.Queries.RemoteConfig;
-using Microscope.Domain.Entities;
+using Microscope.Domain.Aggregates.RemoteConfig;
 using Microscope.Features.RemoteConfig.Queries;
 
 namespace Microscope.Application.Common.Mappings

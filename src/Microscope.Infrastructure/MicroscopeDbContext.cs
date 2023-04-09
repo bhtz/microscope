@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using MediatR;
-using Microscope.Domain.Entities;
+using Microscope.Domain.Aggregates.Analytic;
+using Microscope.Domain.Aggregates.RemoteConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

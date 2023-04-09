@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microscope.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using MediatR;
 using Microscope.Features.RemoteConfig.Commands;
 using Microscope.Core.Queries.RemoteConfig;
+using Microscope.Domain.Aggregates.RemoteConfig;
 using Microscope.Features.RemoteConfig.Queries;
 
 namespace Microscope.Api.Controllers

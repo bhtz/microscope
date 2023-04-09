@@ -21,7 +21,7 @@ namespace Microscope.Application.Handlers.RemoteConfig.Commands
 
         public async Task<Guid> Handle(AddRemoteConfigCommand command, CancellationToken cancellationToken)
         {
-            var entity = Microscope.Domain.Entities.RemoteConfig.NewRemoteConfig(Guid.NewGuid(), command.Key, command.Dimension);
+            var entity = Domain.Aggregates.RemoteConfig.RemoteConfig.NewRemoteConfig(Guid.NewGuid(), command.Key, command.Dimension);
 
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAndDispatchEventsAsync(cancellationToken);

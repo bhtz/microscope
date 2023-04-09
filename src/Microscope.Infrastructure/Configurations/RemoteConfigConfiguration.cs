@@ -1,4 +1,4 @@
-using Microscope.Domain.Entities;
+using Microscope.Domain.Aggregates.RemoteConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

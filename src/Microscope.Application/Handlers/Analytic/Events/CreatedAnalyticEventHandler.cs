@@ -1,5 +1,5 @@
 using MediatR;
-using Microscope.Domain.Events;
+using Microscope.Domain.Aggregates.Analytic.Events;
 
 namespace Microscope.Application.Handlers.Analytic.Events
 {
