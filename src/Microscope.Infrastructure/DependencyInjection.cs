@@ -19,7 +19,7 @@ namespace Microscope.Infrastructure
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCommonInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             var brandName = "Microscope";
             var provider = configuration.GetValue<string>("DatabaseProvider");

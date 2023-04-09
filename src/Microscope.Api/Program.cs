@@ -2,6 +2,7 @@ using Microscope.Api.Configurations;
 using Microscope.Api.Middlewares;
 using Microscope.Application;
 using Microscope.Infrastructure;
+using Microscope.Workflow;
 using Microsoft.FeatureManagement;
 using Serilog;
 using Serilog.Events;
@@ -20,8 +21,10 @@ builder.Services
     .AddFeatureManagement(builder.Configuration.GetSection("FeatureManagement"));
     
 builder.Services.AddMicroscopeApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddCommonInfrastructure(builder.Configuration);
 builder.Services.AddStorage(builder.Configuration);
+
+builder.Services.AddWorkflow(builder.Configuration);
             
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
@@ -59,6 +62,8 @@ if(isWebConsoleEnabled)
 }
 
 app.UseMiddleware<HttpExceptionMiddleware>();
+
+app.UseHttpActivities();
 
 app.UseRouting();
 app.UseCors("allow-all");

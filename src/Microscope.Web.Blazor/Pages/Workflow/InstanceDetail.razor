@@ -1,0 +1,14 @@
+@page "/workflow-instances/{Id}"
+@using Microsoft.JSInterop
+@inject IJSRuntime JS;
+
+<PageTitle>Workflow instance</PageTitle>
+
+<elsa-studio-root server-url="https://localhost:5011" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
+    <elsa-workflow-instance-viewer-screen workflow-instance-id="@Id"></elsa-workflow-instance-viewer-screen>
+</elsa-studio-root>
+
+@code {
+    [Parameter] public string Id { get; set; }
+
+}

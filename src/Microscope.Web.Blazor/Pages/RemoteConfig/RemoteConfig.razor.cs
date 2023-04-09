@@ -1,5 +1,5 @@
-using Microscope.Admin.Shared.Dialogs;
 using Microscope.Core.Queries.RemoteConfig;
+using Microscope.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;

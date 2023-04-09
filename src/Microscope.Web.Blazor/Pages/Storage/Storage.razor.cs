@@ -1,4 +1,4 @@
-using Microscope.Admin.Shared.Dialogs;
+using Microscope.Web.Blazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;

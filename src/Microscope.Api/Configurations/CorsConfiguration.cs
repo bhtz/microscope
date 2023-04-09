@@ -11,7 +11,8 @@ namespace Microscope.Api.Configurations
             {
                 builder.AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("Content-Disposition");
             }));
 
             return services;

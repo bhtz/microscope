@@ -1,6 +1,4 @@
-using System;
-
-namespace Microscope.Admin.Shared
+namespace Microscope.Web.Blazor.Shared
 {
     public partial class NavMenu
     {

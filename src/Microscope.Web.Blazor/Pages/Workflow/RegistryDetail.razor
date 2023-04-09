@@ -1,0 +1,13 @@
+@page "/workflow-registry/{Id}"
+@using Microsoft.JSInterop
+@inject IJSRuntime JS;
+@attribute [Authorize]
+<PageTitle>Workflow registry details</PageTitle>
+
+<elsa-studio-root server-url="https://localhost:5011" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
+    <elsa-workflow-blueprint-viewer-screen workflow-definition-id="@Id" />
+</elsa-studio-root>
+
+@code {
+    [Parameter] public string Id { get; set; }
+}

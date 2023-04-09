@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Microscope.Application\Microscope.Application.csproj" />
     <ProjectReference Include="..\Microscope.Features\Microscope.Features.csproj" />
     <ProjectReference Include="..\Microscope.Web.Blazor\Microscope.Web.Blazor.csproj" />
+    <ProjectReference Include="..\Microscope.Workflow\Microscope.Workflow.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

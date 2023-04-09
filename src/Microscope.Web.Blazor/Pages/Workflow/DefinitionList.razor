@@ -1,0 +1,11 @@
+﻿@page "/workflow-definitions"
+@attribute [Authorize]
+<PageTitle>Workflows definition</PageTitle>
+
+<elsa-studio-root server-url="https://localhost:5011" monaco-lib-path="_content/Elsa.Designer.Components.Web/monaco-editor/min">
+    <elsa-studio-workflow-definitions-list></elsa-studio-workflow-definitions-list>
+</elsa-studio-root>
+
+@code {
+
+}

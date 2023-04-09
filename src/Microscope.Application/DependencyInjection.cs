@@ -17,8 +17,8 @@ public static class DependencyInjection
 
         services.AddAutoMapper(execAssembly);
         services.AddValidatorsFromAssembly(featuresAssembly);
-        services.AddMediatR(featuresAssembly);
-        services.AddMediatR(execAssembly);
+        services.AddMediatR(x => x.RegisterServicesFromAssembly(featuresAssembly));
+        services.AddMediatR(x => x.RegisterServicesFromAssembly(execAssembly));
 
         // services.AddSingleton<IAuthorizationHandler, GridOwnedByRequirementHandler>();
         // services.AddSingleton<IAuthorizationHandler, GridCreatedByRequirementHandler>();
