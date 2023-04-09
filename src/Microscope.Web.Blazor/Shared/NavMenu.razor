@@ -4,7 +4,11 @@
     <MudNavLink Href="lab" Icon="@Icons.Material.Outlined.Science">Lab</MudNavLink>
     <MudNavLink Href="data" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Storage">Data</MudNavLink>
     <MudNavLink Href="api" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Api">API</MudNavLink>
-    <MudNavLink Href="workflow-definitions" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountTree">Workflow</MudNavLink>
+    <MudNavGroup Title="Workflow" Icon="@Icons.Material.Outlined.AccountTree">
+        <MudNavLink Href="workflow-definitions" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountTree">Definitions</MudNavLink>
+        <MudNavLink Href="workflow-registry" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountTree">Registry</MudNavLink>
+        <MudNavLink Href="workflow-instances" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.AccountTree">Instances</MudNavLink>
+    </MudNavGroup>
     <MudNavLink Href="identity" Icon="@Icons.Material.Outlined.AdminPanelSettings">IAM</MudNavLink>
     <MudNavLink Href="storage" Icon="@Icons.Material.Outlined.CloudUpload">Storage</MudNavLink>
     <MudNavLink Href="analytic" Icon="@Icons.Material.Outlined.Analytics">Analytics</MudNavLink>

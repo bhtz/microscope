@@ -15,6 +15,7 @@ public static class DependencyInjection
         var brandName = "Microscope";
         var provider = configuration.GetValue<string>("DatabaseProvider");
         var connectionString = configuration.GetConnectionString(brandName);
+        var isMigrationEnabled = configuration.GetValue<bool>("EnableMigration");
         
         services
             .AddElsa(elsa => elsa
@@ -33,7 +34,7 @@ public static class DependencyInjection
                         
                         // elsa configured by default in-memory
                     }
-                }, true)
+                }, isMigrationEnabled)
                 .AddConsoleActivities()
                 .AddHttpActivities(configuration.GetSection("Workflow:Http").Bind)
                 .AddQuartzTemporalActivities()
