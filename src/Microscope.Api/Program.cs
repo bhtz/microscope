@@ -6,6 +6,12 @@ using Microscope.Workflow;
 using Microsoft.FeatureManagement;
 using Serilog;
 using Serilog.Events;
+using Spectre.Console;
+
+AnsiConsole.Write(
+    new FigletText("MICROSCOPE")
+        .LeftJustified()
+        .Color(Color.Teal));
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,7 +78,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapControllers();
+app.MapControllers().RequireAuthorization();
 
 if(isWebConsoleEnabled)
     app.MapFallbackToFile("index.html");

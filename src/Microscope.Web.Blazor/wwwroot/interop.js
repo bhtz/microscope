@@ -50,5 +50,27 @@ window.interop = {
         } catch (e) {
             console.log(`${e.name}: ${e.message}`);
         }
+    },
+
+    registerElsaPlugin: function (selector, bearer){
+        const elsaStudioRoot = document.querySelector(selector);
+        
+        elsaStudioRoot.addEventListener('initializing', e => {
+            const elsaStudio = e.detail;
+            elsaStudio.pluginManager.registerPlugin(AuthorizationMiddlewarePlugin);
+        });
+
+        function AuthorizationMiddlewarePlugin(elsaStudio) {
+            const eventBus = elsaStudio.eventBus;
+            
+            eventBus.on('http-client-created', e => {
+                e.service.register({
+                    onRequest(request) {
+                        request.headers = {'Authorization': 'Bearer '+ bearer}
+                        return request;
+                    }
+                });
+            });
+        }
     }
 }
