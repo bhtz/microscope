@@ -1,6 +1,7 @@
 @page "/workflow-registry/{Id}"
 @using Microsoft.JSInterop
-@inject IJSRuntime JS;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
 @attribute [Authorize]
 <PageTitle>Workflow registry details</PageTitle>
 
@@ -11,11 +12,29 @@
 @code {
     [Parameter] public string Id { get; set; }
     
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; }
+
     public string Host { get; set; }
 
-    protected override void OnInitialized()
+    public string AccessToken { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
     {
         Host = _navigationManager.BaseUri;
-        base.OnInitialized();
+
+        var accessTokenResult = await TokenProvider.RequestAccessToken();
+        if (accessTokenResult.TryGetToken(out var token))
+        {
+            AccessToken = token.Value;
+        }
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!string.IsNullOrEmpty(AccessToken))
+        {
+            await this.JsRuntime.InvokeVoidAsync("interop.registerElsaPlugin", "elsa-studio-root", AccessToken);
+        }
     }
 }
