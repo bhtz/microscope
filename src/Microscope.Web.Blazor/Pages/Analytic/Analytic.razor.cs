@@ -10,8 +10,8 @@ namespace Microscope.Web.Blazor.Pages.Analytic
     {
         #region properties
         public IList<AnalyticQueryResult> Analytics { get; set; } = new List<AnalyticQueryResult>();
-
         public string SearchTerm { get; set; } = String.Empty;
+        private bool IsLoading { get; set; } = false;
         #endregion
 
         protected override async Task OnInitializedAsync()
@@ -21,19 +21,22 @@ namespace Microscope.Web.Blazor.Pages.Analytic
 
         private async Task GetAnalytic()
         {
+            IsLoading = true;
             IEnumerable<AnalyticQueryResult> analytics = await _microscopeClient.GetAnalyticsAsync();
             this.Analytics = analytics.ToList();
+            IsLoading = false;
         }
-
-        private bool FilterFunc(AnalyticQueryResult element)
+        
+        private Func<AnalyticQueryResult, bool> FilterFunc => x =>
         {
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return true;
-            if (element.Key.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+        
+            if (x.Key.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
                 return true;
 
             return false;
-        }
+        };
 
         private async Task OpenCreateDialog()
         {

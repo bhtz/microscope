@@ -2,29 +2,25 @@
 @attribute [Authorize]
 @page "/remoteconfig"
 
-
-<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Remote Config</MudText>
-
-<MudButton Variant="Variant.Filled" OnClick="OpenCreateDialog" Color="Color.Primary">NEW</MudButton>
-
-<MudTable Class="mt-2" Items="@RemoteConfigs" Striped="true" Hover="true" Filter="new Func<FilteredRemoteConfigQueryResult, bool>(FilterFunc)">
-  <ToolBarContent>
-    <MudText Typo="Typo.h6">Remote Config</MudText>
+<MudToolBar>
+    <MudText Typo="Typo.h6">Remote config</MudText>
     <MudSpacer />
-    <MudTextField @bind-Value="SearchTerm" Placeholder="Search" Adornment="Adornment.Start"
-      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-  </ToolBarContent>
-  <HeaderContent>
-    <MudTh>Key</MudTh>
-    <MudTh>Dimension</MudTh>
-    <MudTh></MudTh>
-  </HeaderContent>
-  <RowTemplate>
-    <MudTd DataLabel="Id">@context.Key</MudTd>
-    <MudTd DataLabel="Dimension">@context.Dimension</MudTd>
-    <MudTd DataLabel="Actions"  Style="text-align:right">
-      <MudIconButton @onclick="() => Delete(context)"  title="Delete" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
-      <MudIconButton @onclick="() => OnSelectItem(context)"  title="Edit" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
-    </MudTd>
-  </RowTemplate>
-</MudTable>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateDialog">Add config</MudButton>
+</MudToolBar>
+
+<MudDataGrid Class="mt-4" T="FilteredRemoteConfigQueryResult" Loading="IsLoading" LoadingProgressColor="Color.Primary" Items="@RemoteConfigs" Dense="true" Striped="true" Hover="true" Bordered="true" Filterable="true" QuickFilter="@FilterFunc" Hideable="true" ShowMenuIcon="true">
+        <ToolBarContent>
+            <MudTextField @bind-Value="SearchTerm" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small" Class="mr-5"></MudTextField>
+        </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Key" Title="Key"/>
+        <PropertyColumn Property="x => x.Dimension" Title="Dimension"/>
+        <TemplateColumn T="FilteredRemoteConfigQueryResult" Title="Actions" Filterable="false" Sortable="false">
+            <CellTemplate>
+                <MudIconButton @onclick="() => OnSelectItem(context.Item)" title="Edit" Size="Size.Small" Icon="@Icons.Material.Filled.Edit"></MudIconButton>
+                <MudIconButton @onclick="() => Delete(context.Item)" title="Delete" Size="Size.Small" Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>

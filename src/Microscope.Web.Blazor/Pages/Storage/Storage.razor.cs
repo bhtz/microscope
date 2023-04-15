@@ -54,15 +54,16 @@ namespace Microscope.Web.Blazor.Pages.Storage
             this.SelectedContainer = this.Containers.FirstOrDefault();
         }
 
-        private bool FilterFunc(string element)
+        private Func<string, bool> FilterFunc => x =>
         {
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return true;
-            if (element.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+        
+            if (x.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
                 return true;
 
             return false;
-        }
+        };
 
         private async Task OpenCreateContainerDialog()
         {
@@ -90,9 +91,11 @@ namespace Microscope.Web.Blazor.Pages.Storage
         {
             if (!string.IsNullOrEmpty(this.SelectedContainer))
             {
+                this.IsLoading = true;
                 this.SearchTerm = string.Empty;
                 var blobResults = await _microscopeClient.GetBlobsAsync(this.SelectedContainer);
                 this.Blobs = blobResults.ToList();
+                this.IsLoading = false;
                 this.StateHasChanged();
             }
         }

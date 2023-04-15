@@ -14,13 +14,12 @@ namespace Microscope.Web.Blazor.Pages.RemoteConfig
         [Inject]
         private IJSRuntime JsRuntime { get; set; }
 
-        // [Inject]
-        // private IToastService ToastService { get; set; }
         #endregion
 
         #region properties
         public IList<FilteredRemoteConfigQueryResult> RemoteConfigs { get; set; } = new List<FilteredRemoteConfigQueryResult>();
         public string SearchTerm { get; set; } = String.Empty;
+        private bool IsLoading { get; set; } = false;
         #endregion
 
         protected override async Task OnInitializedAsync()
@@ -30,19 +29,22 @@ namespace Microscope.Web.Blazor.Pages.RemoteConfig
 
         private async Task GetRemoteConfigs()
         {
+            IsLoading = true;
             IEnumerable<FilteredRemoteConfigQueryResult> remotes = await _microscopeClient.GetRemoteConfigsAsync();
             this.RemoteConfigs = remotes.ToList();
+            IsLoading = false;
         }
-
-        private bool FilterFunc(FilteredRemoteConfigQueryResult element)
+        
+        private Func<FilteredRemoteConfigQueryResult, bool> FilterFunc => x =>
         {
             if (string.IsNullOrWhiteSpace(SearchTerm))
                 return true;
-            if (element.Key.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+        
+            if (x.Key.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
                 return true;
 
             return false;
-        }
+        };
 
         private async Task OpenCreateDialog()
         {
