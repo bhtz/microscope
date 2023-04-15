@@ -39,7 +39,7 @@ public static class DependencyInjection
                 .AddHttpActivities(configuration.GetSection("Workflow:Http").Bind)
                 .AddQuartzTemporalActivities()
                 .AddJavaScriptActivities()
-                .AddWorkflow<HeartbeatWorkflow>()
+                // .AddWorkflow<HeartbeatWorkflow>()
             );
         
         services.AddElsaApiEndpoints();

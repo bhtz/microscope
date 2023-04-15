@@ -19,7 +19,6 @@
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="MudBlazor" Version="6.2.0" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
-    <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.2.0" />
     <PackageReference Include="BlazorTypewriter" Version="1.1.0" />
     <PackageReference Include="Elsa.Designer.Components.Web" Version="2.11.0" />
   </ItemGroup>

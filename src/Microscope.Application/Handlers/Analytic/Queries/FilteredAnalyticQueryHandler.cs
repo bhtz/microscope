@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microscope.Domain.Aggregates.AnalyticAggregate;
+using Microscope.Domain.Aggregates.Analytic;
 using Microscope.Features.Analytic.Queries;
 
 namespace Microscope.QueryHandlers.Analytics

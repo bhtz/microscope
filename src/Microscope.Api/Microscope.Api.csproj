@@ -6,6 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <ContainerImageName>microscope/api</ContainerImageName>
+    <PublishProfile>DefaultContainer</PublishProfile>
+    <ContainerImageTags>latest</ContainerImageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.4" NoWarn="NU1605" />
@@ -33,11 +39,5 @@
     <ProjectReference Include="..\Microscope.Web.Blazor\Microscope.Web.Blazor.csproj" />
     <ProjectReference Include="..\Microscope.Workflow\Microscope.Workflow.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <ContainerImageName>microscope/api</ContainerImageName>
-    <PublishProfile>DefaultContainer</PublishProfile>
-    <ContainerImageTags>latest</ContainerImageTags>
-  </PropertyGroup>
 
 </Project>

@@ -1,7 +1,12 @@
 @inherits LayoutComponentBase
 @using MudBlazor.Services
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Blazored.LocalStorage
 
 @inject IBreakpointService BreakpointListener
+@inject IAccessTokenProvider AccessTokenProvider;
+@inject ILocalStorageService LocalStorageService;
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <MudThemeProvider Theme="currentTheme" />
 <MudDialogProvider />
@@ -9,6 +14,7 @@
 
 <MudLayout>
     <Header DarkMode="DarkMode" DrawerToggle="DrawerToggle" />
+    <Header DarkMode="DarkMode" DrawerToggle="DrawerToggle" IsLoading="IsLoading" />
     <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Never" Variant="@DrawerConfig" MiniWidth="60px">
         <NavMenu />
     </MudDrawer>

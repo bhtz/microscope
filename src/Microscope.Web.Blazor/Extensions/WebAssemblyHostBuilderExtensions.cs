@@ -1,12 +1,10 @@
 using Blazored.LocalStorage;
 using Microscope.Admin.Managers;
-using Microscope.Admin.Managers.Preferences;
 using Microscope.SDK.Dotnet;
 using Microscope.Web.Blazor.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
-using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace Microscope.Web.Blazor.Extensions
 {
@@ -56,9 +54,10 @@ namespace Microscope.Web.Blazor.Extensions
                 .AddTransient<AuthenticationHeaderHandler>()
                 .AddHttpClient<MicroscopeClient>(client => client.BaseAddress = apiAddress)
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
-
-            builder.Services.AddHttpClientInterceptor();
             
+            builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+                .CreateClient());
+
             return builder;
         }
 

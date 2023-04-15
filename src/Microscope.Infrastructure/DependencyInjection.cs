@@ -1,11 +1,11 @@
 using AuditExOp.Infrastructure;
 using Microscope.BuildingBlocks.SharedKernel;
+using Microscope.Domain.Aggregates.Analytic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microscope.Domain.Aggregates.RemoteConfigAggregate;
 using Microscope.Infrastructure.Repositories;
-using Microscope.Domain.Aggregates.AnalyticAggregate;
 using Microscope.ExternalSystems.Services;
 using Microscope.Infrastructure.Services.Storage;
 

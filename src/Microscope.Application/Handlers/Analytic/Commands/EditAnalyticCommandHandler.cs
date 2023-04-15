@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microscope.BuildingBlocks.SharedKernel;
-using Microscope.Domain.Aggregates.AnalyticAggregate;
+using Microscope.Domain.Aggregates.Analytic;
 using Microscope.Features.Analytic.Commands;
 
 namespace Microscope.Application.Handlers.Analytic.Commands

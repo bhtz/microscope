@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
@@ -6,13 +7,14 @@ namespace Microscope.Web.Blazor.Extensions;
 
 public class AuthenticationHeaderHandler : DelegatingHandler
 {
-    private readonly IAccessTokenProvider accessTokenProvider;
+    private readonly IAccessTokenProvider _accessTokenProvider;
     private readonly NavigationManager _navigationManager;
+    private readonly ILocalStorageService _localStorageService;
 
     public AuthenticationHeaderHandler(IAccessTokenProvider accessTokenProvider, NavigationManager navigationManager)
     {
-        this.accessTokenProvider = accessTokenProvider;
-        this._navigationManager = navigationManager;
+        _accessTokenProvider = accessTokenProvider;
+        _navigationManager = navigationManager;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(
@@ -21,11 +23,19 @@ public class AuthenticationHeaderHandler : DelegatingHandler
     {
         if (request.Headers.Authorization?.Scheme != "Bearer")
         {
-            var accessTokenResult = await accessTokenProvider.RequestAccessToken();
+            var accessToken = string.Empty;
+            var accessTokenResult = await _accessTokenProvider.RequestAccessToken();
+            
             if (accessTokenResult.TryGetToken(out var token))
-            {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Value);
+            { 
+                accessToken = token.Value;
             }
+            else
+            {
+                accessToken = await _localStorageService.GetItemAsync<string>("authtoken");
+            }
+            
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
         var response = await base.SendAsync(request, cancellationToken);

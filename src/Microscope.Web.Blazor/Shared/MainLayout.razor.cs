@@ -1,15 +1,17 @@
 using Microscope.Admin.Settings;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 
 namespace Microscope.Web.Blazor.Shared;
 
-public partial class MainLayout : LayoutComponentBase
+public partial class MainLayout : LayoutComponentBase, IDisposable
 {
     MudTheme currentTheme;
     private Guid _subscriptionId;
     public bool _drawerOpen = false;
     public DrawerVariant DrawerConfig = DrawerVariant.Mini;
+    private bool IsLoading { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -56,4 +58,21 @@ public partial class MainLayout : LayoutComponentBase
             currentTheme = Theme.DarkTheme;
         }
     }
+    
+    private async void OnAuthStateChanged(Task<AuthenticationState> authStateTask)
+    {
+        var authState = await authStateTask;
+        if(authState.User.Identity.IsAuthenticated)
+        {
+            var accessTokenResult = await AccessTokenProvider.RequestAccessToken();
+            
+            if (accessTokenResult.TryGetToken(out var token))
+            { 
+                await LocalStorageService.SetItemAsync("authtoken", token.Value);
+            }
+        }
+    }
+    
+    public void Dispose() 
+        => AuthenticationStateProvider.AuthenticationStateChanged -= this.OnAuthStateChanged;
 }
