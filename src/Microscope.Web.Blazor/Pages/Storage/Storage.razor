@@ -5,9 +5,9 @@
     <MudText Typo="Typo.h6">Storage</MudText>
     <MudSpacer />
     <InputFile id="fileInput" OnChange="OnInputFileChange" hidden />
-    <MudIconButton HtmlTag="label" Color="Color.Primary" Icon="@Icons.Filled.CloudUpload" for="fileInput"></MudIconButton>
-    <MudIconButton title="Create container / bucket" @onclick="() => OpenCreateContainerDialog()" Icon="@Icons.Material.Filled.CreateNewFolder" Color="Color.Primary"></MudIconButton>
-    <MudIconButton title="Refresh" @onclick="() => GetBlobsFromSelectedContainer()" Icon="@Icons.Material.Filled.Refresh" Color="Color.Info"></MudIconButton>
+    <MudIconButton Title="Upload file" HtmlTag="label" Color="Color.Primary" Icon="@Icons.Filled.CloudUpload" for="fileInput"></MudIconButton>
+    <MudIconButton Title="Create container / bucket" @onclick="() => OpenCreateContainerDialog()" Icon="@Icons.Material.Filled.CreateNewFolder" Color="Color.Primary"></MudIconButton>
+    <MudIconButton Title="Refresh" @onclick="() => GetBlobsFromSelectedContainer()" Icon="@Icons.Material.Filled.Refresh" Color="Color.Primary"></MudIconButton>
 </MudToolBar>
 
 <MudSelect Disabled="Containers.Count == 0" @bind-Value="SelectedContainer" T="string" Label="Container" Strict="true" >

@@ -113,10 +113,10 @@ namespace Microscope.Admin.Settings
         {
             Palette = new Palette()
             {
-                Primary = Colors.Cyan.Darken3,
+                Primary = Colors.Blue.Darken3,
                 Secondary = Colors.DeepPurple.Accent2,
                 Background = Colors.Grey.Lighten5,
-                AppbarBackground = Colors.Cyan.Darken3,
+                AppbarBackground = Colors.Blue.Darken3,
                 DrawerBackground = "#FFF",
                 DrawerText = "rgba(0,0,0, 0.7)",
                 Success = "#06d79c"
